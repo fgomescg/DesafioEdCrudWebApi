@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="offset-10 col-md-2">
+    <a [routerLink]="['/book/create']" href="#">Create book</a>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Editora</th>
+            <th>Ano Publicação</th>
+            <th>Valor</th>
+            <th>Detalhes</th>
+            <th>Atualizar</th>
+            <th>Deletar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books">
+            <td>{{book.title}}</td>
+            <td>{{book.company}}</td>
+            <td>{{book.publishYear}}</td>
+            <td>{{book.value}}</td>
+            <td><button type="button" id="details" class="btn btn-light">Detalhes</button></td>
+            <td><button type="button" id="update" class="btn btn-success">Atualizar</button></td>
+            <td><button type="button" id="delete" class="btn btn-danger">Deletar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

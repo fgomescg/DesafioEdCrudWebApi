@@ -1,0 +1,13 @@
+2020-09-26 12:15:42.2823 ERROR GetAllBooksAsync: The entity type 'BookAuthor' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
+2020-09-26 12:27:05.5783 ERROR GetAllBooksAsync: Unknown column 'l.BookID' in 'field list'
+2020-09-26 12:38:09.6701 ERROR GetAllBooksAsync: Table 'desafioedcrud.livro' doesn't exist
+2020-09-26 12:40:30.2995 ERROR GetAllBooksAsync: Unknown column 'b.Value' in 'field list'
+2020-09-26 14:26:35.3269 ERROR Book with id:88, not found.
+2020-09-26 15:10:38.5302 INFO Returned all books from database.
+2020-09-26 15:18:20.5482 INFO Returned all books from database.
+2020-09-26 16:09:33.6895 INFO Returned all books from database.
+2020-09-26 16:12:27.5415 INFO Returned all books from database.
+2020-09-26 16:26:53.2971 INFO Returned all books from database.
+2020-09-26 16:27:25.2290 INFO Returned all books from database.
+2020-09-26 16:37:43.4695 INFO Returned all books from database.
+2020-09-26 16:38:30.9012 INFO Returned all books from database.

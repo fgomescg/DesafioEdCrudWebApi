@@ -1,0 +1,30 @@
+﻿using Entities.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Entities
+{
+    public class RepositoryContext: DbContext
+    {
+        public RepositoryContext(DbContextOptions options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Book> Book { get; set; }
+        public DbSet<Author> Author { get; set; }
+        public DbSet<Subject> Subject { get; set; }
+        public DbSet<BookAuthor> BookAuthor { get; set; }
+        public DbSet<BookSubject> BookSubject { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<BookAuthor>()
+                .HasKey(BA => new { BA.BookId, BA.AuthorId });
+            builder.Entity<BookSubject>()
+                .HasKey(BS => new { BS.BookId, BS.SubjectId });
+        }
+    }
+}
