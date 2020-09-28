@@ -94,7 +94,7 @@ namespace DesafioEdCRUD.Controllers
 
                 var createdAuthor = _mapper.Map<AuthorDto>(authorEntity);
 
-                return CreatedAtRoute("AuthorById", new { id = createdAuthor.Id }, createdAuthor);
+                return CreatedAtRoute("AuthorById", new { id = createdAuthor.AuthorId }, createdAuthor);
             }
             catch (Exception ex)
             {

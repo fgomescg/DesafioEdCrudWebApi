@@ -10,7 +10,6 @@ import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

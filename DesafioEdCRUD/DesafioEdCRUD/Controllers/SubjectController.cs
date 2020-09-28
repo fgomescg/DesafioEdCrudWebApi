@@ -96,7 +96,7 @@ namespace DesafioEdCRUD.Controllers
 
                 var createdSubject = _mapper.Map<SubjectDto>(subjectEntity);
 
-                return CreatedAtRoute("SubjectById", new { id = createdSubject.Id }, createdSubject);
+                return CreatedAtRoute("SubjectById", new { id = createdSubject.SubjectId }, createdSubject);
             }
             catch (Exception ex)
             {
