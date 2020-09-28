@@ -20,7 +20,8 @@ namespace Entities.DTO
         public string PublishYear { get; set; }
                 
         [DefaultValue(1)]
-        public int Edit { get; set; }
+        [Required(ErrorMessage = "Edition is required")]
+        public int Edition { get; set; }
 
         //[RegularExpression(@"^\d+\.\d{0,2}$")]
         //[Range(0, 9999999999999999.99)]

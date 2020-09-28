@@ -18,9 +18,9 @@ namespace Entities.DTO
         [Required(ErrorMessage = "PublishYear is required")]
         [StringLength(4, ErrorMessage = "PublishYear cannot be loner then 4 characters")]
         public string PublishYear { get; set; }
-
-        [DefaultValue(1)]
-        public int Edit { get; set; }
+                
+        [Required(ErrorMessage = "Edition is required")]
+        public int Edition { get; set; }
 
         public decimal Value { get; set; }
 

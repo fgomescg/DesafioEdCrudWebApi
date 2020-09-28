@@ -8,12 +8,12 @@ namespace Entities.Models
     public class Book
     {
     public Book() {}
-    public Book(int Id, string title, string company, int edit, string publishYear, decimal value)
+    public Book(int Id, string title, string company, int edition, string publishYear, decimal value)
     {
         this.Id = Id;
         this.Title = title;
         this.Company = company;
-        this.Edit = edit;
+        this.Edition = edition;
         this.PublishYear = publishYear;
         this.Value = value;        
     }
@@ -28,8 +28,9 @@ namespace Entities.Models
     [Required(ErrorMessage = "Company is required")]
     [StringLength(40, ErrorMessage = "Company can't be longer than 40 characters")]
     public string Company { get; set; }
-    
-    public int Edit { get; set; }
+
+    [Required(ErrorMessage = "Edition is required")]
+    public int Edition { get; set; }
 
     [Required(ErrorMessage = "PublishYear is required")]
     [StringLength(4, ErrorMessage = "PublishYear can't be longer than 4 characters")]
