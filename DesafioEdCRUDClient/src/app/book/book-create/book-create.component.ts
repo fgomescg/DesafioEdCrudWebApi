@@ -4,6 +4,8 @@ import { BookForCreation } from './../../_interfaces/book-for-creation.model';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { RepositoryService } from './../../shared/services/repository.service';
 import { Router } from '@angular/router';
+import { Author } from 'src/app/_interfaces/author.model';
+import { Subject } from 'src/app/_interfaces/subject.model';
 
 @Component({
   selector: 'app-book-create',
@@ -14,16 +16,54 @@ export class BookCreateComponent implements OnInit {
   public errorMessage: string = 'Erro ao cadastrar o livro.';
 
   public bookForm: FormGroup;
+  public authors: Author[];
+  public subjects: Subject[];
+  public bookValue = 0;
 
  constructor(private repository: RepositoryService, private errorHandler: ErrorHandlerService, private router: Router) { }
   ngOnInit() {
     this.bookForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(40)]),
       company: new FormControl('', [Validators.required, Validators.maxLength(40)]),
-      value: new FormControl('', [Validators.required]),
-      publishYear: new FormControl('', [Validators.required, Validators.maxLength(4)])
+      value: new FormControl(this.bookValue, [Validators.required]),
+      publishYear: new FormControl('', [Validators.required, Validators.maxLength(4)]),
+      bookAuthors: new FormControl(null),
+      bookSubjects: new FormControl(null)
     });
+    this.getAllAuthors();
+    this.getAllSubjects();
   }
+
+  public getAllAuthors = () => {
+    let apiAddress: string = 'api/author';
+    this.repository.getData(apiAddress).subscribe(
+      (res) => {
+        this.authors = res as Author[];
+      },
+      (error) => {
+        this.errorHandler.handleError(error);
+        this.errorMessage = this.errorHandler.errorMessage;
+      }
+    );
+  };
+
+  public getAllSubjects = () => {
+    let apiAddress: string = 'api/subject';
+    this.repository.getData(apiAddress).subscribe(
+      (res) => {
+        this.subjects = res as Subject[];
+      },
+      (error) => {
+        this.errorHandler.handleError(error);
+        this.errorMessage = this.errorHandler.errorMessage;
+      }
+    );
+  };
+
+  updateBRLAmount(event){
+    this.bookValue = event.target.value;
+  }
+
   public validateControl = (controlName: string) => {
     if (this.bookForm.controls[controlName].invalid && this.bookForm.controls[controlName].touched)
       return true;
@@ -43,8 +83,10 @@ export class BookCreateComponent implements OnInit {
     const book: BookForCreation = {
       title: bookFormValue.title,
       company: bookFormValue.company,
-      value:  Number(bookFormValue.value),
-      publishYear: bookFormValue.publishYear
+      value:  Number(this.bookValue),
+      publishYear: bookFormValue.publishYear,
+      bookAuthors:  this.transformToBookAuthorModel(bookFormValue.bookAuthors),
+      bookSubjects: this.transformToBookSubjectModel(bookFormValue.bookSubjects)
     }
     const apiUrl = 'api/book';
     this.repository.create(apiUrl, book)
@@ -59,5 +101,17 @@ export class BookCreateComponent implements OnInit {
   }
   public redirectToBookList(){
     this.router.navigate(['/book/list']);
+  }
+
+  private transformToBookAuthorModel(ids) {
+    return ids.map((id) => {
+      return { "authorId": id }
+    });
+  }
+
+  private transformToBookSubjectModel(ids) {
+    return ids.map((id) => {
+      return { "subjectId": id }
+    });
   }
 }

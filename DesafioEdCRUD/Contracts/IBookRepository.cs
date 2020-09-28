@@ -5,7 +5,7 @@ namespace Contracts
 {
     public interface IBookRepository : IRepositoryBase<Book>
     {
-        Task<Book[]> GetAllBooks(BookParameters bookParameters, bool withAuthos, bool withSubjects);
+        Task<Book[]> GetAllBooks(BookParameters bookParameters);
         Task<Book> GetBookById(int bookId);              
         void CreateBook(Book book);
         void UpdateBook(Book book);

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCurrencyFormatModule } from 'mat-currency-format';
 
 import { BookListComponent } from './book-list/book-list.component';
 import { BookCreateComponent } from './book-create/book-create.component';
@@ -16,6 +17,7 @@ import { BookDeleteComponent } from './book-delete/book-delete.component';
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
+    MatCurrencyFormatModule,
     RouterModule.forChild([
       { path: 'list', component: BookListComponent },
       { path: 'details/:id', component: BookListComponent },

@@ -27,9 +27,9 @@ import { InternalServerComponent } from './error-pages/internal-server/internal-
       { path: 'home', component: HomeComponent },
       { path: '404', component : NotFoundComponent},
       { path: '500', component: InternalServerComponent },
-      { path: 'book', loadChildren: () => import('./book/book.module').then(m => m.BookModule) },
-      { path: 'author', loadChildren: () => import('./author/author.module').then(m => m.AuthorModule) },
-      { path: 'subject', loadChildren: () => import('./subject/subject.module').then(m => m.SubjectModule) },
+      { path: 'book', loadChildren: () => import('./book/book.module').then(b => b.BookModule) },
+      { path: 'author', loadChildren: () => import('./author/author.module').then(a => a.AuthorModule) },
+      { path: 'subject', loadChildren: () => import('./subject/subject.module').then(s => s.SubjectModule) },
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: '**', redirectTo: '/404', pathMatch: 'full'}
     ])

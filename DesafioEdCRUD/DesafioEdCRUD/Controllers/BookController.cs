@@ -29,7 +29,7 @@ namespace DesafioEdCRUD.Controllers
         {
             try
             {
-                var books = await _repository.Book.GetAllBooks(bookParameters, true, true);
+                var books = await _repository.Book.GetAllBooks(bookParameters);
                        
                 _logger.LogInfo($"Returned all books from database.");
 
@@ -71,7 +71,7 @@ namespace DesafioEdCRUD.Controllers
         }       
 
         [HttpPost]
-        public IActionResult CreateBook([FromBody]BookForCreationDto book)
+        public IActionResult CreateBook([FromBody]BookForCreateDto book)
         {
             try
             {

@@ -12,6 +12,7 @@
           <tr>
             <th>Titulo</th>
             <th>Editora</th>
+            <th>Edição</th>
             <th>Ano Publicação</th>
             <th>Valor</th>
             <th>Detalhes</th>
@@ -23,8 +24,9 @@
           <tr *ngFor="let book of books">
             <td>{{book.title}}</td>
             <td>{{book.company}}</td>
+            <td>{{book.edition}}</td>
             <td>{{book.publishYear}}</td>
-            <td>{{book.value}}</td>
+            <td>R${{book.value}}</td>
             <td><button type="button" id="details" class="btn btn-light">Detalhes</button></td>
             <td><button type="button" id="update" class="btn btn-success" (click)="redirectToUpdatePage(book.id)">Atualizar</button></td>
             <td><button type="button" id="delete" class="btn btn-danger" (click)="redirectToDeletePage(book.id)">Deletar</button></td>

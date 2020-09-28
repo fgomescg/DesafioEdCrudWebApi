@@ -1,1 +1,30 @@
-<p>subject-list works!</p>
+<div class="row">
+  <div class="offset-10 col-md-2">
+    <a [routerLink]="['/subject/create']" href="#">Cadastrar Assunto</a>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Detalhes</th>
+            <th>Atualizar</th>
+            <th>Deletar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let subject of subjects">
+            <td>{{subject.description}}</td>
+            <td><button type="button" id="details" class="btn btn-light">Detalhes</button></td>
+            <td><button type="button" id="update" class="btn btn-success" (click)="redirectToUpdatePage(subject.subjectId)">Atualizar</button></td>
+            <td><button type="button" id="delete" class="btn btn-danger" (click)="redirectToDeletePage(subject.subjectId)">Deletar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./author-delete.component.css'],
 })
 export class AuthorDeleteComponent implements OnInit {
-  public errorMessage: string = '';
+  public errorMessage: string = 'Erro ao deletar Autor.';
   public author: Author;
 
   constructor(
@@ -44,7 +44,7 @@ export class AuthorDeleteComponent implements OnInit {
   };
 
   public deleteAuthor = () => {
-    const deleteUrl: string = `api/author/${this.author.id}`;
+    const deleteUrl: string = `api/author/${this.author.authorId}`;
     this.repository.delete(deleteUrl).subscribe(
       (res) => {
         $('#successModal').modal();

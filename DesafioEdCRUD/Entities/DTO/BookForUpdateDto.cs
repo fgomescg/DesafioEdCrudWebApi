@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Models;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,7 +12,7 @@ namespace Entities.DTO
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Company is required")]
-        [StringLength(40, ErrorMessage = "Name can't be longer than 40 characters")]
+        [StringLength(40, ErrorMessage = "Company cannot be loner then 4 characters")]
         public string Company { get; set; }
 
         [Required(ErrorMessage = "PublishYear is required")]
@@ -21,8 +22,9 @@ namespace Entities.DTO
         [DefaultValue(1)]
         public int Edit { get; set; }
 
-        //[RegularExpression(@"^\d+\.\d{0,2}$")]
-        //[Range(0, 9999999999999999.99)]
         public decimal Value { get; set; }
+
+        public IEnumerable<BookAuthor> BookAuthors { get; set; }
+        public IEnumerable<BookSubject> BookSubjects { get; set; }
     }
 }

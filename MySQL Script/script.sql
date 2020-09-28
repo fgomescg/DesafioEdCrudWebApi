@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `DesafioEdCRUD`.`Book` (
   `BookId` INT NOT NULL AUTO_INCREMENT,
   `Title` VARCHAR(40) NOT NULL,
   `Company` VARCHAR(40) NOT NULL,
-  `Edit` INT NOT NULL,
+  `Edition` INT NOT NULL,
   `PublishYear` VARCHAR(4) NOT NULL,
   `Value` DECIMAL(15,2) NOT NULL,
   PRIMARY KEY (`BookId`))

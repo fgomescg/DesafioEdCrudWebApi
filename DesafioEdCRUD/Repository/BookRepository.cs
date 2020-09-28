@@ -13,32 +13,26 @@ namespace Repository
             : base(repositoryContext)
         {
         }        
-        public async Task<Book[]> GetAllBooks(BookParameters bookParameters, bool withAuthors = false, bool withSubjects = false)
+        public async Task<Book[]> GetAllBooks(BookParameters bookParameters)
         {
-            var query = FindAll();
-           
-            if(withAuthors)
-            {
-                query = query.Include(book => book.BookAuthors)
-                             .ThenInclude(ba => ba.Author);
-            }
-
-            if(withSubjects)
-            {
-                query = query.Include(su => su.BookSubjects)
-                             .ThenInclude(bs => bs.Subject);
-            }
-
-            return await query
-                    .OrderBy(bk => bk.Title)
-                    .Skip((bookParameters.PageNumber - 1) * bookParameters.PageSize)
-                    .Take(bookParameters.PageSize)
-                    .ToArrayAsync();
+            return await FindAll().Include(book => book.BookAuthors)
+                             .ThenInclude(ba => ba.Author)
+                             .Include(su => su.BookSubjects)
+                             .ThenInclude(bs => bs.Subject)
+                             .OrderBy(book => book.Id)
+                             .Skip((bookParameters.PageNumber - 1) * bookParameters.PageSize)
+                             .Take(bookParameters.PageSize)
+                             .ToArrayAsync();
+          
         }       
 
         public async Task<Book> GetBookById(int Id)
         {
-            return await FindByCondition(book => book.Id.Equals(Id)).FirstOrDefaultAsync();
+            return await FindByCondition(book => book.Id.Equals(Id))
+                             .Include(book => book.BookAuthors)
+                             .ThenInclude(ba => ba.Author)
+                             .Include(su => su.BookSubjects)
+                             .ThenInclude(bs => bs.Subject).FirstOrDefaultAsync();
         }       
         
         public void CreateBook(Book book)
