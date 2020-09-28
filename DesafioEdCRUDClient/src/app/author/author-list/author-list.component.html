@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="offset-10 col-md-2">
+    <a [routerLink]="['/author/create']" href="#">Cadastrar Autor</a>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Detalhes</th>
+            <th>Atualizar</th>
+            <th>Deletar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let author of authors">
+            <td>{{author.name}}</td>
+            <td><button type="button" id="details" class="btn btn-light">Detalhes</button></td>
+            <td><button type="button" id="update" class="btn btn-success" (click)="redirectToUpdatePage(author.id)">Atualizar</button></td>
+            <td><button type="button" id="delete" class="btn btn-danger" (click)="redirectToDeletePage(author.id)">Deletar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

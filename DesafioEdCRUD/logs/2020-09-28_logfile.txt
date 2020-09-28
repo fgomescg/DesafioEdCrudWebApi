@@ -1,0 +1,3 @@
+2020-09-28 00:50:04.6700 INFO Returned all books from database.
+2020-09-28 00:54:36.3707 INFO Returned all books from database.
+2020-09-28 00:57:33.2122 INFO Returned all books from database.

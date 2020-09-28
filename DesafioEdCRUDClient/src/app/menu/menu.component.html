@@ -12,7 +12,15 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/book/list']" routerLinkActive="active"
-      [routerLinkActiveOptions]="{exact: true}"> Books </a>
+      [routerLinkActiveOptions]="{exact: true}"> Livro </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/author/list']" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"> Autor </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/subject/list']" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"> Assunto </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Account Actions </a>

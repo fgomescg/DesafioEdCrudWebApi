@@ -1,4 +1,4 @@
-export interface BookForCreation{
+export interface BookForCreation {
   title: string;
   company: string;
   value: number;

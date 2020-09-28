@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./book-create.component.css']
 })
 export class BookCreateComponent implements OnInit {
-  public errorMessage: string = '';
+  public errorMessage: string = 'Erro ao cadastrar o livro.';
 
   public bookForm: FormGroup;
 
@@ -34,9 +34,6 @@ export class BookCreateComponent implements OnInit {
       return true;
     return false;
   }
-  public executeDatePicker = (event) => {
-    this.bookForm.patchValue({ 'dateOfBirth': event });
-  }
   public createBook = (bookFormValue) => {
     if (this.bookForm.valid) {
       this.executeBookCreation(bookFormValue);
@@ -46,7 +43,7 @@ export class BookCreateComponent implements OnInit {
     const book: BookForCreation = {
       title: bookFormValue.title,
       company: bookFormValue.company,
-      value: bookFormValue.value,
+      value:  Number(bookFormValue.value),
       publishYear: bookFormValue.publishYear
     }
     const apiUrl = 'api/book';

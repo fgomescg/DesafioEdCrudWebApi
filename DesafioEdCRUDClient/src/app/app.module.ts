@@ -9,7 +9,7 @@ import { MenuComponent } from './menu/menu.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
-import { BookCreateComponent } from './book/book-create/book-create.component';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +29,8 @@ import { BookCreateComponent } from './book/book-create/book-create.component';
       { path: '404', component : NotFoundComponent},
       { path: '500', component: InternalServerComponent },
       { path: 'book', loadChildren: () => import('./book/book.module').then(m => m.BookModule) },
+      { path: 'author', loadChildren: () => import('./author/author.module').then(m => m.AuthorModule) },
+      { path: 'subject', loadChildren: () => import('./subject/subject.module').then(m => m.SubjectModule) },
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: '**', redirectTo: '/404', pathMatch: 'full'}
     ])

@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(){
-    this.homeText = "WELCOME TO CRUD APPLICATION";
+    this.homeText = "CADASTRO DE LIVROS";
   }
 
 }

@@ -71,7 +71,7 @@ namespace DesafioEdCRUD.Controllers
         }       
 
         [HttpPost]
-        public IActionResult CreateBook([FromBody]Book book)
+        public IActionResult CreateBook([FromBody]BookForCreationDto book)
         {
             try
             {

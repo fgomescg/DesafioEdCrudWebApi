@@ -1,6 +1,6 @@
 <div class="row">
   <div class="offset-10 col-md-2">
-    <a [routerLink]="['/book/create']" href="#">Create book</a>
+    <a [routerLink]="['/book/create']" href="#">Cadastrar Livro</a>
   </div>
 </div>
 <br>
@@ -26,8 +26,8 @@
             <td>{{book.publishYear}}</td>
             <td>{{book.value}}</td>
             <td><button type="button" id="details" class="btn btn-light">Detalhes</button></td>
-            <td><button type="button" id="update" class="btn btn-success">Atualizar</button></td>
-            <td><button type="button" id="delete" class="btn btn-danger">Deletar</button></td>
+            <td><button type="button" id="update" class="btn btn-success" (click)="redirectToUpdatePage(book.id)">Atualizar</button></td>
+            <td><button type="button" id="delete" class="btn btn-danger" (click)="redirectToDeletePage(book.id)">Deletar</button></td>
           </tr>
         </tbody>
       </table>
