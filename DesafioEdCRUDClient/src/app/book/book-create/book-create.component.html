@@ -54,9 +54,9 @@
 
       <div class="form-group row">
         <label for="edition" class="control-label col-md-2">Edição: </label>
-        <div class="col-md-5">
+        <div class="col-md-1">
           <input
-            type="text"
+            type="number"
             formControlName="edition"
             id="edition"
             class="form-control"
@@ -78,8 +78,10 @@
         </label>
         <div class="col-md-2">
           <input
-            type="text"
+            type="number"
             formControlName="publishYear"
+            min="1800"
+            max={{currentYear}}
             id="publishYear"
             class="form-control"
           />
@@ -98,6 +100,20 @@
               hasError('publishYear', 'maxlength')
             "
             >Tamanho máximo permitido são 4 caractéres.</em
+          >
+          <em
+            *ngIf="
+              validateControl('publishYear') &&
+              hasError('publishYear', 'min')
+            "
+            >Ano mínimo 1500.</em
+          >
+          <em
+            *ngIf="
+              validateControl('publishYear') &&
+              hasError('publishYear', 'max')
+            "
+            >Ano inválido.</em
           >
         </div>
       </div>

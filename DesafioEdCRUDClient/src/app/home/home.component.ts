@@ -15,4 +15,8 @@ export class HomeComponent implements OnInit {
     this.homeText = "CADASTRO DE LIVROS";
   }
 
+  public executeSelectedChange = (event) => {
+    console.log(event);
+  }
+
 }

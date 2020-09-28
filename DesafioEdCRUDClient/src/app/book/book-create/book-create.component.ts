@@ -19,14 +19,16 @@ export class BookCreateComponent implements OnInit {
   public authors: Author[];
   public subjects: Subject[];
   public bookValue = 0;
+  public currentYear = new Date().getFullYear();
 
  constructor(private repository: RepositoryService, private errorHandler: ErrorHandlerService, private router: Router) { }
   ngOnInit() {
     this.bookForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(40)]),
       company: new FormControl('', [Validators.required, Validators.maxLength(40)]),
-      value: new FormControl(this.bookValue, [Validators.required]),
-      publishYear: new FormControl('', [Validators.required, Validators.maxLength(4)]),
+      value: new FormControl(0, [Validators.required]),
+      edition: new FormControl('', [Validators.required]),
+      publishYear: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.max(this.currentYear), Validators.min(1500)]),
       bookAuthors: new FormControl(null),
       bookSubjects: new FormControl(null)
     });
@@ -84,6 +86,7 @@ export class BookCreateComponent implements OnInit {
       title: bookFormValue.title,
       company: bookFormValue.company,
       value:  Number(this.bookValue),
+      edition: Number(bookFormValue.edition),
       publishYear: bookFormValue.publishYear,
       bookAuthors:  this.transformToBookAuthorModel(bookFormValue.bookAuthors),
       bookSubjects: this.transformToBookSubjectModel(bookFormValue.bookSubjects)

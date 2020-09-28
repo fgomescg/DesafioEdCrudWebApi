@@ -9,6 +9,13 @@ import { MenuComponent } from './menu/menu.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { LayoutComponent } from './layout/layout.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { RoutingModule } from './routing/routing.module';
+import { HeaderComponent } from './navigation/header/header.component';
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +23,19 @@ import { InternalServerComponent } from './error-pages/internal-server/internal-
     HomeComponent,
     MenuComponent,
     NotFoundComponent,
-    InternalServerComponent
+    InternalServerComponent,
+    LayoutComponent,
+    HeaderComponent,
+    SidenavListComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FlexLayoutModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: '404', component : NotFoundComponent},
@@ -32,7 +45,8 @@ import { InternalServerComponent } from './error-pages/internal-server/internal-
       { path: 'subject', loadChildren: () => import('./subject/subject.module').then(s => s.SubjectModule) },
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: '**', redirectTo: '/404', pathMatch: 'full'}
-    ])
+    ]),
+    RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
