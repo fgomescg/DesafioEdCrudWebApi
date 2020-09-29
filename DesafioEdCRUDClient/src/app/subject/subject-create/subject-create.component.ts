@@ -18,7 +18,7 @@ export class SubjectCreateComponent implements OnInit {
  constructor(private repository: RepositoryService, private errorHandler: ErrorHandlerService, private router: Router) { }
   ngOnInit() {
     this.subjectForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(20)])
+      description: new FormControl('', [Validators.required, Validators.maxLength(20)])
     });
   }
   public validateControl = (controlName: string) => {

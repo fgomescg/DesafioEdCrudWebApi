@@ -71,7 +71,7 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateAuthor([FromBody] AuthorForCreationDto author)
+        public IActionResult CreateAuthor([FromBody] AuthorForCreateUpdateDto author)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateAuthor(int Id, [FromBody] Author AuthorObj)
+        public async Task<IActionResult> UpdateAuthor(int Id, [FromBody]AuthorForCreateUpdateDto AuthorObj)
         {
             try
             {

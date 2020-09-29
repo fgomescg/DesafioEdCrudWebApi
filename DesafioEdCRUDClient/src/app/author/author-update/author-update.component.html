@@ -1,1 +1,67 @@
-<p>author-update works!</p>
+<div class="container-fluid">
+  <form
+    [formGroup]="authorForm"
+    autocomplete="off"
+    novalidate
+    (ngSubmit)="updateAuthor(authorForm.value)"
+  >
+    <div class="form-horizontal card card-body bg-light mb-2 mt-2">
+      <div class="form-group row">
+        <label for="name" class="control-label col-md-2">Nome: </label>
+        <div class="col-md-5">
+          <input
+            type="text"
+            formControlName="name"
+            id="name"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-5">
+          <em *ngIf="validateControl('name') && hasError('name', 'required')"
+            >O campo Nome é obrigatório.</em
+          >
+          <em *ngIf="validateControl('name') && hasError('name', 'maxlength')"
+            >Tamanho máximo permitido são 40 caractéres.</em
+          >
+        </div>
+      </div>
+
+      <br /><br />
+
+      <div class="form-group row">
+        <div class="offset-5 col-md-1">
+          <button
+            type="submit"
+            class="btn btn-info"
+            [disabled]="!authorForm.valid"
+          >
+            Salvar
+          </button>
+        </div>
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="redirectToAuthorList()"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <app-success-modal
+    [modalHeaderText]="'SUCESSO !'"
+    [modalBodyText]="'Autor atualizado com sucesso.'"
+    [okButtonText]="'OK'"
+    (redirectOnOK)="redirectToAuthorList()"
+  ></app-success-modal>
+
+  <app-error-modal
+    [modalHeaderText]="'Erro'"
+    [modalBodyText]="errorMessage"
+    [okButtonText]="'OK'"
+  ></app-error-modal>
+</div>
+

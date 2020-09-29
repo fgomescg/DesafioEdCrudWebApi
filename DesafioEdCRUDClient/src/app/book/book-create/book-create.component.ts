@@ -19,6 +19,7 @@ export class BookCreateComponent implements OnInit {
   public authors: Author[];
   public subjects: Subject[];
   public bookValue = 0;
+  public currentYear = new Date().getFullYear();
 
  constructor(private repository: RepositoryService, private errorHandler: ErrorHandlerService, private router: Router) { }
   ngOnInit() {

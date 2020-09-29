@@ -73,7 +73,7 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateSubject([FromBody] SubjectForCreationDto subject)
+        public IActionResult CreateSubject([FromBody] SubjectForCreateUpdateDto subject)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateSubject(int Id, [FromBody] Subject subjectObj)
+        public async Task<IActionResult> UpdateSubject(int Id, [FromBody] SubjectForCreateUpdateDto subjectObj)
         {
             try
             {

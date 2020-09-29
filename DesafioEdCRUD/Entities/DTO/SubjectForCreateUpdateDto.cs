@@ -2,10 +2,10 @@
 
 namespace Entities.DTO
 {
-    public class SubjectForCreationDto
+    public class SubjectForCreateUpdateDto
     {
         [Required(ErrorMessage = "Description is required")]
-        [StringLength(40, ErrorMessage = "Description can't be longer than 40 characters")]
+        [StringLength(40, ErrorMessage = "Description can't be longer than 20 characters")]
         public string Description { get; set; }
     }
 }

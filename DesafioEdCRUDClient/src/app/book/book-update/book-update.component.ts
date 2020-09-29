@@ -20,7 +20,8 @@ export class BookUpdateComponent implements OnInit {
   public subjects: Subject[];
   public bookForm: FormGroup;
   public bookValue = 0;
-
+  public currentYear = new Date().getFullYear();
+  
   constructor(private repository: RepositoryService, private errorHandler: ErrorHandlerService, private router: Router,
     private activeRoute: ActivatedRoute) { }
 
@@ -34,16 +35,16 @@ export class BookUpdateComponent implements OnInit {
       bookAuthors: new FormControl(null),
       bookSubjects: new FormControl(null)
     });
-    this.getOwnerById();
+    this.getBookById();
     this.getAllAuthors();
     this.getAllSubjects();
   }
 
-  private getOwnerById = () => {
-    let ownerId: string = this.activeRoute.snapshot.params['id'];
+  private getBookById = () => {
+    let bookId: string = this.activeRoute.snapshot.params['id'];
 
-    let ownerByIdUrl: string = `api/book/${ownerId}`;
-    this.repository.getData(ownerByIdUrl)
+    let bookIdByIdUrl: string = `api/book/${bookId}`;
+    this.repository.getData(bookIdByIdUrl)
       .subscribe(res => {
         this.book = res as Book;
         this.bookForm.patchValue(this.book);
@@ -79,7 +80,7 @@ export class BookUpdateComponent implements OnInit {
       }
     );
   };
-  
+
   public validateControl = (controlName: string) => {
     if (this.bookForm.controls[controlName].invalid && this.bookForm.controls[controlName].touched)
       return true;
