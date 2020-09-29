@@ -6,8 +6,8 @@
     (ngSubmit)="updateBook(bookForm.value)"
   >
     <div class="form-horizontal card card-body bg-light mb-2 mt-2">
-      <div class="form-group">
-        <label for="name" class="control-label col-md-2">Título: </label>
+      <div class="form-group row">
+        <label for="title" class="control-label col-md-2">Título: </label>
         <div class="col-md-5">
           <input
             type="text"
@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-5">
           <em *ngIf="validateControl('title') && hasError('title', 'required')"
-            >Título é obrigatório.</em
+            >O campo Título é obrigatório.</em
           >
           <em *ngIf="validateControl('title') && hasError('title', 'maxlength')"
             >Tamanho máximo permitido são 40 caractéres.</em
@@ -41,7 +41,7 @@
             *ngIf="
               validateControl('company') && hasError('company', 'required')
             "
-            >O Editora é obrigatório.</em
+            >O campo Editora é obrigatório.</em
           >
           <em
             *ngIf="
@@ -53,10 +53,30 @@
       </div>
 
       <div class="form-group row">
-        <label for="value" class="control-label col-md-2"
+        <label for="edition" class="control-label col-md-2">Edição: </label>
+        <div class="col-md-5">
+          <input
+            type="text"
+            formControlName="edition"
+            id="edition"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-5">
+          <em
+            *ngIf="
+              validateControl('edition') && hasError('edition', 'required')
+            "
+            >O campo Edição é obrigatório.</em
+          >
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="publishYear" class="control-label col-md-2"
           >Ano de Publicação:
         </label>
-        <div class="col-md-5">
+        <div class="col-md-2">
           <input
             type="text"
             formControlName="publishYear"
@@ -85,12 +105,15 @@
       <div class="form-group row">
         <label for="value" class="control-label col-md-2">Valor: </label>
         <div class="col-md-5">
-          <input
-            type="text"
-            formControlName="value"
+
+          <input type="text"
+            mvndrMatCurrencyFormat
             id="value"
-            class="form-control"
-          />
+            [allowNegative]="false"
+            [currencyCode]="'BRL'"
+            [value]="bookValue"
+            (blur)="updateBRLAmount($event)" />
+
         </div>
         <div class="col-md-5">
           <em *ngIf="validateControl('value') && hasError('value', 'required')"
@@ -99,7 +122,36 @@
         </div>
       </div>
 
+      <div class="form-group row">
+        <label for="bookAuthors" class="control-label col-md-2">Autores: </label>
+        <div class="col-md-5">
+          <select
+            multiple
+            id="bookAuthors"
+            formControlName="bookAuthors"
+            class="form-control"
+          >
+          <option *ngFor="let author of authors" [ngValue]="author.authorId" >{{author.name}}</option>
+        </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="bookSubjects" class="control-label col-md-2">Assunto: </label>
+        <div class="col-md-5">
+          <select
+            multiple
+            formControlName="bookSubjects"
+            id="bookSubjects"
+            class="form-control"
+          >
+          <option *ngFor="let subject of subjects" [ngValue]="subject.subjectId" >{{subject.description}}</option>
+        </select>
+        </div>
+      </div>
+
       <br /><br />
+
       <div class="form-group row">
         <div class="offset-5 col-md-1">
           <button
@@ -107,7 +159,7 @@
             class="btn btn-info"
             [disabled]="!bookForm.valid"
           >
-            Atualizar
+            Salvar
           </button>
         </div>
         <div class="col-md-1">
@@ -125,7 +177,7 @@
 
   <app-success-modal
     [modalHeaderText]="'SUCESSO !'"
-    [modalBodyText]="'Livro atualizado com sucesso.'"
+    [modalBodyText]="'Livro criado com sucesso.'"
     [okButtonText]="'OK'"
     (redirectOnOK)="redirectToBookList()"
   ></app-success-modal>

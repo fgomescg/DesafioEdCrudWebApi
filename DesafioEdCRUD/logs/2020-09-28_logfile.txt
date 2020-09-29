@@ -560,3 +560,17 @@ Entities.DTO.BookForUpdateDto -> Entities.Models.Book
 2020-09-28 16:57:46.2264 INFO Returned all books from database.
 2020-09-28 16:57:50.7742 INFO Returned all books from database.
 2020-09-28 16:57:56.0070 INFO Returned all books from database.
+2020-09-28 21:50:49.7511 INFO Returned all books from database.
+2020-09-28 21:50:52.1933 INFO Returned all authors from database.
+2020-09-28 21:50:53.5097 INFO Returned all Subjects from database.
+2020-09-28 21:50:57.4962 INFO Returned all authors from database.
+2020-09-28 21:50:59.9327 INFO Returned all books from database.
+2020-09-28 21:51:03.9948 INFO Returned all authors from database.
+2020-09-28 21:51:04.5475 INFO Returned all Subjects from database.
+2020-09-28 23:44:18.7052 INFO Returned all books from database.
+2020-09-28 23:44:59.2531 INFO Returned all books from database.
+2020-09-28 23:56:33.9830 INFO Returned all books from database.
+2020-09-28 23:58:30.1106 INFO Returned all books from database.
+2020-09-28 23:58:39.0292 INFO Returned all books from database.
+2020-09-28 23:59:28.0786 INFO Returned all books from database.
+2020-09-28 23:59:44.0674 INFO Returned all books from database.

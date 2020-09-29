@@ -25,6 +25,7 @@ export class BookCreateComponent implements OnInit {
     this.bookForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(40)]),
       company: new FormControl('', [Validators.required, Validators.maxLength(40)]),
+      edition: new FormControl('', [Validators.required]),
       value: new FormControl(this.bookValue, [Validators.required]),
       publishYear: new FormControl('', [Validators.required, Validators.maxLength(4)]),
       bookAuthors: new FormControl(null),

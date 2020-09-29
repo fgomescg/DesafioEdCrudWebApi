@@ -4,6 +4,8 @@ import { ErrorHandlerService } from './../../shared/services/error-handler.servi
 import { RepositoryService } from './../../shared/services/repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Book } from './../../_interfaces/book.model';
+import { Author } from 'src/app/_interfaces/author.model';
+import { Subject } from 'src/app/_interfaces/subject.model';
 
 @Component({
   selector: 'app-book-update',
@@ -14,7 +16,10 @@ export class BookUpdateComponent implements OnInit {
 
   public errorMessage: string = '';
   public book: Book;
+  public authors: Author[];
+  public subjects: Subject[];
   public bookForm: FormGroup;
+  public bookValue = 0;
 
   constructor(private repository: RepositoryService, private errorHandler: ErrorHandlerService, private router: Router,
     private activeRoute: ActivatedRoute) { }
@@ -23,10 +28,15 @@ export class BookUpdateComponent implements OnInit {
     this.bookForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(40)]),
       company: new FormControl('', [Validators.required, Validators.maxLength(40)]),
+      edition: new FormControl('', [Validators.required]),
+      value: new FormControl(this.bookValue, [Validators.required]),
       publishYear: new FormControl('', [Validators.required, Validators.maxLength(4)]),
-      value: new FormControl('', [Validators.required])
+      bookAuthors: new FormControl(null),
+      bookSubjects: new FormControl(null)
     });
     this.getOwnerById();
+    this.getAllAuthors();
+    this.getAllSubjects();
   }
 
   private getOwnerById = () => {
@@ -37,7 +47,6 @@ export class BookUpdateComponent implements OnInit {
       .subscribe(res => {
         this.book = res as Book;
         this.bookForm.patchValue(this.book);
-
       },
       (error) => {
         this.errorHandler.handleError(error);
@@ -45,6 +54,32 @@ export class BookUpdateComponent implements OnInit {
       })
   }
 
+  public getAllAuthors = () => {
+    let apiAddress: string = 'api/author';
+    this.repository.getData(apiAddress).subscribe(
+      (res) => {
+        this.authors = res as Author[];
+      },
+      (error) => {
+        this.errorHandler.handleError(error);
+        this.errorMessage = this.errorHandler.errorMessage;
+      }
+    );
+  };
+
+  public getAllSubjects = () => {
+    let apiAddress: string = 'api/subject';
+    this.repository.getData(apiAddress).subscribe(
+      (res) => {
+        this.subjects = res as Subject[];
+      },
+      (error) => {
+        this.errorHandler.handleError(error);
+        this.errorMessage = this.errorHandler.errorMessage;
+      }
+    );
+  };
+  
   public validateControl = (controlName: string) => {
     if (this.bookForm.controls[controlName].invalid && this.bookForm.controls[controlName].touched)
       return true;
@@ -70,6 +105,9 @@ export class BookUpdateComponent implements OnInit {
     this.book.company = bookFormValue.company;
     this.book.publishYear = bookFormValue.publishYear;
     this.book.value = Number(bookFormValue.value);
+    this.book.edition = Number(bookFormValue.edition);
+    this.book.bookAuthors =  this.transformToBookAuthorModel(bookFormValue.bookAuthors);
+    this.book.bookSubjects= this.transformToBookSubjectModel(bookFormValue.bookSubjects);
 
     let apiUrl = `api/book/${this.book.id}`;
     this.repository.update(apiUrl, this.book)
@@ -81,5 +119,21 @@ export class BookUpdateComponent implements OnInit {
         this.errorMessage = this.errorHandler.errorMessage;
       })
     )
+  }
+
+  updateBRLAmount(event){
+    this.bookValue = event.target.value;
+  }
+
+  private transformToBookAuthorModel(ids) {
+    return ids.map((id) => {
+      return { "authorId": id }
+    });
+  }
+
+  private transformToBookSubjectModel(ids) {
+    return ids.map((id) => {
+      return { "subjectId": id }
+    });
   }
 }
