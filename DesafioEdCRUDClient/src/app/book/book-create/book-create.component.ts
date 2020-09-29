@@ -83,6 +83,7 @@ export class BookCreateComponent implements OnInit {
     const book: BookForCreation = {
       title: bookFormValue.title,
       company: bookFormValue.company,
+      edition: Number(bookFormValue.edition),
       value:  Number(this.bookValue),
       publishYear: bookFormValue.publishYear,
       bookAuthors:  this.transformToBookAuthorModel(bookFormValue.bookAuthors),
