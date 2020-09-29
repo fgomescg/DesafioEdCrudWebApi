@@ -47,5 +47,10 @@ namespace Repository
         {
             Delete(book);
         }
+
+        public async Task<BookAuthorReport[]> GetBookAuthorReports()
+        {
+            return await RepositoryContext.BookAuthorReport.ToArrayAsync();
+        }
     }
 }

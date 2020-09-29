@@ -189,3 +189,12 @@
 2020-09-29 02:40:12.3024 INFO Returned all authors from database.
 2020-09-29 02:40:14.2118 INFO Returned all authors from database.
 2020-09-29 02:40:15.3695 INFO Returned all books from database.
+2020-09-29 11:32:00.5468 ERROR GetAllBookss: The entity type 'BookAuthorReport' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
+2020-09-29 11:32:19.2394 ERROR GetAllBookss: The entity type 'BookAuthorReport' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
+2020-09-29 11:32:57.9987 ERROR GetAllBookss: The entity type 'BookAuthorReport' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
+2020-09-29 11:34:32.7195 INFO Returned all books from database.
+2020-09-29 11:34:40.0820 ERROR GetBookAuthorReports: Unable to cast object of type 'System.Int32' to type 'System.String'.
+2020-09-29 11:36:56.4535 ERROR GetBookAuthorReports: Unable to cast object of type 'System.Decimal' to type 'System.String'.
+2020-09-29 11:37:40.4048 INFO Returned bookReport from database.
+2020-09-29 13:01:27.3276 INFO Returned bookReport from database.
+2020-09-29 13:01:31.8507 INFO Returned all books from database.

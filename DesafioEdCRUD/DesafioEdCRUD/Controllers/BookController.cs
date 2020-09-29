@@ -165,5 +165,23 @@ namespace DesafioEdCRUD.Controllers
                 return StatusCode(500, "Internal server error");
             }            
         }
+
+        [HttpGet("report")]
+        public async Task<IActionResult> GetBookAuthorReports()
+        {
+            try
+            {
+                var bookReport = await _repository.Book.GetBookAuthorReports();
+
+                _logger.LogInfo($"Returned bookReport from database.");
+                
+                return Ok(bookReport);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"GetBookAuthorReports: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
 }

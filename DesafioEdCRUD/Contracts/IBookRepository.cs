@@ -10,6 +10,7 @@ namespace Contracts
         void CreateBook(Book book);
         void UpdateBook(Book book);
         void DeleteBook(Book book);
+        Task<BookAuthorReport[]> GetBookAuthorReports();
 
     }
 }

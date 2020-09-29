@@ -40,6 +40,6 @@ namespace Repository
         public void DeleteAuthor(Author author)
         {
             Delete(author);
-        }
+        }       
     }
 }
