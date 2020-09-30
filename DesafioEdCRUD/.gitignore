@@ -1,5 +1,9 @@
 /DesafioEdCRUD/obj
 /DesafioEdCRUD/bin
+/DesafioEdCRUD/logs
+/DesafioEdCRUD/internal_logs
+/DesafioEdCRUD.Integration.Tests/obj
+/DesafioEdCRUD.Integration.Tests/bin
 /Contracts/obj
 /Contracts/bin
 /Entities/obj

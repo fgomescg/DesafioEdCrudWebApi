@@ -1,6 +1,6 @@
 <div class="row">
   <div class="offset-10 col-md-2">
-    <a [routerLink]="['/author/create']" href="#">Cadastrar Autor</a>
+    <button [routerLink]="['/author/create']" type="button" id="details" class="btn btn-info"> Cadastrar Autor</button>
   </div>
 </div>
 <br>
@@ -11,14 +11,14 @@
         <thead>
           <tr>
             <th>Nome</th>
-            <th>Atualizar</th>
+            <th>Editar</th>
             <th>Deletar</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let author of authors">
             <td>{{author.name}}</td>
-            <td><button type="button" id="update" class="btn btn-success" (click)="redirectToUpdatePage(author.authorId)">Atualizar</button></td>
+            <td><button type="button" id="update" class="btn btn-success" (click)="redirectToUpdatePage(author.authorId)">Editar</button></td>
             <td><button type="button" id="delete" class="btn btn-danger" (click)="redirectToDeletePage(author.authorId)">Deletar</button></td>
           </tr>
         </tbody>

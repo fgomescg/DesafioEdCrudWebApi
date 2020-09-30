@@ -26,11 +26,11 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllBooks([FromQuery] BookParameters bookParameters)
+        public async Task<IActionResult> GetAllBooks([FromQuery] BookParameters bookParameters)
         {
             try
             {
-                var books = _repository.Book.GetAllBooks(bookParameters);
+                var books = await Task.Run(() => _repository.Book.GetAllBooks(bookParameters));
                        
                 _logger.LogInfo($"Returned all books from database.");
 

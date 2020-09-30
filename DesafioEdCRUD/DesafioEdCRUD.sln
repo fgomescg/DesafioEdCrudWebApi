@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{00B7974A-5DE1-4420-BD14-BD138D429722}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioEdCRUD.Integration.Tests", "DesafioEdCRUD.Integration.Tests\DesafioEdCRUD.Integration.Tests.csproj", "{BB386222-A2E7-44DF-85F6-DC2FBE7B8850}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{00B7974A-5DE1-4420-BD14-BD138D429722}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00B7974A-5DE1-4420-BD14-BD138D429722}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00B7974A-5DE1-4420-BD14-BD138D429722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB386222-A2E7-44DF-85F6-DC2FBE7B8850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB386222-A2E7-44DF-85F6-DC2FBE7B8850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB386222-A2E7-44DF-85F6-DC2FBE7B8850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB386222-A2E7-44DF-85F6-DC2FBE7B8850}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
