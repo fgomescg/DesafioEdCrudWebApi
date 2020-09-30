@@ -13,6 +13,13 @@ export class BookListComponent implements OnInit {
   public books: Book[];
   public errorMessage: string = '';
 
+  public TotalCount : Number = 100;
+  public PageSize : Number = 10;
+  public CurrentPage : Number = 1;
+  public TotalPages: Number = 10;
+  public HasNext : boolean = true;
+  public HasPrevious : boolean = true;
+
   constructor(
     private repository: RepositoryService,
     private errorHandler: ErrorHandlerService,
@@ -33,6 +40,11 @@ export class BookListComponent implements OnInit {
       }
     );
   };
+  public getBookDetails = (id) => {
+    const detailsUrl: string = `/book/details/${id}`;
+    this.router.navigate([detailsUrl]);
+  }
+
   public redirectToUpdatePage = (id) => {
     const updateUrl: string = `/book/update/${id}`;
     this.router.navigate([updateUrl]);

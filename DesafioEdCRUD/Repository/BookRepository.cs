@@ -1,4 +1,4 @@
-﻿using Entities;
+using Entities;
 using Entities.Models;
 using Contracts;
 using System.Linq;
@@ -13,18 +13,18 @@ namespace Repository
             : base(repositoryContext)
         {
         }        
-        public async Task<Book[]> GetAllBooks(BookParameters bookParameters)
+        public PagedList<Book> GetAllBooks(BookParameters bookParameters)
         {
-            return await FindAll().Include(book => book.BookAuthors)
-                             .ThenInclude(ba => ba.Author)
-                             .Include(su => su.BookSubjects)
-                             .ThenInclude(bs => bs.Subject)
-                             .OrderBy(book => book.Id)
-                             .Skip((bookParameters.PageNumber - 1) * bookParameters.PageSize)
-                             .Take(bookParameters.PageSize)
-                             .ToArrayAsync();
-          
-        }       
+        var books = FindAll().Include(book => book.BookAuthors)
+                            .ThenInclude(ba => ba.Author)
+                            .Include(su => su.BookSubjects)
+                            .ThenInclude(bs => bs.Subject)
+                            .OrderBy(book => book.Title);
+
+          return PagedList<Book>.ToPagedList(books,
+               bookParameters.PageNumber,
+               bookParameters.PageSize);          
+        }
 
         public async Task<Book> GetBookById(int Id)
         {

@@ -150,11 +150,6 @@
           <option *ngFor="let author of authors" [ngValue]="author.authorId" >{{author.name}}</option>
         </select>
         </div>
-        <!-- <div class="col-md-5">
-          <em *ngIf="validateControl('bookAuthors') && hasError('bookAuthors', 'required')"
-            >O campo Valor é obrigatório.</em
-          >
-        </div> -->
       </div>
 
       <div class="form-group row">
@@ -169,11 +164,6 @@
           <option *ngFor="let subject of subjects" [ngValue]="subject.subjectId" >{{subject.description}}</option>
         </select>
         </div>
-        <!-- <div class="col-md-5">
-          <em *ngIf="validateControl('bookSubjects') && hasError('bookSubjects', 'required')"
-            >O campo Valor é obrigatório.</em
-          >
-        </div> -->
       </div>
 
       <br /><br />

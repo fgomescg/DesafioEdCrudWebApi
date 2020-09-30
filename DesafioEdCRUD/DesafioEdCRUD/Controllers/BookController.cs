@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Entities.Models;
@@ -6,6 +6,7 @@ using Contracts;
 using AutoMapper;
 using Entities.DTO;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace DesafioEdCRUD.Controllers
 {
@@ -25,16 +26,26 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllBooks([FromQuery] BookParameters bookParameters)
+        public IActionResult GetAllBooks([FromQuery] BookParameters bookParameters)
         {
             try
             {
-                var books = await _repository.Book.GetAllBooks(bookParameters);
+                var books = _repository.Book.GetAllBooks(bookParameters);
                        
                 _logger.LogInfo($"Returned all books from database.");
 
-                var booksResult = _mapper.Map<IEnumerable<BookDto>>(books);
-                return Ok(booksResult);
+                var metadata = new
+                {
+                  books.TotalCount,
+                  books.PageSize,
+                  books.CurrentPage,
+                  books.TotalPages,
+                  books.HasNext,
+                  books.HasPrevious
+                };
+
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+                return Ok(books);
             }
             catch (Exception ex)
             {

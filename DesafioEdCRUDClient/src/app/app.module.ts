@@ -9,6 +9,8 @@ import { MenuComponent } from './menu/menu.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
+import { RelatorioModule } from './relatorio/relatorio.module';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,6 @@ import { InternalServerComponent } from './error-pages/internal-server/internal-
     MenuComponent,
     NotFoundComponent,
     InternalServerComponent
-
   ],
   imports: [
     BrowserModule,
@@ -30,9 +31,11 @@ import { InternalServerComponent } from './error-pages/internal-server/internal-
       { path: 'book', loadChildren: () => import('./book/book.module').then(b => b.BookModule) },
       { path: 'author', loadChildren: () => import('./author/author.module').then(a => a.AuthorModule) },
       { path: 'subject', loadChildren: () => import('./subject/subject.module').then(s => s.SubjectModule) },
+      { path: 'relatorio', loadChildren: () => import('./relatorio/relatorio.module').then(r => r.RelatorioModule) },
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: '**', redirectTo: '/404', pathMatch: 'full'}
-    ])
+    ]),
+    RelatorioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

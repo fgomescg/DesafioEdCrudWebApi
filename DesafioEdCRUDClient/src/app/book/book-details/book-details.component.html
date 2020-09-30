@@ -1,0 +1,48 @@
+<div class="card card-body bg-light mb-2 mt-2">
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Título:</strong>
+    </div>
+    <div class="col-md-3">
+      {{book?.title}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Autores:</strong>
+    </div>
+    <div class="col-md-3">
+      <ul>
+      <li *ngFor="let bookAuthor of book?.bookAuthors">
+        {{ bookAuthor.author.name }}
+      </li>
+    </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Assuntos:</strong>
+    </div>
+    <div class="col-md-3">
+      <ul>
+        <li *ngFor="let bookSubject of book?.bookSubjects">
+          {{ bookSubject.subject.description }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="redirectToBookList()"
+    >
+      Voltar
+    </button>
+  </div>
+
+
+
+</div>
+

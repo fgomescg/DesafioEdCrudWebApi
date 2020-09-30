@@ -19,9 +19,8 @@ export class BookUpdateComponent implements OnInit {
   public authors: Author[];
   public subjects: Subject[];
   public bookForm: FormGroup;
-  public bookValue = 0;
   public currentYear = new Date().getFullYear();
-  
+
   constructor(private repository: RepositoryService, private errorHandler: ErrorHandlerService, private router: Router,
     private activeRoute: ActivatedRoute) { }
 
@@ -30,7 +29,7 @@ export class BookUpdateComponent implements OnInit {
       title: new FormControl('', [Validators.required, Validators.maxLength(40)]),
       company: new FormControl('', [Validators.required, Validators.maxLength(40)]),
       edition: new FormControl('', [Validators.required]),
-      value: new FormControl(this.bookValue, [Validators.required]),
+      value: new FormControl('', [Validators.required]),
       publishYear: new FormControl('', [Validators.required, Validators.maxLength(4)]),
       bookAuthors: new FormControl(null),
       bookSubjects: new FormControl(null)
@@ -120,10 +119,6 @@ export class BookUpdateComponent implements OnInit {
         this.errorMessage = this.errorHandler.errorMessage;
       })
     )
-  }
-
-  updateBRLAmount(event){
-    this.bookValue = event.target.value;
   }
 
   private transformToBookAuthorModel(ids) {

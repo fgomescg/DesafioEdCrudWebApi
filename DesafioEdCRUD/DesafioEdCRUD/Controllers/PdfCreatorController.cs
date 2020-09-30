@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DesafioEdCRUD.Controllers
 {
-    [Route("api/pdfcreator")]
+    [Route("api/report")]
     [ApiController]
     public class PdfCreatorController : ControllerBase
     {
