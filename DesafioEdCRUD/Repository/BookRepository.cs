@@ -15,15 +15,15 @@ namespace Repository
         }        
         public PagedList<Book> GetAllBooks(BookParameters bookParameters)
         {
-        var books = FindAll().Include(book => book.BookAuthors)
+            var books = FindAll().Include(book => book.BookAuthors)
                             .ThenInclude(ba => ba.Author)
                             .Include(su => su.BookSubjects)
                             .ThenInclude(bs => bs.Subject)
                             .OrderBy(book => book.Title);
 
-          return PagedList<Book>.ToPagedList(books,
-               bookParameters.PageNumber,
-               bookParameters.PageSize);          
+              return PagedList<Book>.ToPagedList(books,
+                   bookParameters.PageNumber,
+                   bookParameters.PageSize);          
         }
 
         public async Task<Book> GetBookById(int Id)

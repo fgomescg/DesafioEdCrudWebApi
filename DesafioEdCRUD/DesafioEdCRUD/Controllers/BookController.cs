@@ -32,7 +32,7 @@ namespace DesafioEdCRUD.Controllers
             {
                 var books = await Task.Run(() => _repository.Book.GetAllBooks(bookParameters));
                        
-                _logger.LogInfo($"Returned all books from database.");
+                _logger.LogInfo($"Returned all books from database.");                
 
                 var metadata = new
                 {
@@ -40,12 +40,12 @@ namespace DesafioEdCRUD.Controllers
                   books.PageSize,
                   books.CurrentPage,
                   books.TotalPages,
-                  books.HasNext,
-                  books.HasPrevious
+                  books
                 };
+           
 
-                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
-                return Ok(books);
+                //Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+                return Ok(metadata);
             }
             catch (Exception ex)
             {

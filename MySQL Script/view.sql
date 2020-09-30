@@ -17,4 +17,5 @@ CREATE OR REPLACE VIEW BookAuthorReport AS
     JOIN author
         ON bookauthor.AuthorId = author.AuthorId
     AND author.AuthorId is not NULL
-        GROUP BY author.Name;
+        GROUP BY author.Name
+        ORDER BY author.Name;

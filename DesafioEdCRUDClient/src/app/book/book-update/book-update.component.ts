@@ -30,7 +30,7 @@ export class BookUpdateComponent implements OnInit {
       company: new FormControl('', [Validators.required, Validators.maxLength(40)]),
       edition: new FormControl('', [Validators.required]),
       value: new FormControl('', [Validators.required]),
-      publishYear: new FormControl('', [Validators.required, Validators.maxLength(4)]),
+      publishYear: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.min(1500), Validators.max(this.currentYear)]),
       bookAuthors: new FormControl(null),
       bookSubjects: new FormControl(null)
     });

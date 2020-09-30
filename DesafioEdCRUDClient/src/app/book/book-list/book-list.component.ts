@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from './../../shared/services/repository.service';
-import { Book } from './../../_interfaces/book.model';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { Router } from '@angular/router';
+import { BookList } from 'src/app/_interfaces/book-list';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-book-list',
@@ -10,15 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./book-list.component.css'],
 })
 export class BookListComponent implements OnInit {
-  public books: Book[];
+  public bookList: BookList;
   public errorMessage: string = '';
-
-  public TotalCount : Number = 100;
-  public PageSize : Number = 10;
-  public CurrentPage : Number = 1;
-  public TotalPages: Number = 10;
-  public HasNext : boolean = true;
-  public HasPrevious : boolean = true;
+  public totalCount : Number;
+  public totalPages: Number;
+  public currentPage : Number = 1;
+  public pageSize : Number = 10;
 
   constructor(
     private repository: RepositoryService,
@@ -26,13 +24,20 @@ export class BookListComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.getAllBooks();
+    this.getBooks();
   }
-  public getAllBooks = () => {
+  public getBooks = () => {
     let apiAddress: string = 'api/book';
-    this.repository.getData(apiAddress).subscribe(
+
+    let params = new HttpParams().set("pageNumber",this.currentPage.toString()).set("pageSize", this.pageSize.toString());
+
+    this.repository.getData(apiAddress, params).subscribe(
       (res) => {
-        this.books = res as Book[];
+        this.bookList = res as BookList;
+        this.totalCount = this.bookList.totalCount;
+        this.pageSize = this.bookList.currentPage;
+        this.totalPages = this.bookList.totalPages;
+        this.pageSize = this.bookList.pageSize;
       },
       (error) => {
         this.errorHandler.handleError(error);
@@ -40,6 +45,12 @@ export class BookListComponent implements OnInit {
       }
     );
   };
+
+  handlePageChange(event){
+    this.currentPage = event;
+    this.getBooks();
+  }
+
   public getBookDetails = (id) => {
     const detailsUrl: string = `/book/details/${id}`;
     this.router.navigate([detailsUrl]);
