@@ -7,6 +7,7 @@ using AutoMapper;
 using Entities.DTO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Entities.Models.Exceptions;
 
 namespace DesafioEdCRUD.Controllers
 {
@@ -26,15 +27,15 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllBooks([FromQuery] BookParameters bookParameters)
+        public async ValueTask<IActionResult> GetAllBooks([FromQuery] BookParameters bookParameters)
         {
             try
             {
                 var books = await Task.Run(() => _repository.Book.GetAllBooks(bookParameters));
                        
-                _logger.LogInfo($"Returned all books from database.");                
+                _logger.LogInfo($"Returned {books.TotalCount} books from database.");                
 
-                var metadata = new
+                var booksResult = new
                 {
                   books.TotalCount,
                   books.PageSize,
@@ -43,9 +44,7 @@ namespace DesafioEdCRUD.Controllers
                   books
                 };
            
-
-                //Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
-                return Ok(metadata);
+                return Ok(booksResult);
             }
             catch (Exception ex)
             {
@@ -56,7 +55,7 @@ namespace DesafioEdCRUD.Controllers
         
 
         [HttpGet("{Id}", Name ="BookById")]
-        public async Task<IActionResult> GetBookById(int Id)
+        public async ValueTask<IActionResult> GetBookById(int Id)
         {
             try
             {
@@ -107,6 +106,20 @@ namespace DesafioEdCRUD.Controllers
 
                 return CreatedAtRoute("BookById", new { id = createdBook.Id }, createdBook);
             }
+            catch (InvalidBookException bookValidationException)
+                when (bookValidationException.InnerException is AlreadyExistsBookException)
+            {
+                return Conflict(bookValidationException.InnerException.Message);
+            }
+            catch (BookValidationException bookValidationException)
+            {
+                return BadRequest(bookValidationException.InnerException.Message);
+            }
+            catch (StudentServiceException studentServiceException)
+            {
+                return Problem(studentServiceException.Message);
+            }
+
             catch (Exception ex)
             {                
                 _logger.LogError($"CreateBook: {ex}");
@@ -115,7 +128,7 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateBook(int Id, [FromBody]BookForUpdateDto bookObj)
+        public async ValueTask<IActionResult> UpdateBook(int Id, [FromBody]BookForUpdateDto bookObj)
         {
             try
             {
@@ -153,7 +166,7 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpDelete("{Id}")]
-        public async Task<IActionResult> DeleteBook(int Id)
+        public async ValueTask<IActionResult> DeleteBook(int Id)
         {
             try
             {
@@ -178,7 +191,7 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpGet("report")]
-        public async Task<IActionResult> GetBookAuthorReports()
+        public async ValueTask<IActionResult> GetBookAuthorReports()
         {
             try
             {

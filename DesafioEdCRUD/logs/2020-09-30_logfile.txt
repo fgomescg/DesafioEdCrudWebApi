@@ -23,3 +23,24 @@
 2020-09-30 02:04:05.8930 INFO Returned book with id: 2
 2020-09-30 02:12:46.1882 INFO Returned all books from database.
 2020-09-30 02:12:46.3233 INFO Returned book with id: 2
+2020-09-30 15:53:39.0335 INFO Returned all books from database.
+2020-09-30 15:54:16.9789 INFO Returned all books from database.
+2020-09-30 16:12:33.0447 INFO Returned 10 books from database.
+2020-09-30 16:13:26.0199 INFO Returned all authors from database.
+2020-09-30 16:13:26.0199 INFO Returned all Subjects from database.
+2020-09-30 16:13:28.6082 ERROR Author with id:2, not found.
+2020-09-30 16:13:32.2023 ERROR Subject with id: 2, not found in db.
+2020-09-30 16:13:34.2086 ERROR Subject with id: 2, not found in db.
+2020-09-30 18:24:19.6388 INFO Returned 12 books from database.
+2020-09-30 18:40:57.0408 INFO Returned book with id: 17
+2020-09-30 18:44:32.6523 INFO Returned 16 books from database.
+2020-09-30 18:44:33.5378 INFO Returned book with id: 19
+2020-09-30 18:55:27.1346 INFO Returned all authors from database.
+2020-09-30 18:55:28.2651 INFO Returned author with id: 3
+2020-09-30 18:56:26.7625 INFO Returned all authors from database.
+2020-09-30 18:56:27.9092 INFO Returned author with id: 7
+2020-09-30 18:58:55.2769 INFO Returned all Subjects from database.
+2020-09-30 18:58:55.2769 INFO Returned all authors from database.
+2020-09-30 19:36:31.9382 INFO Returned 20 books from database.
+2020-09-30 19:36:34.1421 INFO Returned 20 books from database.
+2020-09-30 19:37:10.5095 INFO Returned book with id: 7

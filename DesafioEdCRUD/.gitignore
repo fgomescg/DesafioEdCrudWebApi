@@ -1,9 +1,11 @@
 /DesafioEdCRUD/obj
 /DesafioEdCRUD/bin
-/DesafioEdCRUD/logs
-/DesafioEdCRUD/internal_logs
+DesafioEdCRUD\logs
+DesafioEdCRUD\internal_logs
 /DesafioEdCRUD.Integration.Tests/obj
 /DesafioEdCRUD.Integration.Tests/bin
+/DesafioEdCRUD.Unit.Tests/obj
+/DesafioEdCRUD.Unit.Tests/bin
 /Contracts/obj
 /Contracts/bin
 /Entities/obj
@@ -12,3 +14,6 @@
 /LoggerService/bin
 /Repository/obj
 /Repository/bin
+DesafioEdCRUD/internal_logs/internallog.txt
+DesafioEdCRUD/logs/2020-09-30_logfile.txt
+

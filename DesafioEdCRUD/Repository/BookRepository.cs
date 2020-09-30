@@ -19,7 +19,7 @@ namespace Repository
                             .ThenInclude(ba => ba.Author)
                             .Include(su => su.BookSubjects)
                             .ThenInclude(bs => bs.Subject)
-                            .OrderBy(book => book.Title);
+                            .OrderBy(book => book.Title);                            
 
               return PagedList<Book>.ToPagedList(books,
                    bookParameters.PageNumber,
