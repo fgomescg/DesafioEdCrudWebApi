@@ -24,7 +24,7 @@ namespace Repository
             Delete(subject);
         }
 
-        public async Task<Subject[]> GetAllSubjects(SubjectParameters subjectParameters)
+        public async ValueTask<Subject[]> GetAllSubjects(SubjectParameters subjectParameters)
         {
             return await FindAll()
                     .OrderBy(su => su.Description)
@@ -33,7 +33,7 @@ namespace Repository
                     .ToArrayAsync();
         }
 
-        public async Task<Subject> GetSubjectById(int Id)
+        public async ValueTask<Subject> GetSubjectById(int Id)
         {
             return await FindByCondition(sub => sub.SubjectId.Equals(Id)).FirstOrDefaultAsync();
         }    

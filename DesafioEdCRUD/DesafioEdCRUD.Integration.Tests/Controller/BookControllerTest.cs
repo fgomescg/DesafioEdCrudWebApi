@@ -6,14 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Newtonsoft.Json;
-using Xunit.Priority;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
 namespace DesafioEdCRUD.Integration.Tests.Controller
 {
-    [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
     public class BookControllerTest
     {
         private readonly HttpClient _client;
@@ -34,7 +32,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             bookTest = new Book() { Title = "Test Title", Company = "Test Company", Edition = 1, PublishYear = "2000", Value = 20 };
         }
 
-         [Fact, Priority(0)]
+         [Fact]
         public async Task CreateBook_Should_ReturnsCreatedResponse()
         {   
             var response = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
@@ -43,7 +41,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.Created);
         }
 
-        [Fact, Priority(1)]
+        [Fact]
         public async Task GetAllBooks_ReturnsOkResponse()
         {         
             var response = await _client.GetAsync("/api/book");
@@ -51,7 +49,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
-        [Fact, Priority(2)]
+        [Fact]
         public async Task GetBookById_Should_ReturnsOkResponse()
         {    
             var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
@@ -64,7 +62,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }        
 
-        [Fact, Priority(3)]
+        [Fact]
         public async Task UpdateBook_Should_ReturnsNoContentResponse()
         {
             var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
@@ -80,7 +78,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }
 
-        [Fact, Priority(4)]
+        [Fact]
         public async Task DeleteBook_Should_ReturnsNoContentResponse()
         {
             var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject

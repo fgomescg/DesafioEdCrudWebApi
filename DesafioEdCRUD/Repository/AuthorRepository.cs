@@ -15,7 +15,7 @@ namespace Repository
         {
         }
 
-        public async Task<Author[]> GetAllAuthors(AuthorParameters authorParameters)
+        public async ValueTask<Author[]> GetAllAuthors(AuthorParameters authorParameters)
         {
             return await FindAll()
                     .OrderBy(bk => bk.Name)
@@ -24,7 +24,7 @@ namespace Repository
                     .ToArrayAsync();
         }
 
-        public async Task<Author> GetAuthorById(int Id)
+        public async ValueTask<Author> GetAuthorById(int Id)
         {
             return await FindByCondition(author => author.AuthorID.Equals(Id)).FirstOrDefaultAsync();
         }

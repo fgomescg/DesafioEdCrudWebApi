@@ -12,11 +12,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Priority;
+
 
 namespace DesafioEdCRUD.Integration.Tests.Controller
 {
-    [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
     public class SubjectControllerTest
     {
         private readonly HttpClient _client;
@@ -36,7 +35,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             subjectTest = new Subject() { Description = "Subject Test" };
         }
 
-        [Fact, Priority(0)]
+        [Fact]
         public async Task GetAllSubjects_ReturnsOkResponse()
         {
             var response = await _client.GetAsync(baseApiUrl);
@@ -44,7 +43,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
-        [Fact, Priority(1)]
+        [Fact]
         public async Task GetSubjectById_Should_ReturnsOkResponse()
         {
             var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
@@ -57,7 +56,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
-        [Fact, Priority(2)]
+        [Fact]
         public async Task CreateSubject_Should_ReturnsCreatedResponse()
         {
             var response = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
@@ -66,7 +65,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.Created);
         }
 
-        [Fact, Priority(3)]
+        [Fact]
         public async Task UpdateSubject_Should_ReturnsNoContentResponse()
         {
             var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
@@ -82,7 +81,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }
 
-        [Fact, Priority(4)]
+        [Fact]
         public async Task DeleteSubject_Should_ReturnsNoContentResponse()
         {
             var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject

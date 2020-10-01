@@ -13,20 +13,20 @@ namespace Repository
             : base(repositoryContext)
         {
         }        
-        public PagedList<Book> GetAllBooks(BookParameters bookParameters)
+        public async ValueTask<PagedList<Book>> GetAllBooks(BookParameters bookParameters)
         {
-            var books = FindAll().Include(book => book.BookAuthors)
+            var books = await FindAll().Include(book => book.BookAuthors)
                             .ThenInclude(ba => ba.Author)
                             .Include(su => su.BookSubjects)
                             .ThenInclude(bs => bs.Subject)
-                            .OrderBy(book => book.Title);                            
+                            .OrderBy(book => book.Title).ToListAsync();                            
 
-              return PagedList<Book>.ToPagedList(books,
+              return PagedList<Book>.ToPagedList(books.AsQueryable(),
                    bookParameters.PageNumber,
                    bookParameters.PageSize);          
         }
 
-        public async Task<Book> GetBookById(int Id)
+        public async ValueTask<Book> GetBookById(int Id)
         {
             return await FindByCondition(book => book.Id.Equals(Id))
                              .Include(book => book.BookAuthors)
@@ -48,7 +48,7 @@ namespace Repository
             Delete(book);
         }
 
-        public async Task<BookAuthorReport[]> GetBookAuthorReports()
+        public async ValueTask<BookAuthorReport[]> GetBookAuthorReports()
         {
             return await RepositoryContext.BookAuthorReport.ToArrayAsync();
         }

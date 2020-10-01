@@ -35,13 +35,6 @@ namespace DesafioEdCRUD.Unit.Tests.Controller
             bookController = new BookController(logManagerMock.Object, repoWrapperMock.Object, mapperMock.Object);            
         }
 
-
-        [Fact, Priority(0)]
-        public async Task GetAllBooks_Should_Return_Books()
-        {
-            
-        }
-
         /*
                 [Fact, Priority(1)]
                 public async Task GetAllBooks_ReturnsOkResponse()

@@ -5,8 +5,8 @@ namespace Contracts
 {
     public interface ISubjectRepository : IRepositoryBase<Subject>
     {
-        Task<Subject[]> GetAllSubjects(SubjectParameters subjectParameters);
-        Task<Subject> GetSubjectById(int subjectId);
+        ValueTask<Subject[]> GetAllSubjects(SubjectParameters subjectParameters);
+        ValueTask<Subject> GetSubjectById(int subjectId);
         void CreateSubject(Subject subject);
         void UpdateSubject(Subject subject);
         void DeleteSubject(Subject subject);

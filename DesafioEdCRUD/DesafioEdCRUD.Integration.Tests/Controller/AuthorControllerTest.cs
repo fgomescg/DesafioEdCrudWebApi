@@ -1,22 +1,18 @@
 ﻿using Entities.Models;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Priority;
 
 namespace DesafioEdCRUD.Integration.Tests.Controller
 {
-    [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
+   
     public class AuthorControllerTest 
     {
         private readonly HttpClient _client;
@@ -36,7 +32,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             authorTest = new Author() { Name = "Author Test"};
         }        
 
-        [Fact, Priority(0)]
+        [Fact]
         public async Task GetAllAuthors_ReturnsOkResponse()
         {
             var response = await _client.GetAsync(urlPath);
@@ -44,7 +40,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
-        [Fact, Priority(1)]
+        [Fact]
         public async Task GetAuthorById_Should_ReturnsOkResponse()
         {
             var responsePost = await _client.PostAsync(urlPath, new StringContent(JsonConvert.SerializeObject
@@ -57,7 +53,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
-        [Fact, Priority(2)]
+        [Fact]
         public async Task CreateAuthor_Should_ReturnsCreatedResponse()
         {
             var response = await _client.PostAsync(urlPath, new StringContent(JsonConvert.SerializeObject
@@ -66,7 +62,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.Created);
         }
 
-        [Fact, Priority(3)]
+        [Fact]
         public async Task UpdateAuthor_Should_ReturnsNoContentResponse()
         {
             var responsePost = await _client.PostAsync(urlPath, new StringContent(JsonConvert.SerializeObject
@@ -82,7 +78,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }
 
-        [Fact, Priority(4)]
+        [Fact]
         public async Task DeleteAuthor_Should_ReturnsNoContentResponse()
         {
             var responsePost = await _client.PostAsync(urlPath, new StringContent(JsonConvert.SerializeObject

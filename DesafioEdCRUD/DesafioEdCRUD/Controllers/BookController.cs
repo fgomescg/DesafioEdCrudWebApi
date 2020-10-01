@@ -31,7 +31,7 @@ namespace DesafioEdCRUD.Controllers
         {
             try
             {
-                var books = await Task.Run(() => _repository.Book.GetAllBooks(bookParameters));
+                PagedList<Book> books = await _repository.Book.GetAllBooks(bookParameters);
                        
                 _logger.LogInfo($"Returned {books.TotalCount} books from database.");                
 
@@ -105,21 +105,7 @@ namespace DesafioEdCRUD.Controllers
                 var createdBook = _mapper.Map<BookDto>(bookEntity);
 
                 return CreatedAtRoute("BookById", new { id = createdBook.Id }, createdBook);
-            }
-            catch (InvalidBookException bookValidationException)
-                when (bookValidationException.InnerException is AlreadyExistsBookException)
-            {
-                return Conflict(bookValidationException.InnerException.Message);
-            }
-            catch (BookValidationException bookValidationException)
-            {
-                return BadRequest(bookValidationException.InnerException.Message);
-            }
-            catch (StudentServiceException studentServiceException)
-            {
-                return Problem(studentServiceException.Message);
-            }
-
+            }           
             catch (Exception ex)
             {                
                 _logger.LogError($"CreateBook: {ex}");

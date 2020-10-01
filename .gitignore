@@ -1,2 +1,3 @@
-DesafioEdCRUD/internal_logs/internallog.txt
-DesafioEdCRUD/logs/2020-09-30_logfile.txt
+DesafioEdCRUD/internal_logs/*
+DesafioEdCRUD/logs/*
+DesafioEdCRUD/.vs/DesafioEdCRUD/v16/TestStore/*
