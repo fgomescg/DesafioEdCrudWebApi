@@ -1,11 +1,7 @@
-using Entities.Models;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Text;
+using Entities.Models.Books;
 using System.Threading.Tasks;
 using Xunit;
-using Newtonsoft.Json;
+
 using Xunit.Priority;
 using Moq;
 using Contracts;
@@ -23,8 +19,8 @@ namespace DesafioEdCRUD.Unit.Tests.Controller
         private Mock<ILoggerManager> logManagerMock;
         private Mock<IMapper> mapperMock;
 
-        private BookController bookController;
-        private PagedList<Book> pagedListBook;
+        /*private BookController bookController;
+        private PagedList<Book> pagedListBook;*/
 
         public BookControllerUnitTest()
         {
@@ -32,7 +28,7 @@ namespace DesafioEdCRUD.Unit.Tests.Controller
             logManagerMock = new Mock<ILoggerManager>();
             mapperMock = new Mock<IMapper>();
 
-            bookController = new BookController(logManagerMock.Object, repoWrapperMock.Object, mapperMock.Object);            
+            //bookController = new BookController(logManagerMock.Object, repoWrapperMock.Object, mapperMock.Object);            
         }
 
 

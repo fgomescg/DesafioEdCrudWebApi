@@ -1,3 +1,5 @@
+using Entities.Models.Books;
+
 namespace Entities.Models
 { 
     public class BookSubject

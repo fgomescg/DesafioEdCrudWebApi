@@ -40,7 +40,7 @@ namespace DesafioEdCRUD.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"GetAllSubjectss: {ex.Message}");
+                _logger.LogError(ex);
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -55,7 +55,7 @@ namespace DesafioEdCRUD.Controllers
 
                 if (subject == null)
                 {
-                    _logger.LogError($"Subject with id:{Id}, not found.");
+                    //_logger.LogError(ex);
                     return NotFound();
                 }
                 else
@@ -67,7 +67,7 @@ namespace DesafioEdCRUD.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"GetSubjectById: {ex.Message}");
+                _logger.LogError(ex);
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -79,13 +79,13 @@ namespace DesafioEdCRUD.Controllers
             {
                 if (subject == null)
                 {
-                    _logger.LogError("Subject object sent from client is null.");
+                    //_logger.LogError(ex);
                     return BadRequest("Subject object is null");
                 }
 
                 if (!ModelState.IsValid)
                 {
-                    _logger.LogError("Invalid Subject object sent from client.");
+                    //_logger.LogError(ex);
                     return BadRequest("Invalid model object");
                 }
 
@@ -100,7 +100,7 @@ namespace DesafioEdCRUD.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"CreateSubject: {ex}");
+                _logger.LogError(ex);
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -112,20 +112,20 @@ namespace DesafioEdCRUD.Controllers
             {
                 if (subjectObj == null)
                 {
-                    _logger.LogError("Subject object sent from client is null.");
+                    //_logger.LogError("Subject object sent from client is null.");
                     return BadRequest("Subject object is null");
                 }
 
                 if (!ModelState.IsValid)
                 {
-                    _logger.LogError("Invalid Subject object sent from client.");
+                    //_logger.LogError("Invalid Subject object sent from client.");
                     return BadRequest("Invalid model object");
                 }
                 var subjectEntity = await _repository.Subject.GetSubjectById(Id);
 
                 if (subjectEntity == null)
                 {
-                    _logger.LogError($"Subject with id: {Id}, not found in db.");
+                    //_logger.LogError($"Subject with id: {Id}, not found in db.");
                     return NotFound();
                 }
 
@@ -138,7 +138,7 @@ namespace DesafioEdCRUD.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"UpdateSubject: {ex.Message}");
+                //_logger.LogError($"UpdateSubject: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -152,7 +152,7 @@ namespace DesafioEdCRUD.Controllers
 
                 if (subject == null)
                 {
-                    _logger.LogError($"Subject with id: {Id}, not found in db.");
+                    //_logger.LogError($"Subject with id: {Id}, not found in db.");
                     return NotFound();
                 }
 
@@ -163,7 +163,7 @@ namespace DesafioEdCRUD.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"DeleteSubject action: {ex.Message}");
+                //_logger.LogError($"DeleteSubject action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }

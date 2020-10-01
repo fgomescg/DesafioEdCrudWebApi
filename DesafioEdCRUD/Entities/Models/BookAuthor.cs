@@ -1,3 +1,4 @@
+using Entities.Models.Books;
 using System.ComponentModel.DataAnnotations;
 
 namespace Entities.Models

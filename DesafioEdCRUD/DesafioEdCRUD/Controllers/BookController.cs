@@ -7,7 +7,9 @@ using AutoMapper;
 using Entities.DTO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Entities.Models.Exceptions;
+using Entities.Models.Books.Exceptions;
+using DesafioEdCRUD.Services;
+using Entities.Models.Books;
 
 namespace DesafioEdCRUD.Controllers
 {
@@ -15,40 +17,24 @@ namespace DesafioEdCRUD.Controllers
     [Route("api/book")]
     public class BookController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositoryWrapper _repository;
-        private IMapper _mapper;
+        private IBookService _bookService;
 
-        public BookController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public BookController(IBookService bookService)
         {
-            _logger = logger;
-            _repository = repository;
-            _mapper = mapper;
+            _bookService = bookService;
         }
 
         [HttpGet]
-        public async ValueTask<IActionResult> GetAllBooks([FromQuery] BookParameters bookParameters)
+        public async ValueTask<IActionResult> GetBooks([FromQuery] BookParameters bookParameters)
         {
             try
             {
-                var books = await Task.Run(() => _repository.Book.GetAllBooks(bookParameters));
-                       
-                _logger.LogInfo($"Returned {books.TotalCount} books from database.");                
-
-                var booksResult = new
-                {
-                  books.TotalCount,
-                  books.PageSize,
-                  books.CurrentPage,
-                  books.TotalPages,
-                  books
-                };
+                var books = await _bookService.GetBooks(bookParameters);                                       
            
-                return Ok(booksResult);
+                return Ok(books);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"GetAllBookss: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -59,102 +45,95 @@ namespace DesafioEdCRUD.Controllers
         {
             try
             {
-                var book = await _repository.Book.GetBookById(Id);
+                var book = await _bookService.GetBookByIdAsync(Id);
 
-                if(book == null)
-                {
-                    _logger.LogError($"Book with id:{Id}, not found.");
+                /*if(book == null)
+                {                    
                     return NotFound();
                 }
                 else
                 {
                     var bookResult = _mapper.Map<BookDto>(book);
-                    _logger.LogInfo($"Returned book with id: {Id}");
-                    return Ok(bookResult);
-                }
+                    
+                    
+                }*/
+                return Ok(book);
             }
             catch (Exception ex)
-            {
-                _logger.LogError($"GetBookById: {ex.Message}");
+            {                
                 return StatusCode(500, "Internal server error");
             }
         }       
 
         [HttpPost]
-        public IActionResult CreateBook([FromBody]BookForCreateDto book)
+        public async ValueTask<IActionResult> CreateBook([FromBody]Book book)
         {
             try
             {
-                if (book == null)
-                {
-                    _logger.LogError("Book object sent from client is null.");
-                    return BadRequest("Book object is null");
-                }
+                 var storageBook = await _bookService.CreateBookAsync(book);
+                
+                /* if (book == null)
+                 {
+                     return BadRequest("Book object is null");
+                 }
 
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid book object sent from client.");
-                    return BadRequest("Invalid model object");
-                }
+                 if (!ModelState.IsValid)
+                 {
+                     return BadRequest("Invalid model object");
+                 }
 
-                var bookEntity = _mapper.Map<Book>(book);
+                 var bookEntity = _mapper.Map<Book>(book);
 
-                _repository.Book.CreateBook(bookEntity);
-                _repository.Book.Save();
+                 _repository.Book.CreateBook(bookEntity);
+                 _repository.Book.Save();
 
-                var createdBook = _mapper.Map<BookDto>(bookEntity);
+                 var createdBook = _mapper.Map<BookDto>(bookEntity);*/
+                
 
-                return CreatedAtRoute("BookById", new { id = createdBook.Id }, createdBook);
+                return CreatedAtRoute("BookById", new { id = storageBook.Id }, storageBook);
+
+
             }
-            catch (InvalidBookException bookValidationException)
+            catch (BookValidationException bookValidationException)
                 when (bookValidationException.InnerException is AlreadyExistsBookException)
-            {
+            {                
                 return Conflict(bookValidationException.InnerException.Message);
             }
             catch (BookValidationException bookValidationException)
-            {
+            {             
                 return BadRequest(bookValidationException.InnerException.Message);
             }
-            catch (StudentServiceException studentServiceException)
-            {
-                return Problem(studentServiceException.Message);
-            }
-
-            catch (Exception ex)
+            catch (BookRepositoryException bookRepositoryException)
             {                
-                _logger.LogError($"CreateBook: {ex}");
-                return StatusCode(500, "Internal server error");
-            }            
+                return Problem(bookRepositoryException.Message);
+            }                
         }
 
-        [HttpPut("{Id}")]
+        /*[HttpPut("{Id}")]
         public async ValueTask<IActionResult> UpdateBook(int Id, [FromBody]BookForUpdateDto bookObj)
         {
             try
             {
                 if (bookObj == null)
                 {
-                    _logger.LogError("Book object sent from client is null.");
                     return BadRequest("Book object is null");
                 }
 
                 if (!ModelState.IsValid)
                 {
-                    _logger.LogError("Invalid book object sent from client.");
                     return BadRequest("Invalid model object");
                 }
-                var bookEntity = await _repository.Book.GetBookById(Id);
+                var bookEntity = await _bookService.GetBookById(Id);
 
                 if (bookEntity == null)
                 {
-                    _logger.LogError($"Book with id: {Id}, not found in db.");
                     return NotFound();
                 }
 
-                _mapper.Map(bookObj, bookEntity);
+                *//*_mapper.Map(bookObj, bookEntity);
 
                 _repository.Book.UpdateBook(bookEntity);
-                _repository.Book.Save();
+                _repository.Book.Save();*//*
 
                 return NoContent();
             }
@@ -206,6 +185,6 @@ namespace DesafioEdCRUD.Controllers
                 _logger.LogError($"GetBookAuthorReports: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
-        }
+        }*/
     }
 }

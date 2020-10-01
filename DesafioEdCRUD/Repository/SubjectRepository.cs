@@ -9,19 +9,12 @@ namespace Repository
 {
     public class SubjectRepository : RepositoryBase<Subject>, ISubjectRepository
     {
+        private RepositoryContext repoContext;
+
         public SubjectRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
-        }
-
-        public void CreateSubject(Subject subject)
-        {
-            Create(subject);
-        }
-
-        public void DeleteSubject(Subject subject)
-        {
-            Delete(subject);
+            repoContext = repositoryContext;
         }
 
         public async Task<Subject[]> GetAllSubjects(SubjectParameters subjectParameters)
@@ -36,11 +29,26 @@ namespace Repository
         public async Task<Subject> GetSubjectById(int Id)
         {
             return await FindByCondition(sub => sub.SubjectId.Equals(Id)).FirstOrDefaultAsync();
-        }    
+        }
+
+        public void CreateSubject(Subject subject)
+        {
+            Create(subject);
+        }
+
+        public void DeleteSubject(Subject subject)
+        {
+            Delete(subject);
+        }
 
         public void UpdateSubject(Subject subject)
         {
             Update(subject);
+        }
+
+        public async Task SaveAsync()
+        {
+            await repoContext.SaveChangesAsync();
         }
     }
 }

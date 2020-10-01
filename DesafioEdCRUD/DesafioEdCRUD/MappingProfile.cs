@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.DTO;
 using Entities.Models;
+using Entities.Models.Books;
 
 namespace DesafioEdCRUD
 {

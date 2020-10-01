@@ -37,8 +37,7 @@ namespace DesafioEdCRUD.Controllers
                 return Ok(authorsResult);
             }
             catch (Exception ex)
-            {
-                _logger.LogError($"GetAllAuthors: {ex.Message}");
+            {               
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -52,8 +51,7 @@ namespace DesafioEdCRUD.Controllers
                 var author = await _repository.Author.GetAuthorById(Id);
 
                 if (author == null)
-                {
-                    _logger.LogError($"Author with id:{Id}, not found.");
+                {                    
                     return NotFound();
                 }
                 else
@@ -64,8 +62,7 @@ namespace DesafioEdCRUD.Controllers
                 }
             }
             catch (Exception ex)
-            {
-                _logger.LogError($"GetAuthorById: {ex.Message}");
+            {               
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -76,14 +73,12 @@ namespace DesafioEdCRUD.Controllers
             try
             {
                 if (author == null)
-                {
-                    _logger.LogError("Author object sent from client is null.");
+                {                  
                     return BadRequest("Author object is null");
                 }
 
                 if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid Author object sent from client.");
+                {                   
                     return BadRequest("Invalid model object");
                 }
 
@@ -98,7 +93,6 @@ namespace DesafioEdCRUD.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"CreateAuthor: {ex}");
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -109,21 +103,18 @@ namespace DesafioEdCRUD.Controllers
             try
             {
                 if (AuthorObj == null)
-                {
-                    _logger.LogError("Author object sent from client is null.");
+                {                    
                     return BadRequest("Author object is null");
                 }
 
                 if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid Author object sent from client.");
+                {                   
                     return BadRequest("Invalid model object");
                 }
                 var AuthorEntity = await _repository.Author.GetAuthorById(Id);
 
                 if (AuthorEntity == null)
-                {
-                    _logger.LogError($"Author with id: {Id}, not found in db.");
+                {                    
                     return NotFound();
                 }
 
@@ -135,8 +126,7 @@ namespace DesafioEdCRUD.Controllers
                 return NoContent();
             }
             catch (Exception ex)
-            {
-                _logger.LogError($"UpdateAuthor: {ex.Message}");
+            {                
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -149,8 +139,7 @@ namespace DesafioEdCRUD.Controllers
                 var Author = await _repository.Author.GetAuthorById(Id);
 
                 if (Author == null)
-                {
-                    _logger.LogError($"Author with id: {Id}, not found in db.");
+                {                    
                     return NotFound();
                 }
 
@@ -160,8 +149,7 @@ namespace DesafioEdCRUD.Controllers
                 return NoContent();
             }
             catch (Exception ex)
-            {
-                _logger.LogError($"DeleteAuthor action: {ex.Message}");
+            {               
                 return StatusCode(500, "Internal server error");
             }
         }

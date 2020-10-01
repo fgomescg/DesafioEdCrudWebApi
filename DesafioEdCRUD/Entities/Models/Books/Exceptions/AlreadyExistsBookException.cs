@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Entities.Models.Exceptions
+namespace Entities.Models.Books.Exceptions
 {
     public class AlreadyExistsBookException : Exception
     {

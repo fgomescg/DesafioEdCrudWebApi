@@ -10,9 +10,13 @@ namespace Repository
 {
     public class AuthorRepository: RepositoryBase<Author>, IAuthorRepository
     {
+
+        private RepositoryContext repoContext;
+
         public AuthorRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
+            repoContext = repositoryContext;
         }
 
         public async Task<Author[]> GetAllAuthors(AuthorParameters authorParameters)
@@ -40,6 +44,11 @@ namespace Repository
         public void DeleteAuthor(Author author)
         {
             Delete(author);
-        }       
+        }
+
+        public async Task SaveAsync()
+        {
+            await repoContext.SaveChangesAsync();
+        }
     }
 }

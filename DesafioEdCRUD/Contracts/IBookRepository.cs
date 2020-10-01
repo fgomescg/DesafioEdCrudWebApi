@@ -1,16 +1,16 @@
 using Entities.Models;
+using Entities.Models.Books;
 using System.Threading.Tasks;
 
 namespace Contracts
 {
     public interface IBookRepository : IRepositoryBase<Book>
     {
-        PagedList<Book> GetAllBooks(BookParameters bookParameters);
+        ValueTask<PagedList<Book>> GetBooks(BookParameters bookParameters);
         Task<Book> GetBookById(int bookId);              
-        void CreateBook(Book book);
+        ValueTask<Book> CreateBook(Book book);
         void UpdateBook(Book book);
         void DeleteBook(Book book);
         Task<BookAuthorReport[]> GetBookAuthorReports();
-
     }
 }

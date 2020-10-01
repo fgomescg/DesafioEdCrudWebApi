@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Entities.Models.Exceptions
+namespace Entities.Models.Books.Exceptions
 {
     public class BookServiceException : Exception
     {
