@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from './../../shared/services/repository.service';
-import { Subject } from './../../_interfaces/subject.model';
+import { SubjectList } from './../../_interfaces/subject-list';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-subject-list',
@@ -10,8 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./subject-list.component.css'],
 })
 export class SubjectListComponent implements OnInit {
-  public subjects: Subject[];
+  public subjects;
   public errorMessage: string = '';
+  public totalCount : Number;
+  public totalPages: Number;
+  public currentPage : Number = 1;
+  public pageSize : Number = 10;
 
   constructor(
     private repository: RepositoryService,
@@ -22,10 +27,15 @@ export class SubjectListComponent implements OnInit {
     this.getAllSubjects();
   }
   public getAllSubjects = () => {
-    let apiAddress: string = 'api/subject';
-    this.repository.getData(apiAddress).subscribe(
+    let params = new HttpParams().set("pageNumber",this.currentPage.toString()).set("pageSize", this.pageSize.toString());
+    this.repository.getData('api/subject', params).subscribe(
       (res) => {
-        this.subjects = res as Subject[];
+        const { subjects, totalCount, currentPage, totalPages, pageSize  } = res as SubjectList;
+        this.subjects = subjects;
+        this.totalCount = totalCount;
+        this.pageSize = currentPage;
+        this.totalPages = totalPages;
+        this.pageSize = pageSize;
       },
       (error) => {
         this.errorHandler.handleError(error);
@@ -33,6 +43,12 @@ export class SubjectListComponent implements OnInit {
       }
     );
   };
+
+  handlePageChange(event){
+    this.currentPage = event;
+    this.getAllSubjects();
+  }
+
   public redirectToUpdatePage = (id) => {
     const updateUrl: string = `/subject/update/${id}`;
     this.router.navigate([updateUrl]);

@@ -16,13 +16,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let subject of subjects">
+          <tr *ngFor="let subject of subjects | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalCount }">
             <td>{{subject.description}}</td>
             <td><button type="button" id="update" class="btn btn-success" (click)="redirectToUpdatePage(subject.subjectId)">Editar</button></td>
             <td><button type="button" id="delete" class="btn btn-danger" (click)="redirectToDeletePage(subject.subjectId)">Deletar</button></td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="text-right">
+      <pagination-controls
+        previousLabel="Anterior"
+        nextLabel="Próximo"
+        responsive="true"
+        (pageChange)="handlePageChange($event)"></pagination-controls>
     </div>
   </div>
 </div>

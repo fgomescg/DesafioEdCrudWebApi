@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { SubjectListComponent } from './subject-list/subject-list.component';
 import { SubjectCreateComponent } from './subject-create/subject-create.component';
@@ -16,6 +17,7 @@ import { SubjectDeleteComponent } from './subject-delete/subject-delete.componen
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     RouterModule.forChild([
       { path: 'list', component: SubjectListComponent },
       { path: 'details/:id', component: SubjectListComponent },

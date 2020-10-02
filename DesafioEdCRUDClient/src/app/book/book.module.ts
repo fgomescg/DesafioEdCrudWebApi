@@ -4,12 +4,12 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCurrencyFormatModule } from 'mat-currency-format';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { BookListComponent } from './book-list/book-list.component';
 import { BookCreateComponent } from './book-create/book-create.component';
 import { BookUpdateComponent } from './book-update/book-update.component';
 import { BookDeleteComponent } from './book-delete/book-delete.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { BookDetailsComponent } from './book-details/book-details.component';
 
 @NgModule({

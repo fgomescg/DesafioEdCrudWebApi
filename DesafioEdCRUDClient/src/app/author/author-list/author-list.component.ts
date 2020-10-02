@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from './../../shared/services/repository.service';
-import { Author } from './../../_interfaces/author.model';
+import { AuthorList } from './../../_interfaces/author-list';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-author-list',
@@ -10,8 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./author-list.component.css'],
 })
 export class AuthorListComponent implements OnInit {
-  public authors: Author[];
+  public authors;
   public errorMessage: string = '';
+  public totalCount : Number;
+  public totalPages: Number;
+  public currentPage : Number = 1;
+  public pageSize : Number = 10;
 
   constructor(
     private repository: RepositoryService,
@@ -22,10 +27,15 @@ export class AuthorListComponent implements OnInit {
     this.getAllAuthors();
   }
   public getAllAuthors = () => {
-    let apiAddress: string = 'api/author';
-    this.repository.getData(apiAddress).subscribe(
+    let params = new HttpParams().set("pageNumber",this.currentPage.toString()).set("pageSize", this.pageSize.toString());
+    this.repository.getData('api/author', params).subscribe(
       (res) => {
-        this.authors = res as Author[];
+        const { authors, totalCount, currentPage, totalPages, pageSize  } = res as AuthorList;
+        this.authors = authors;
+        this.totalCount = totalCount;
+        this.pageSize = currentPage;
+        this.totalPages = totalPages;
+        this.pageSize = pageSize;
       },
       (error) => {
         this.errorHandler.handleError(error);
@@ -33,6 +43,12 @@ export class AuthorListComponent implements OnInit {
       }
     );
   };
+
+  handlePageChange(event){
+    this.currentPage = event;
+    this.getAllAuthors();
+  }
+
   public redirectToUpdatePage = (id) => {
     const updateUrl: string = `/author/update/${id}`;
     this.router.navigate([updateUrl]);
