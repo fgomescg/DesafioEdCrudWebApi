@@ -7,8 +7,8 @@ namespace Contracts
     {
         ValueTask<PagedList<Subject>> GetSubjects(SubjectParameters subjectParameters);       
         ValueTask<Subject> GetSubjectById(int subjectId);
-        void CreateSubject(Subject subject);
-        void UpdateSubject(Subject subject);
-        void DeleteSubject(Subject subject);
+        Task CreateSubjectAsync(Subject subject);
+        Task UpdateSubjectAsync(Subject subject);
+        Task DeleteSubjectAsync(Subject subject);
     }
 }

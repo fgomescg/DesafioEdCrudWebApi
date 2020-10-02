@@ -65,20 +65,17 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateSubject([FromBody] SubjectForCreateUpdateDto subject)
+        public async Task<IActionResult> CreateSubject([FromBody] Subject subjectFromBody)
         {  
-            var subjectEntity = _mapper.Map<Subject>(subject);
+            await _repository.Subject.CreateSubjectAsync(subjectFromBody);            
 
-            _repository.Subject.CreateSubject(subjectEntity);
-            _repository.Subject.Save();
-
-            var createdSubject = _mapper.Map<SubjectDto>(subjectEntity);
+            var createdSubject = _mapper.Map<SubjectDto>(subjectFromBody);
 
             return CreatedAtRoute("SubjectById", new { id = createdSubject.SubjectId }, createdSubject);            
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateSubject(int Id, [FromBody] SubjectForCreateUpdateDto subjectObj)
+        public async Task<IActionResult> UpdateSubject(int Id, [FromBody] Subject subject)
         {  
             var subjectEntity = await _repository.Subject.GetSubjectById(Id);
 
@@ -88,11 +85,10 @@ namespace DesafioEdCRUD.Controllers
                 return NotFound();
             }
 
-            _mapper.Map(subjectObj, subjectEntity);
+            _mapper.Map(subject, subjectEntity);
 
-            _repository.Subject.UpdateSubject(subjectEntity);
-            _repository.Subject.Save();
-
+            await _repository.Subject.UpdateSubjectAsync(subjectEntity);
+            
             return NoContent();
            
         }
@@ -108,8 +104,7 @@ namespace DesafioEdCRUD.Controllers
                 return NotFound();
             }
 
-            _repository.Subject.DeleteSubject(subject);
-            _repository.Subject.Save();
+            await _repository.Subject.DeleteSubjectAsync(subject);            
 
             return NoContent();                        
         }

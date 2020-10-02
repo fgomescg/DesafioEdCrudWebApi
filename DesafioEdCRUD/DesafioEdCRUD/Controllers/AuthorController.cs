@@ -47,50 +47,46 @@ namespace DesafioEdCRUD.Controllers
         [HttpGet("{Id}", Name = "AuthorById")]
         public async Task<IActionResult> GetAuthorById(int Id)
         {            
-            var author = await _repository.Author.GetAuthorById(Id);
+            var authorEntity = await _repository.Author.GetAuthorById(Id);
 
-            if (author == null)
+            if (authorEntity == null)
             {
                 _logger.LogError($"Author with id:{Id}, not found.");
                 return NotFound();
             }
             else
             {
-                var authorResult = _mapper.Map<AuthorDto>(author);
+                var authorResult = _mapper.Map<AuthorDto>(authorEntity);
                 _logger.LogInfo($"Returned author with id: {Id}");
                 return Ok(authorResult);
             }           
         }
 
         [HttpPost]
-        public IActionResult CreateAuthor([FromBody] AuthorForCreateUpdateDto author)
+        public async Task<IActionResult> CreateAuthor([FromBody] Author authorFromBody)
         {  
-            var authorEntity = _mapper.Map<Author>(author);
+            await _repository.Author.CreateAuthorAsync(authorFromBody);            
 
-            _repository.Author.CreateAuthor(authorEntity);
-            _repository.Author.Save();
+            var createdAuthorDto = _mapper.Map<AuthorDto>(authorFromBody);
 
-            var createdAuthor = _mapper.Map<AuthorDto>(authorEntity);
-
-            return CreatedAtRoute("AuthorById", new { id = createdAuthor.AuthorId }, createdAuthor);            
+            return CreatedAtRoute("AuthorById", new { id = authorFromBody.AuthorID }, createdAuthorDto);            
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateAuthor(int Id, [FromBody]AuthorForCreateUpdateDto AuthorObj)
+        public async Task<IActionResult> UpdateAuthor(int Id, [FromBody] Author authorFromBody)
         {
             
-            var AuthorEntity = await _repository.Author.GetAuthorById(Id);
+            var authorEntity = await _repository.Author.GetAuthorById(Id);
 
-            if (AuthorEntity == null)
+            if (authorEntity == null)
             {
                 _logger.LogError($"Author with id: {Id}, not found in db.");
                 return NotFound();
             }
 
-            _mapper.Map(AuthorObj, AuthorEntity);
+            _mapper.Map(authorFromBody, authorEntity);
 
-            _repository.Author.UpdateAuthor(AuthorEntity);
-            _repository.Author.Save();
+            await _repository.Author.UpdateAuthorAsync(authorEntity);            
 
             return NoContent();           
         }
@@ -98,16 +94,15 @@ namespace DesafioEdCRUD.Controllers
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteAuthor(int Id)
         {           
-            var Author = await _repository.Author.GetAuthorById(Id);
+            var authorEntity = await _repository.Author.GetAuthorById(Id);
 
-            if (Author == null)
+            if (authorEntity == null)
             {
                 _logger.LogError($"Author with id: {Id}, not found in db.");
                 return NotFound();
             }
 
-            _repository.Author.DeleteAuthor(Author);
-            _repository.Author.Save();
+            await _repository.Author.DeleteAuthorAsync(authorEntity);            
 
             return NoContent();            
         }

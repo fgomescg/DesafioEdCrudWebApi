@@ -62,14 +62,11 @@ namespace DesafioEdCRUD.Controllers
         }       
 
         [HttpPost]
-        public IActionResult CreateBook([FromBody]BookForCreateDto book)
+        public async ValueTask<IActionResult> CreateBook([FromBody]Book book)
         { 
-            var bookEntity = _mapper.Map<Book>(book);
+            await _repository.Book.CreateBookAsync(book);            
 
-            _repository.Book.CreateBook(bookEntity);
-            _repository.Book.Save();
-
-            var createdBook = _mapper.Map<BookDto>(bookEntity);
+            var createdBook = _mapper.Map<BookDto>(book);
 
             return CreatedAtRoute("BookById", new { id = createdBook.Id }, createdBook);                   
         }
@@ -87,8 +84,7 @@ namespace DesafioEdCRUD.Controllers
 
             _mapper.Map(bookObj, bookEntity);
 
-            _repository.Book.UpdateBook(bookEntity);
-            _repository.Book.Save();
+            await _repository.Book.UpdateBookAsync(bookEntity);            
 
             return NoContent();                        
         }
@@ -104,8 +100,7 @@ namespace DesafioEdCRUD.Controllers
                 return NotFound();
             }
 
-            _repository.Book.DeleteBook(book);
-            _repository.Book.Save();
+            await _repository.Book.DeleteBookAsync(book);            
 
             return NoContent();                      
         }

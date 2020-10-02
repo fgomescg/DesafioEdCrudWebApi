@@ -41,17 +41,17 @@ namespace Repository
             return await FindByCondition(author => author.AuthorID.Equals(Id)).FirstOrDefaultAsync();
         }
 
-        public void CreateAuthor(Author author)
+        public async Task CreateAuthorAsync(Author author)
         {
-            Create(author);
+            await CreateAsync(author);
         }
-        public void UpdateAuthor(Author author)
+        public async Task UpdateAuthorAsync(Author author)
         {
-            Update(author);
+            await UpdateAsync(author);
         }
-        public void DeleteAuthor(Author author)
+        public async Task DeleteAuthorAsync(Author author)
         {
-            Delete(author);
+            await DeleteAsync(author);
         }       
     }
 }

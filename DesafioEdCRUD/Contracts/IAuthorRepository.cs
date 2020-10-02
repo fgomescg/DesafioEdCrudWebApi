@@ -7,8 +7,8 @@ namespace Contracts
     {
         ValueTask<PagedList<Author>> GetAuthors(AuthorParameters authorParameters);        
         ValueTask<Author> GetAuthorById(int authorId);
-        void CreateAuthor(Author author);
-        void UpdateAuthor(Author author);
-        void DeleteAuthor(Author author);
+        Task CreateAuthorAsync(Author author);
+        Task UpdateAuthorAsync(Author author);
+        Task DeleteAuthorAsync(Author author);
     }
 }

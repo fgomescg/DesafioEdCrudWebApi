@@ -7,9 +7,9 @@ namespace Contracts
     {
         ValueTask<PagedList<Book>> GetAllBooks(BookParameters bookParameters);
         ValueTask<Book> GetBookById(int bookId);              
-        void CreateBook(Book book);
-        void UpdateBook(Book book);
-        void DeleteBook(Book book);
+        Task CreateBookAsync(Book book);
+        Task UpdateBookAsync(Book book);
+        Task DeleteBookAsync(Book book);
         ValueTask<BookAuthorReport[]> GetBookAuthorReports();
 
     }
