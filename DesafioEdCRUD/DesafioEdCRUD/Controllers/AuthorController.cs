@@ -73,9 +73,8 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateAuthor(int Id, [FromBody] Author authorFromBody)
-        {
-            
+        public async Task<IActionResult> UpdateAuthor(int Id, [FromBody] AuthorForCreateUpdateDto authorFromBody)
+        {            
             var authorEntity = await _repository.Author.GetAuthorById(Id);
 
             if (authorEntity == null)
@@ -84,9 +83,9 @@ namespace DesafioEdCRUD.Controllers
                 return NotFound();
             }
 
-            _mapper.Map(authorFromBody, authorEntity);
+            var authorToUpdate = _mapper.Map(authorFromBody, authorEntity);
 
-            await _repository.Author.UpdateAuthorAsync(authorEntity);            
+            await _repository.Author.UpdateAuthorAsync(authorToUpdate);            
 
             return NoContent();           
         }

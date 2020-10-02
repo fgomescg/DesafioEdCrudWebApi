@@ -75,7 +75,7 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateSubject(int Id, [FromBody] Subject subject)
+        public async Task<IActionResult> UpdateSubject(int Id, [FromBody] SubjectForCreateUpdateDto subject)
         {  
             var subjectEntity = await _repository.Subject.GetSubjectById(Id);
 
@@ -83,11 +83,11 @@ namespace DesafioEdCRUD.Controllers
             {
                 _logger.LogError($"Subject with id: {Id}, not found in db.");
                 return NotFound();
-            }
+            }            
 
-            _mapper.Map(subject, subjectEntity);
+            var subjectToUpdate = _mapper.Map(subject, subjectEntity);
 
-            await _repository.Subject.UpdateSubjectAsync(subjectEntity);
+            await _repository.Subject.UpdateSubjectAsync(subjectToUpdate);
             
             return NoContent();
            
