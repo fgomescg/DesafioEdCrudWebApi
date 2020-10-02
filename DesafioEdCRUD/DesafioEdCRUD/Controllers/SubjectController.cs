@@ -27,145 +27,91 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllSubjects([FromQuery] SubjectParameters subjectParameters)
-        {
-            try
-            {
-                var Subjects = await _repository.Subject.GetAllSubjects(subjectParameters);
+        public async Task<IActionResult> GetSubjects([FromQuery] SubjectParameters subjectParameters)
+        {    
+            var subjects = await _repository.Subject.GetSubjects(subjectParameters);
 
-                _logger.LogInfo($"Returned all Subjects from database.");
+            _logger.LogInfo($"Returned {subjects.TotalCount} subjects from database.");
 
-                var SubjectsResult = _mapper.Map<IEnumerable<SubjectDto>>(Subjects);
-                return Ok(SubjectsResult);
-            }
-            catch (Exception ex)
+            var subjectsResult = new
             {
-                _logger.LogError($"GetAllSubjectss: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
+                subjects.TotalCount,
+                subjects.PageSize,
+                subjects.CurrentPage,
+                subjects.TotalPages,
+                subjects
+            };
+
+            return Ok(subjectsResult);
         }
 
 
         [HttpGet("{Id}", Name = "SubjectById")]
         public async Task<IActionResult> GetSubjectById(int Id)
-        {
-            try
-            {
-                var subject = await _repository.Subject.GetSubjectById(Id);
+        {           
+            var subject = await _repository.Subject.GetSubjectById(Id);
 
-                if (subject == null)
-                {
-                    _logger.LogError($"Subject with id:{Id}, not found.");
-                    return NotFound();
-                }
-                else
-                {
-                    var subjectResult = _mapper.Map<SubjectDto>(subject);
-                    _logger.LogInfo($"Returned Subject with id: {Id}");
-                    return Ok(subjectResult);
-                }
-            }
-            catch (Exception ex)
+            if (subject == null)
             {
-                _logger.LogError($"GetSubjectById: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                _logger.LogError($"Subject with id:{Id}, not found.");
+                return NotFound();
             }
+            else
+            {
+                var subjectResult = _mapper.Map<SubjectDto>(subject);
+                _logger.LogInfo($"Returned Subject with id: {Id}");
+                return Ok(subjectResult);
+            }           
         }
 
         [HttpPost]
         public IActionResult CreateSubject([FromBody] SubjectForCreateUpdateDto subject)
-        {
-            try
-            {
-                if (subject == null)
-                {
-                    _logger.LogError("Subject object sent from client is null.");
-                    return BadRequest("Subject object is null");
-                }
+        {  
+            var subjectEntity = _mapper.Map<Subject>(subject);
 
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid Subject object sent from client.");
-                    return BadRequest("Invalid model object");
-                }
+            _repository.Subject.CreateSubject(subjectEntity);
+            _repository.Subject.Save();
 
-                var subjectEntity = _mapper.Map<Subject>(subject);
+            var createdSubject = _mapper.Map<SubjectDto>(subjectEntity);
 
-                _repository.Subject.CreateSubject(subjectEntity);
-                _repository.Subject.Save();
-
-                var createdSubject = _mapper.Map<SubjectDto>(subjectEntity);
-
-                return CreatedAtRoute("SubjectById", new { id = createdSubject.SubjectId }, createdSubject);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"CreateSubject: {ex}");
-                return StatusCode(500, "Internal server error");
-            }
+            return CreatedAtRoute("SubjectById", new { id = createdSubject.SubjectId }, createdSubject);            
         }
 
         [HttpPut("{Id}")]
         public async Task<IActionResult> UpdateSubject(int Id, [FromBody] SubjectForCreateUpdateDto subjectObj)
-        {
-            try
+        {  
+            var subjectEntity = await _repository.Subject.GetSubjectById(Id);
+
+            if (subjectEntity == null)
             {
-                if (subjectObj == null)
-                {
-                    _logger.LogError("Subject object sent from client is null.");
-                    return BadRequest("Subject object is null");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid Subject object sent from client.");
-                    return BadRequest("Invalid model object");
-                }
-                var subjectEntity = await _repository.Subject.GetSubjectById(Id);
-
-                if (subjectEntity == null)
-                {
-                    _logger.LogError($"Subject with id: {Id}, not found in db.");
-                    return NotFound();
-                }
-
-                _mapper.Map(subjectObj, subjectEntity);
-
-                _repository.Subject.UpdateSubject(subjectEntity);
-                _repository.Subject.Save();
-
-                return NoContent();
+                _logger.LogError($"Subject with id: {Id}, not found in db.");
+                return NotFound();
             }
-            catch (Exception ex)
-            {
-                _logger.LogError($"UpdateSubject: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
+
+            _mapper.Map(subjectObj, subjectEntity);
+
+            _repository.Subject.UpdateSubject(subjectEntity);
+            _repository.Subject.Save();
+
+            return NoContent();
+           
         }
 
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteSubject(int Id)
-        {
-            try
+        {            
+            var subject = await _repository.Subject.GetSubjectById(Id);
+
+            if (subject == null)
             {
-                var subject = await _repository.Subject.GetSubjectById(Id);
-
-                if (subject == null)
-                {
-                    _logger.LogError($"Subject with id: {Id}, not found in db.");
-                    return NotFound();
-                }
-
-                _repository.Subject.DeleteSubject(subject);
-                _repository.Subject.Save();
-
-                return NoContent();
+                _logger.LogError($"Subject with id: {Id}, not found in db.");
+                return NotFound();
             }
-            catch (Exception ex)
-            {
-                _logger.LogError($"DeleteSubject action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
+
+            _repository.Subject.DeleteSubject(subject);
+            _repository.Subject.Save();
+
+            return NoContent();                        
         }
     }    
 }

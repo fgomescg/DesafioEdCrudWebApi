@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Entities.Models
+﻿namespace Entities.Models
 {
     public class AuthorParameters : QueryStringParameters
     {
+        public string Name { get; set; }
     }
 }

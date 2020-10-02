@@ -25,145 +25,91 @@ namespace DesafioEdCRUD.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAuthors([FromQuery] AuthorParameters authorParameters)
-        {
-            try
-            {
-                var authors = await _repository.Author.GetAllAuthors(authorParameters);
+        public async ValueTask<IActionResult> GetAuthors([FromQuery] AuthorParameters authorParameters)
+        {            
+            var authors = await _repository.Author.GetAuthors(authorParameters);
 
-                _logger.LogInfo($"Returned all authors from database.");
+            _logger.LogInfo($"Returned {authors.TotalCount} authors from database.");
 
-                var authorsResult = _mapper.Map<IEnumerable<AuthorDto>>(authors);
-                return Ok(authorsResult);
-            }
-            catch (Exception ex)
+            var authorsResult = new
             {
-                _logger.LogError($"GetAllAuthors: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
+                authors.TotalCount,
+                authors.PageSize,
+                authors.CurrentPage,
+                authors.TotalPages,
+                authors
+            };              
+            
+            return Ok(authorsResult);            
         }
 
 
         [HttpGet("{Id}", Name = "AuthorById")]
         public async Task<IActionResult> GetAuthorById(int Id)
-        {
-            try
-            {
-                var author = await _repository.Author.GetAuthorById(Id);
+        {            
+            var author = await _repository.Author.GetAuthorById(Id);
 
-                if (author == null)
-                {
-                    _logger.LogError($"Author with id:{Id}, not found.");
-                    return NotFound();
-                }
-                else
-                {
-                    var authorResult = _mapper.Map<AuthorDto>(author);
-                    _logger.LogInfo($"Returned author with id: {Id}");
-                    return Ok(authorResult);
-                }
-            }
-            catch (Exception ex)
+            if (author == null)
             {
-                _logger.LogError($"GetAuthorById: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                _logger.LogError($"Author with id:{Id}, not found.");
+                return NotFound();
             }
+            else
+            {
+                var authorResult = _mapper.Map<AuthorDto>(author);
+                _logger.LogInfo($"Returned author with id: {Id}");
+                return Ok(authorResult);
+            }           
         }
 
         [HttpPost]
         public IActionResult CreateAuthor([FromBody] AuthorForCreateUpdateDto author)
-        {
-            try
-            {
-                if (author == null)
-                {
-                    _logger.LogError("Author object sent from client is null.");
-                    return BadRequest("Author object is null");
-                }
+        {  
+            var authorEntity = _mapper.Map<Author>(author);
 
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid Author object sent from client.");
-                    return BadRequest("Invalid model object");
-                }
+            _repository.Author.CreateAuthor(authorEntity);
+            _repository.Author.Save();
 
-                var authorEntity = _mapper.Map<Author>(author);
+            var createdAuthor = _mapper.Map<AuthorDto>(authorEntity);
 
-                _repository.Author.CreateAuthor(authorEntity);
-                _repository.Author.Save();
-
-                var createdAuthor = _mapper.Map<AuthorDto>(authorEntity);
-
-                return CreatedAtRoute("AuthorById", new { id = createdAuthor.AuthorId }, createdAuthor);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"CreateAuthor: {ex}");
-                return StatusCode(500, "Internal server error");
-            }
+            return CreatedAtRoute("AuthorById", new { id = createdAuthor.AuthorId }, createdAuthor);            
         }
 
         [HttpPut("{Id}")]
         public async Task<IActionResult> UpdateAuthor(int Id, [FromBody]AuthorForCreateUpdateDto AuthorObj)
         {
-            try
+            
+            var AuthorEntity = await _repository.Author.GetAuthorById(Id);
+
+            if (AuthorEntity == null)
             {
-                if (AuthorObj == null)
-                {
-                    _logger.LogError("Author object sent from client is null.");
-                    return BadRequest("Author object is null");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid Author object sent from client.");
-                    return BadRequest("Invalid model object");
-                }
-                var AuthorEntity = await _repository.Author.GetAuthorById(Id);
-
-                if (AuthorEntity == null)
-                {
-                    _logger.LogError($"Author with id: {Id}, not found in db.");
-                    return NotFound();
-                }
-
-                _mapper.Map(AuthorObj, AuthorEntity);
-
-                _repository.Author.UpdateAuthor(AuthorEntity);
-                _repository.Author.Save();
-
-                return NoContent();
+                _logger.LogError($"Author with id: {Id}, not found in db.");
+                return NotFound();
             }
-            catch (Exception ex)
-            {
-                _logger.LogError($"UpdateAuthor: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
+
+            _mapper.Map(AuthorObj, AuthorEntity);
+
+            _repository.Author.UpdateAuthor(AuthorEntity);
+            _repository.Author.Save();
+
+            return NoContent();           
         }
 
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteAuthor(int Id)
-        {
-            try
+        {           
+            var Author = await _repository.Author.GetAuthorById(Id);
+
+            if (Author == null)
             {
-                var Author = await _repository.Author.GetAuthorById(Id);
-
-                if (Author == null)
-                {
-                    _logger.LogError($"Author with id: {Id}, not found in db.");
-                    return NotFound();
-                }
-
-                _repository.Author.DeleteAuthor(Author);
-                _repository.Author.Save();
-
-                return NoContent();
+                _logger.LogError($"Author with id: {Id}, not found in db.");
+                return NotFound();
             }
-            catch (Exception ex)
-            {
-                _logger.LogError($"DeleteAuthor action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
+
+            _repository.Author.DeleteAuthor(Author);
+            _repository.Author.Save();
+
+            return NoContent();            
         }
     }
 }

@@ -22,9 +22,7 @@ namespace DesafioEdCRUD.Unit.Tests.Controller
         private Mock<IRepositoryWrapper> repoWrapperMock;
         private Mock<ILoggerManager> logManagerMock;
         private Mock<IMapper> mapperMock;
-
-        private BookController bookController;
-        private PagedList<Book> pagedListBook;
+       
 
         public BookControllerUnitTest()
         {

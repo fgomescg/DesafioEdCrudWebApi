@@ -10,7 +10,7 @@ namespace DesafioEdCRUD
         {
             CreateMap<Book, BookDto>();
             CreateMap<Author, AuthorDto>();
-            CreateMap<Subject, SubjectDto>();
+            CreateMap<SubjectDto, Subject>();
             CreateMap<BookForCreateDto, Book>();
             CreateMap<BookForUpdateDto, Book>();
             CreateMap<AuthorForCreateUpdateDto, Author>();

@@ -5,6 +5,7 @@ using Contracts;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Repository
 {
@@ -15,13 +16,24 @@ namespace Repository
         {
         }
 
-        public async ValueTask<Author[]> GetAllAuthors(AuthorParameters authorParameters)
+        public async ValueTask<PagedList<Author>> GetAuthors(AuthorParameters authorParameters)
         {
-            return await FindAll()
-                    .OrderBy(bk => bk.Name)
-                    .Skip((authorParameters.PageNumber - 1) * authorParameters.PageSize)
-                    .Take(authorParameters.PageSize)
-                    .ToArrayAsync();
+            var authors = FindAll();
+            
+            SearchByName(ref authors, authorParameters.Name);
+
+            await authors.OrderBy(p => p.Name).ToArrayAsync();
+
+            return PagedList<Author>.ToPagedList(authors,
+                     authorParameters.PageNumber,
+                     authorParameters.PageSize);
+        }
+
+        private void SearchByName(ref IQueryable<Author> authors, string authorName)
+        {
+            if (!authors.Any() || string.IsNullOrWhiteSpace(authorName))
+                return;
+            authors = authors.Where(o => o.Name.ToLower().Contains(authorName.Trim().ToLower()));
         }
 
         public async ValueTask<Author> GetAuthorById(int Id)

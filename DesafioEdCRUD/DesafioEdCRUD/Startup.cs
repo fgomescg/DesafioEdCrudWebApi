@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using AutoMapper;
+using Contracts;
 using DesafioEdCRUD.Extensions;
 using DinkToPdf;
 using DinkToPdf.Contracts;
@@ -56,6 +57,9 @@ namespace DesafioEdCRUD
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.ConfigureCustomExceptionMiddleware();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");

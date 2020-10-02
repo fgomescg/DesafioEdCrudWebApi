@@ -13,6 +13,32 @@ namespace Repository
             : base(repositoryContext)
         {
         }
+       
+        public async ValueTask<PagedList<Subject>> GetSubjects(SubjectParameters subjectParameters)
+        {
+            var subjects = FindAll();
+
+            SearchByDescription(ref subjects, subjectParameters.description);
+
+            await subjects.OrderBy(su => su.Description)
+                            .ToListAsync();
+
+            return PagedList<Subject>.ToPagedList(subjects,
+                   subjectParameters.PageNumber,
+                   subjectParameters.PageSize);
+        }
+
+        private void SearchByDescription(ref IQueryable<Subject> subjects, string subjectDescription)
+        {
+            if (!subjects.Any() || string.IsNullOrWhiteSpace(subjectDescription))
+                return;
+            subjects = subjects.Where(o => o.Description.ToLower().Contains(subjectDescription.Trim().ToLower()));
+        }
+
+        public async ValueTask<Subject> GetSubjectById(int Id)
+        {
+            return await FindByCondition(sub => sub.SubjectId.Equals(Id)).FirstOrDefaultAsync();
+        }
 
         public void CreateSubject(Subject subject)
         {
@@ -23,20 +49,6 @@ namespace Repository
         {
             Delete(subject);
         }
-
-        public async ValueTask<Subject[]> GetAllSubjects(SubjectParameters subjectParameters)
-        {
-            return await FindAll()
-                    .OrderBy(su => su.Description)
-                    .Skip((subjectParameters.PageNumber - 1) * subjectParameters.PageSize)
-                    .Take(subjectParameters.PageSize)
-                    .ToArrayAsync();
-        }
-
-        public async ValueTask<Subject> GetSubjectById(int Id)
-        {
-            return await FindByCondition(sub => sub.SubjectId.Equals(Id)).FirstOrDefaultAsync();
-        }    
 
         public void UpdateSubject(Subject subject)
         {
