@@ -4,8 +4,9 @@ import { BookForCreation } from './../../_interfaces/book-for-creation.model';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { RepositoryService } from './../../shared/services/repository.service';
 import { Router } from '@angular/router';
-import { Author } from 'src/app/_interfaces/author.model';
-import { Subject } from 'src/app/_interfaces/subject.model';
+import { AuthorList } from 'src/app/_interfaces/author-list';
+import { SubjectList } from 'src/app/_interfaces/subject-list';
+
 
 @Component({
   selector: 'app-book-create',
@@ -16,8 +17,8 @@ export class BookCreateComponent implements OnInit {
   public errorMessage: string = 'Erro ao cadastrar o livro.';
 
   public bookForm: FormGroup;
-  public authors: Author[];
-  public subjects: Subject[];
+  public authors;
+  public subjects;
   public bookValue = 0;
   public currentYear = new Date().getFullYear();
 
@@ -37,10 +38,10 @@ export class BookCreateComponent implements OnInit {
   }
 
   public getAllAuthors = () => {
-    let apiAddress: string = 'api/author';
-    this.repository.getData(apiAddress).subscribe(
+    this.repository.getData('api/author').subscribe(
       (res) => {
-        this.authors = res as Author[];
+        const { authors, totalCount, currentPage, totalPages, pageSize  } = res as AuthorList;
+        this.authors = authors;
       },
       (error) => {
         this.errorHandler.handleError(error);
@@ -50,10 +51,10 @@ export class BookCreateComponent implements OnInit {
   };
 
   public getAllSubjects = () => {
-    let apiAddress: string = 'api/subject';
-    this.repository.getData(apiAddress).subscribe(
+    this.repository.getData('api/subject').subscribe(
       (res) => {
-        this.subjects = res as Subject[];
+        const { subjects, totalCount, currentPage, totalPages, pageSize  } = res as SubjectList;
+        this.subjects = subjects;
       },
       (error) => {
         this.errorHandler.handleError(error);

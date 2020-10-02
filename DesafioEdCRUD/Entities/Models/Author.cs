@@ -10,11 +10,11 @@ namespace Entities.Models
     public Author() {}
     public Author(int authorID, string name)
     {
-      this.AuthorID = authorID;
+      this.AuthorId = authorID;
       this.Name = name;
     }
     [Key]
-    public int AuthorID { get; set; }
+    public int AuthorId { get; set; }
     
     
     [Required(ErrorMessage = "Name is required")]

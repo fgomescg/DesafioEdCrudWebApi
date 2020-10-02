@@ -69,7 +69,7 @@ namespace DesafioEdCRUD.Controllers
 
             var createdAuthorDto = _mapper.Map<AuthorDto>(authorFromBody);
 
-            return CreatedAtRoute("AuthorById", new { id = authorFromBody.AuthorID }, createdAuthorDto);            
+            return CreatedAtRoute("AuthorById", new { id = authorFromBody.AuthorId }, createdAuthorDto);            
         }
 
         [HttpPut("{Id}")]

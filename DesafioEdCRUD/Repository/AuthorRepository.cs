@@ -38,7 +38,7 @@ namespace Repository
 
         public async ValueTask<Author> GetAuthorById(int Id)
         {
-            return await FindByCondition(author => author.AuthorID.Equals(Id)).FirstOrDefaultAsync();
+            return await FindByCondition(author => author.AuthorId.Equals(Id)).FirstOrDefaultAsync();
         }
 
         public async Task CreateAuthorAsync(Author author)
