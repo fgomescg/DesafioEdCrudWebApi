@@ -1,0 +1,551 @@
+2020-10-01 15:44:17.6236 INFO Returned 20 books from database.
+2020-10-01 15:44:20.5119 INFO Returned 20 books from database.
+2020-10-01 15:44:22.4026 INFO Returned 20 books from database.
+2020-10-01 15:44:23.6682 INFO Returned 20 books from database.
+2020-10-01 15:47:01.7514 INFO Returned 20 books from database.
+2020-10-01 15:47:05.2566 INFO Returned all authors from database.
+2020-10-01 15:47:06.6620 INFO Returned all Subjects from database.
+2020-10-01 15:47:08.9879 INFO Returned all Subjects from database.
+2020-10-01 15:47:09.7649 INFO Returned all authors from database.
+2020-10-01 15:48:38.9159 INFO Returned all Subjects from database.
+2020-10-01 15:48:38.9159 INFO Returned all authors from database.
+2020-10-01 16:10:47.7491 INFO Returned 21 books from database.
+2020-10-01 16:12:07.0314 INFO Returned 21 books from database.
+2020-10-01 16:15:57.3698 INFO Returned 21 books from database.
+2020-10-01 16:17:20.6243 INFO Returned all authors from database.
+2020-10-01 16:17:20.6243 INFO Returned all Subjects from database.
+2020-10-01 16:18:32.7291 INFO Returned 22 books from database.
+2020-10-01 16:18:32.8226 INFO Returned Subject with id: 4
+2020-10-01 16:26:05.1223 INFO Returned author with id: 15
+2020-10-01 16:26:08.0908 INFO Returned Subject with id: 9
+2020-10-01 16:57:45.1846 INFO Returned 25 books from database.
+2020-10-01 16:59:38.3604 ERROR Something went wrong: System.Exception: Exception while fetching all the students from the storage.
+   at DesafioEdCRUD.Controllers.BookController.GetAllBooks(BookParameters bookParameters) in C:\PROJETOS\.NET\DesafioEdCRUD\DesafioEdCRUD\Controllers\BookController.cs:line 31
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at DesafioEdCRUD.CustomExceptionMiddleware.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\PROJETOS\.NET\DesafioEdCRUD\DesafioEdCRUD\CustomExceptionMiddleware\ExceptionMiddleware.cs:line 27
+2020-10-01 17:34:05.2008 INFO Returned all authors from database.
+2020-10-01 17:34:06.1863 INFO Returned 25 books from database.
+2020-10-01 17:34:07.0941 INFO Returned all authors from database.
+2020-10-01 17:34:07.8315 INFO Returned all Subjects from database.
+2020-10-01 17:34:10.1015 INFO Returned 25 books from database.
+2020-10-01 17:34:11.0070 INFO Returned all authors from database.
+2020-10-01 17:34:11.0182 INFO Returned all Subjects from database.
+2020-10-01 17:34:15.3024 INFO Returned all authors from database.
+2020-10-01 17:34:22.2975 INFO Returned all authors from database.
+2020-10-01 17:34:24.2864 INFO Returned 25 books from database.
+2020-10-01 17:34:25.6098 INFO Returned all Subjects from database.
+2020-10-01 17:34:25.6098 INFO Returned all authors from database.
+2020-10-01 17:34:57.0074 INFO Returned 26 books from database.
+2020-10-01 17:34:58.8834 INFO Returned all authors from database.
+2020-10-01 17:35:02.0628 INFO Returned all Subjects from database.
+2020-10-01 17:35:03.5858 INFO Returned all authors from database.
+2020-10-01 17:45:27.7475 INFO Returned 14 books from database.
+2020-10-01 17:45:27.7943 INFO Returned 14 authors from database.
+2020-10-01 17:45:38.3749 INFO Returned 8 books from database.
+2020-10-01 17:47:06.3598 INFO Returned 14 books from database.
+2020-10-01 17:47:06.3713 INFO Returned 14 authors from database.
+2020-10-01 17:53:25.8970 INFO Returned 14 books from database.
+2020-10-01 17:53:25.9092 INFO Returned 14 authors from database.
+2020-10-01 17:53:51.4808 INFO Returned 14 books from database.
+2020-10-01 17:53:51.5004 INFO Returned 14 authors from database.
+2020-10-01 17:54:06.8078 INFO Returned 26 books from database.
+2020-10-01 17:54:09.6899 INFO Returned 14 books from database.
+2020-10-01 17:54:09.7065 INFO Returned 14 authors from database.
+2020-10-01 17:54:48.7130 INFO Returned 14 books from database.
+2020-10-01 17:54:48.7375 INFO Returned 14 authors from database.
+2020-10-01 17:54:53.2174 INFO Returned 14 books from database.
+2020-10-01 17:54:53.2320 INFO Returned 14 authors from database.
+2020-10-01 17:54:55.8172 INFO Returned 14 books from database.
+2020-10-01 17:54:55.8321 INFO Returned 14 authors from database.
+2020-10-01 17:54:57.5640 INFO Returned 14 books from database.
+2020-10-01 17:54:57.5780 INFO Returned 14 authors from database.
+2020-10-01 17:55:52.4340 INFO Returned 14 books from database.
+2020-10-01 17:55:52.4556 INFO Returned 14 authors from database.
+2020-10-01 17:56:49.5037 INFO Returned 14 books from database.
+2020-10-01 17:56:49.5313 INFO Returned 14 authors from database.
+2020-10-01 17:56:51.6531 INFO Returned 14 books from database.
+2020-10-01 17:56:51.6690 INFO Returned 14 authors from database.
+2020-10-01 17:56:59.6820 INFO Returned 14 books from database.
+2020-10-01 17:56:59.7005 INFO Returned 14 authors from database.
+2020-10-01 17:57:08.2410 INFO Returned 14 books from database.
+2020-10-01 17:57:08.2607 INFO Returned 14 authors from database.
+2020-10-01 17:57:11.5082 INFO Returned 14 books from database.
+2020-10-01 17:57:11.5315 INFO Returned 14 authors from database.
+2020-10-01 17:57:15.0335 INFO Returned 14 books from database.
+2020-10-01 17:57:15.0640 INFO Returned 14 authors from database.
+2020-10-01 17:57:18.2487 INFO Returned 14 books from database.
+2020-10-01 17:57:18.2715 INFO Returned 14 authors from database.
+2020-10-01 17:57:19.7125 INFO Returned 14 books from database.
+2020-10-01 17:57:19.7349 INFO Returned 14 authors from database.
+2020-10-01 17:57:23.3041 INFO Returned 14 books from database.
+2020-10-01 17:57:23.3314 INFO Returned 14 authors from database.
+2020-10-01 17:58:39.7621 INFO Returned 14 books from database.
+2020-10-01 17:58:39.7621 INFO Returned 14 authors from database.
+2020-10-01 17:58:41.1615 INFO Returned 14 books from database.
+2020-10-01 17:58:41.1751 INFO Returned 14 authors from database.
+2020-10-01 17:59:08.2020 INFO Returned 14 books from database.
+2020-10-01 17:59:08.2394 INFO Returned 14 authors from database.
+2020-10-01 17:59:09.2896 INFO Returned 14 books from database.
+2020-10-01 17:59:09.3063 INFO Returned 14 authors from database.
+2020-10-01 17:59:16.8215 INFO Returned 14 books from database.
+2020-10-01 17:59:16.8387 INFO Returned 14 authors from database.
+2020-10-01 17:59:20.9920 INFO Returned 14 books from database.
+2020-10-01 17:59:21.0101 INFO Returned 14 authors from database.
+2020-10-01 17:59:45.2045 INFO Returned 14 books from database.
+2020-10-01 17:59:45.2266 INFO Returned 14 authors from database.
+2020-10-01 18:01:33.8983 INFO Returned 14 books from database.
+2020-10-01 18:01:33.9130 INFO Returned 14 authors from database.
+2020-10-01 18:01:37.5902 INFO Returned 8 books from database.
+2020-10-01 18:01:56.2708 INFO Returned 8 books from database.
+2020-10-01 18:02:05.4822 INFO Returned 9 books from database.
+2020-10-01 18:02:12.3553 INFO Returned 10 books from database.
+2020-10-01 18:02:17.0098 INFO Returned 11 books from database.
+2020-10-01 18:04:00.2109 INFO Returned 11 books from database.
+2020-10-01 18:04:02.2815 INFO Returned 26 books from database.
+2020-10-01 18:04:03.1390 INFO Returned 14 books from database.
+2020-10-01 18:04:03.1494 INFO Returned 14 authors from database.
+2020-10-01 18:04:05.5795 INFO Returned 14 books from database.
+2020-10-01 18:04:05.5925 INFO Returned 14 authors from database.
+2020-10-01 18:04:07.8010 INFO Returned 14 books from database.
+2020-10-01 18:04:07.8129 INFO Returned 14 authors from database.
+2020-10-01 18:04:09.0956 INFO Returned 11 books from database.
+2020-10-01 18:04:10.3996 INFO Returned 11 books from database.
+2020-10-01 18:04:40.6286 INFO Returned 26 books from database.
+2020-10-01 18:04:41.8745 INFO Returned 14 books from database.
+2020-10-01 18:04:41.8881 INFO Returned 11 books from database.
+2020-10-01 18:04:41.8881 INFO Returned 14 authors from database.
+2020-10-01 18:04:51.7577 INFO Returned 26 books from database.
+2020-10-01 18:04:53.2660 INFO Returned 14 books from database.
+2020-10-01 18:04:53.2768 INFO Returned 14 authors from database.
+2020-10-01 18:04:53.2768 INFO Returned 11 books from database.
+2020-10-01 18:04:53.3554 INFO Returned book with id: 7
+2020-10-01 18:05:10.2679 INFO Returned 14 books from database.
+2020-10-01 18:05:10.2813 INFO Returned 14 authors from database.
+2020-10-01 18:08:59.3410 INFO Returned 26 books from database.
+2020-10-01 18:09:02.7805 INFO Returned 14 books from database.
+2020-10-01 18:09:02.7805 INFO Returned 11 books from database.
+2020-10-01 18:09:02.7912 INFO Returned 14 authors from database.
+2020-10-01 18:31:08.5425 INFO Returned all subjects from database.
+2020-10-01 18:31:09.9889 ERROR Something went wrong: AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> SubjectDto
+System.Object -> Entities.DTO.SubjectDto
+   at lambda_method(Closure , Object , SubjectDto , ResolutionContext )
+   at DesafioEdCRUD.Controllers.SubjectController.GetSubjects(SubjectParameters subjectParameters) in C:\PROJETOS\.NET\DesafioEdCRUD\DesafioEdCRUD\Controllers\SubjectController.cs:line 53
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at DesafioEdCRUD.CustomExceptionMiddleware.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\PROJETOS\.NET\DesafioEdCRUD\DesafioEdCRUD\CustomExceptionMiddleware\ExceptionMiddleware.cs:line 27
+2020-10-01 18:31:58.6976 INFO Returned all subjects from database.
+2020-10-01 18:32:01.8385 ERROR Something went wrong: AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> SubjectDto
+System.Object -> Entities.DTO.SubjectDto
+   at lambda_method(Closure , Object , SubjectDto , ResolutionContext )
+   at DesafioEdCRUD.Controllers.SubjectController.GetSubjects(SubjectParameters subjectParameters) in C:\PROJETOS\.NET\DesafioEdCRUD\DesafioEdCRUD\Controllers\SubjectController.cs:line 53
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at DesafioEdCRUD.CustomExceptionMiddleware.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\PROJETOS\.NET\DesafioEdCRUD\DesafioEdCRUD\CustomExceptionMiddleware\ExceptionMiddleware.cs:line 27
+2020-10-01 18:33:56.7418 INFO Returned all subjects from database.
+2020-10-01 18:33:56.8003 ERROR Something went wrong: AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> SubjectDto
+System.Object -> Entities.DTO.SubjectDto
+   at lambda_method(Closure , Object , SubjectDto , ResolutionContext )
+   at DesafioEdCRUD.Controllers.SubjectController.GetSubjects(SubjectParameters subjectParameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at DesafioEdCRUD.CustomExceptionMiddleware.ExceptionMiddleware.InvokeAsync(HttpContext httpContext)
+2020-10-01 18:34:19.3980 INFO Returned all subjects from database.
+2020-10-01 18:34:19.5180 ERROR Something went wrong: AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> SubjectDto
+System.Object -> Entities.DTO.SubjectDto
+   at lambda_method(Closure , Object , SubjectDto , ResolutionContext )
+   at DesafioEdCRUD.Controllers.SubjectController.GetSubjects(SubjectParameters subjectParameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at DesafioEdCRUD.CustomExceptionMiddleware.ExceptionMiddleware.InvokeAsync(HttpContext httpContext)
+2020-10-01 18:39:11.6100 INFO Returned all subjects from database.
+2020-10-01 18:39:27.9573 INFO Returned 11 subjects from database.
+2020-10-01 18:39:39.3952 INFO Returned 14 authors from database.
+2020-10-01 18:39:39.4070 INFO Returned 14 authors from database.
+2020-10-01 18:39:43.5533 INFO Returned all authors from database.
+2020-10-01 18:45:06.8570 INFO Returned all authors from database.
+2020-10-01 18:45:14.3329 INFO Returned 26 books from database.
+2020-10-01 18:45:15.5964 INFO Returned 26 books from database.
+2020-10-01 18:45:16.3067 INFO Returned 26 books from database.
+2020-10-01 18:45:16.9338 INFO Returned 26 books from database.
+2020-10-01 18:45:17.5025 INFO Returned 26 books from database.
+2020-10-01 20:28:13.1074 INFO Returned 26 books from database.
+2020-10-01 20:28:15.4500 INFO Returned 14 authors from database.
+2020-10-01 20:28:27.3615 INFO Returned 14 authors from database.
+2020-10-01 20:28:33.2566 INFO Returned all subjects from database.
+2020-10-01 20:30:29.1413 INFO Returned 14 authors from database.
+2020-10-01 20:30:29.1620 INFO Returned all subjects from database.
+2020-10-01 20:30:29.1651 INFO Returned 14 authors from database.
+2020-10-01 20:30:36.7032 INFO Returned 14 authors from database.
+2020-10-01 20:30:36.7032 INFO Returned all subjects from database.
+2020-10-01 20:30:36.7281 INFO Returned 14 authors from database.
+2020-10-01 20:30:59.8336 INFO Returned 14 authors from database.
+2020-10-01 20:30:59.8336 INFO Returned all subjects from database.
+2020-10-01 20:30:59.8524 INFO Returned 14 authors from database.
+2020-10-01 20:31:04.7373 INFO Returned all subjects from database.
+2020-10-01 20:31:04.7373 INFO Returned 14 authors from database.
+2020-10-01 20:31:04.7791 INFO Returned 14 authors from database.
+2020-10-01 20:31:07.6452 INFO Returned 14 authors from database.
+2020-10-01 20:31:07.6452 INFO Returned all subjects from database.
+2020-10-01 20:31:07.6650 INFO Returned 14 authors from database.
+2020-10-01 20:31:33.8547 INFO Returned all subjects from database.
+2020-10-01 20:31:33.8547 INFO Returned 14 authors from database.
+2020-10-01 20:31:33.9011 INFO Returned 14 authors from database.
+2020-10-01 20:32:05.6202 INFO Returned 14 authors from database.
+2020-10-01 20:32:05.6202 INFO Returned all subjects from database.
+2020-10-01 20:32:05.6401 INFO Returned 14 authors from database.
+2020-10-01 20:32:12.2486 INFO Returned all subjects from database.
+2020-10-01 20:32:12.2486 INFO Returned 14 authors from database.
+2020-10-01 20:32:12.2967 INFO Returned 14 authors from database.
+2020-10-01 20:33:40.6245 INFO Returned 14 authors from database.
+2020-10-01 20:33:40.6415 INFO Returned 14 authors from database.
+2020-10-01 20:33:43.1899 INFO Returned 26 books from database.
+2020-10-01 20:33:44.1801 INFO Returned 14 authors from database.
+2020-10-01 20:33:44.1801 INFO Returned all subjects from database.
+2020-10-01 20:33:44.1801 INFO Returned 14 authors from database.
+2020-10-01 20:37:23.9974 INFO Returned 14 authors from database.
+2020-10-01 20:37:23.9974 INFO Returned all subjects from database.
+2020-10-01 20:37:24.0126 INFO Returned 14 authors from database.
+2020-10-01 20:41:12.0619 INFO Returned 14 authors from database.
+2020-10-01 20:41:12.0619 INFO Returned all subjects from database.
+2020-10-01 20:41:12.0786 INFO Returned 14 authors from database.
+2020-10-01 20:41:23.2377 INFO Returned 14 authors from database.
+2020-10-01 20:41:23.2377 INFO Returned all subjects from database.
+2020-10-01 20:41:23.2588 INFO Returned 14 authors from database.
+2020-10-01 20:46:32.4010 INFO Returned 14 authors from database.
+2020-10-01 20:46:32.4010 INFO Returned all subjects from database.
+2020-10-01 20:46:32.4504 INFO Returned 14 authors from database.
+2020-10-01 20:48:25.0912 INFO Returned all subjects from database.
+2020-10-01 20:48:25.0912 INFO Returned 14 authors from database.
+2020-10-01 20:48:25.1042 INFO Returned 14 authors from database.
+2020-10-01 20:49:08.3134 INFO Returned all subjects from database.
+2020-10-01 20:49:08.3134 INFO Returned 14 authors from database.
+2020-10-01 20:49:08.3497 INFO Returned 14 authors from database.
+2020-10-01 20:49:14.8486 INFO Returned all subjects from database.
+2020-10-01 20:49:14.8486 INFO Returned 14 authors from database.
+2020-10-01 20:49:14.8684 INFO Returned 14 authors from database.
+2020-10-01 20:50:27.9438 INFO Returned all subjects from database.
+2020-10-01 20:50:27.9438 INFO Returned 14 authors from database.
+2020-10-01 20:50:27.9857 INFO Returned 14 authors from database.
+2020-10-01 20:51:29.9079 INFO Returned all subjects from database.
+2020-10-01 20:51:29.9079 INFO Returned 14 authors from database.
+2020-10-01 20:51:29.9391 INFO Returned 14 authors from database.
+2020-10-01 20:51:34.6893 INFO Returned 14 authors from database.
+2020-10-01 20:51:34.6893 INFO Returned all subjects from database.
+2020-10-01 20:51:34.7086 INFO Returned 14 authors from database.
+2020-10-01 20:51:39.9545 INFO Returned all subjects from database.
+2020-10-01 20:51:39.9545 INFO Returned 14 authors from database.
+2020-10-01 20:51:39.9944 INFO Returned 14 authors from database.
+2020-10-01 20:51:47.8816 INFO Returned 14 authors from database.
+2020-10-01 20:51:47.8816 INFO Returned all subjects from database.
+2020-10-01 20:51:47.9007 INFO Returned 14 authors from database.
+2020-10-01 20:51:48.8978 INFO Returned 14 authors from database.
+2020-10-01 20:51:48.8978 INFO Returned all subjects from database.
+2020-10-01 20:51:48.9240 INFO Returned 14 authors from database.
+2020-10-01 20:51:57.4702 INFO Returned all subjects from database.
+2020-10-01 20:51:57.4702 INFO Returned 14 authors from database.
+2020-10-01 20:51:57.5090 INFO Returned 14 authors from database.
+2020-10-01 20:52:07.1983 INFO Returned 14 authors from database.
+2020-10-01 20:52:07.2371 INFO Returned 14 authors from database.
+2020-10-01 20:52:07.2642 INFO Returned all subjects from database.
+2020-10-01 20:52:27.5629 INFO Returned all subjects from database.
+2020-10-01 20:52:27.5629 INFO Returned 14 authors from database.
+2020-10-01 20:52:27.5982 INFO Returned 14 authors from database.
+2020-10-01 20:54:13.2282 INFO Returned all subjects from database.
+2020-10-01 20:54:13.2282 INFO Returned 14 authors from database.
+2020-10-01 20:54:13.2760 INFO Returned 14 authors from database.
+2020-10-01 20:56:29.7543 INFO Returned 14 authors from database.
+2020-10-01 20:56:29.7625 INFO Returned all subjects from database.
+2020-10-01 20:56:29.7773 INFO Returned 14 authors from database.
+2020-10-01 20:56:35.7991 INFO Returned 14 authors from database.
+2020-10-01 20:56:35.8066 INFO Returned all subjects from database.
+2020-10-01 20:56:35.8066 INFO Returned 14 authors from database.
+2020-10-01 20:56:40.6430 INFO Returned 14 authors from database.
+2020-10-01 20:56:40.6430 INFO Returned all subjects from database.
+2020-10-01 20:56:40.6604 INFO Returned 14 authors from database.
+2020-10-01 20:56:52.6311 INFO Returned 14 authors from database.
+2020-10-01 20:56:52.6483 INFO Returned 14 authors from database.
+2020-10-01 20:56:52.6483 INFO Returned all subjects from database.
+2020-10-01 20:57:36.9088 INFO Returned all subjects from database.
+2020-10-01 20:57:36.9088 INFO Returned 14 authors from database.
+2020-10-01 20:57:36.9448 INFO Returned 14 authors from database.
+2020-10-01 20:58:14.6017 INFO Returned all subjects from database.
+2020-10-01 20:58:14.6017 INFO Returned 14 authors from database.
+2020-10-01 20:58:14.6333 INFO Returned 14 authors from database.
+2020-10-01 20:59:22.9511 INFO Returned all subjects from database.
+2020-10-01 20:59:22.9511 INFO Returned 14 authors from database.
+2020-10-01 20:59:22.9875 INFO Returned 14 authors from database.
+2020-10-01 20:59:26.7556 INFO Returned 14 authors from database.
+2020-10-01 20:59:26.7639 INFO Returned all subjects from database.
+2020-10-01 20:59:26.7789 INFO Returned 14 authors from database.
+2020-10-01 21:00:39.3071 INFO Returned 26 books from database.
+2020-10-01 21:00:40.6800 INFO Returned all subjects from database.
+2020-10-01 21:00:40.6800 INFO Returned 14 authors from database.
+2020-10-01 21:00:40.7178 INFO Returned 14 authors from database.
+2020-10-01 21:01:02.7544 INFO Returned 14 authors from database.
+2020-10-01 21:01:02.7544 INFO Returned all subjects from database.
+2020-10-01 21:01:02.7779 INFO Returned 14 authors from database.
+2020-10-01 21:01:17.7107 INFO Returned all subjects from database.
+2020-10-01 21:01:17.7107 INFO Returned 14 authors from database.
+2020-10-01 21:01:17.7554 INFO Returned 14 authors from database.
+2020-10-01 21:01:19.7559 INFO Returned 14 authors from database.
+2020-10-01 21:01:19.7734 INFO Returned all subjects from database.
+2020-10-01 21:01:19.7808 INFO Returned 14 authors from database.
+2020-10-01 21:01:22.2449 INFO Returned 14 authors from database.
+2020-10-01 21:01:22.2449 INFO Returned all subjects from database.
+2020-10-01 21:01:22.2719 INFO Returned 14 authors from database.
+2020-10-01 21:01:30.8291 INFO Returned all subjects from database.
+2020-10-01 21:01:30.8291 INFO Returned 14 authors from database.
+2020-10-01 21:01:30.8806 INFO Returned 14 authors from database.
+2020-10-01 21:01:34.2982 INFO Returned all subjects from database.
+2020-10-01 21:01:34.2982 INFO Returned 14 authors from database.
+2020-10-01 21:01:34.3635 INFO Returned 14 authors from database.
+2020-10-01 21:02:25.0153 INFO Returned all subjects from database.
+2020-10-01 21:02:25.0153 INFO Returned 14 authors from database.
+2020-10-01 21:02:25.0732 INFO Returned 14 authors from database.
+2020-10-01 21:02:38.6173 INFO Returned 14 authors from database.
+2020-10-01 21:02:38.6176 INFO Returned 14 authors from database.
+2020-10-01 21:02:38.6176 INFO Returned all subjects from database.
+2020-10-01 21:02:50.6993 INFO Returned 14 authors from database.
+2020-10-01 21:02:50.6993 INFO Returned all subjects from database.
+2020-10-01 21:02:50.7261 INFO Returned 14 authors from database.
+2020-10-01 21:04:28.1092 INFO Returned all subjects from database.
+2020-10-01 21:04:28.1092 INFO Returned 14 authors from database.
+2020-10-01 21:04:28.1503 INFO Returned 14 authors from database.
+2020-10-01 21:04:57.3673 INFO Returned 14 authors from database.
+2020-10-01 21:04:57.3915 INFO Returned all subjects from database.
+2020-10-01 21:04:57.3915 INFO Returned 14 authors from database.
+2020-10-01 21:05:06.4190 INFO Returned 14 authors from database.
+2020-10-01 21:05:06.4376 INFO Returned all subjects from database.
+2020-10-01 21:05:06.4546 INFO Returned 14 authors from database.
+2020-10-01 21:05:08.4380 INFO Returned all subjects from database.
+2020-10-01 21:05:08.4869 INFO Returned 14 authors from database.
+2020-10-01 21:05:08.5174 INFO Returned 14 authors from database.
+2020-10-01 21:09:50.4258 INFO Returned 26 books from database.
+2020-10-01 21:10:05.4549 INFO Returned 26 books from database.
+2020-10-01 21:10:06.4839 INFO Returned 14 authors from database.
+2020-10-01 21:10:06.4982 INFO Returned all subjects from database.
+2020-10-01 21:10:06.4982 INFO Returned 14 authors from database.
+2020-10-01 21:10:10.5473 INFO Returned 14 authors from database.
+2020-10-01 21:10:10.5473 INFO Returned all subjects from database.
+2020-10-01 21:10:10.5657 INFO Returned 14 authors from database.
+2020-10-01 21:10:17.9795 INFO Returned 14 authors from database.
+2020-10-01 21:10:17.9961 INFO Returned 14 authors from database.
+2020-10-01 21:10:17.9795 INFO Returned all subjects from database.
+2020-10-01 21:10:33.3618 INFO Returned 26 books from database.
+2020-10-01 21:10:44.8871 INFO Returned all subjects from database.
+2020-10-01 21:10:44.8871 INFO Returned 14 authors from database.
+2020-10-01 21:10:44.9299 INFO Returned 14 authors from database.
+2020-10-01 21:53:51.2753 INFO Returned 14 authors from database.
+2020-10-01 21:53:51.3385 INFO Returned 14 authors from database.
+2020-10-01 21:53:59.2160 INFO Returned 1 authors from database.
+2020-10-01 21:53:59.2294 INFO Returned 1 authors from database.
+2020-10-01 21:54:02.7672 INFO Returned 1 authors from database.
+2020-10-01 21:54:02.7814 INFO Returned 1 authors from database.
+2020-10-01 21:54:05.0095 INFO Returned 1 authors from database.
+2020-10-01 21:54:05.0244 INFO Returned 1 authors from database.
+2020-10-01 23:21:31.2983 INFO Returned 1 authors from database.
+2020-10-01 23:21:36.4545 INFO Returned 14 authors from database.
+2020-10-01 23:21:44.5749 INFO Returned 0 authors from database.
+2020-10-01 23:21:48.3695 INFO Returned 14 authors from database.
+2020-10-01 23:26:23.8400 INFO Returned 26 books from database.
+2020-10-01 23:26:24.5745 INFO Returned 14 authors from database.
+2020-10-01 23:26:24.6020 INFO Returned 11 subjects from database.
+2020-10-01 23:27:00.4920 INFO Returned 14 authors from database.
+2020-10-01 23:27:00.5027 INFO Returned 11 subjects from database.
+2020-10-01 23:27:36.6147 INFO Returned 11 subjects from database.
+2020-10-01 23:27:36.6147 INFO Returned 14 authors from database.
+2020-10-01 23:27:38.8908 INFO Returned 14 authors from database.
+2020-10-01 23:27:38.8908 INFO Returned 11 subjects from database.
+2020-10-01 23:27:54.1294 INFO Returned 14 authors from database.
+2020-10-01 23:27:54.1294 INFO Returned 11 subjects from database.
+2020-10-01 23:28:50.8051 INFO Returned 14 authors from database.
+2020-10-01 23:28:50.8051 INFO Returned 11 subjects from database.
+2020-10-01 23:28:59.1306 INFO Returned 11 subjects from database.
+2020-10-01 23:28:59.1306 INFO Returned 14 authors from database.
+2020-10-01 23:29:08.3774 INFO Returned 14 authors from database.
+2020-10-01 23:29:08.3774 INFO Returned 11 subjects from database.
+2020-10-01 23:29:12.6581 INFO Returned 14 authors from database.
+2020-10-01 23:29:12.6581 INFO Returned 11 subjects from database.
+2020-10-01 23:29:13.6325 INFO Returned 14 authors from database.
+2020-10-01 23:29:13.6480 INFO Returned 11 subjects from database.
+2020-10-01 23:29:24.0936 INFO Returned 14 authors from database.
+2020-10-01 23:29:24.1178 INFO Returned 11 subjects from database.
+2020-10-01 23:29:28.7281 INFO Returned 11 subjects from database.
+2020-10-01 23:29:28.7281 INFO Returned 14 authors from database.
+2020-10-01 23:29:53.8839 INFO Returned 14 authors from database.
+2020-10-01 23:29:56.1605 INFO Returned 14 authors from database.
+2020-10-01 23:29:56.1871 INFO Returned 11 subjects from database.
+2020-10-01 23:30:17.9141 INFO Returned 14 authors from database.
+2020-10-01 23:30:17.9141 INFO Returned 11 subjects from database.
+2020-10-01 23:30:19.8928 INFO Returned 11 subjects from database.
+2020-10-01 23:30:19.8928 INFO Returned 14 authors from database.
+2020-10-01 23:30:21.1832 INFO Returned 14 authors from database.
+2020-10-01 23:30:21.1832 INFO Returned 11 subjects from database.
+2020-10-01 23:30:24.5506 INFO Returned 14 authors from database.
+2020-10-01 23:30:24.5506 INFO Returned 11 subjects from database.
+2020-10-01 23:31:20.9698 INFO Returned 14 authors from database.
+2020-10-01 23:31:20.9698 INFO Returned 11 subjects from database.
+2020-10-01 23:32:58.6478 INFO Returned 14 authors from database.
+2020-10-01 23:32:58.6524 INFO Returned 11 subjects from database.
+2020-10-01 23:38:18.4118 INFO Returned 11 subjects from database.
+2020-10-01 23:38:18.4118 INFO Returned 14 authors from database.
+2020-10-01 23:38:44.1528 INFO Returned 14 authors from database.
+2020-10-01 23:38:44.1528 INFO Returned 11 subjects from database.
+2020-10-01 23:39:01.6757 INFO Returned 14 authors from database.
+2020-10-01 23:39:01.6757 INFO Returned 11 subjects from database.
+2020-10-01 23:40:05.4562 INFO Returned 14 authors from database.
+2020-10-01 23:40:05.4562 INFO Returned 11 subjects from database.
+2020-10-01 23:41:52.7084 INFO Returned 14 authors from database.
+2020-10-01 23:41:52.7256 INFO Returned 11 subjects from database.
+2020-10-01 23:42:05.5099 INFO Returned 14 authors from database.
+2020-10-01 23:42:05.5253 INFO Returned 11 subjects from database.
+2020-10-01 23:42:14.5859 INFO Returned 14 authors from database.
+2020-10-01 23:42:14.5936 INFO Returned 11 subjects from database.
+2020-10-01 23:42:16.3464 INFO Returned 14 authors from database.
+2020-10-01 23:42:16.3723 INFO Returned 11 subjects from database.
+2020-10-01 23:42:49.5783 INFO Returned 14 authors from database.
+2020-10-01 23:42:49.5886 INFO Returned 11 subjects from database.
+2020-10-01 23:42:59.8616 INFO Returned 14 authors from database.
+2020-10-01 23:42:59.8616 INFO Returned 11 subjects from database.
+2020-10-01 23:43:12.4448 INFO Returned 14 authors from database.
+2020-10-01 23:43:12.4464 INFO Returned 11 subjects from database.
+2020-10-01 23:43:26.7832 INFO Returned 14 authors from database.
+2020-10-01 23:43:26.7832 INFO Returned 11 subjects from database.
+2020-10-01 23:43:31.8361 INFO Returned 14 authors from database.
+2020-10-01 23:43:31.8540 INFO Returned 11 subjects from database.
+2020-10-01 23:43:49.9394 INFO Returned 14 authors from database.
+2020-10-01 23:43:49.9394 INFO Returned 11 subjects from database.
+2020-10-01 23:44:31.9537 INFO Returned 14 authors from database.
+2020-10-01 23:44:31.9537 INFO Returned 11 subjects from database.
+2020-10-01 23:44:36.7203 INFO Returned 14 authors from database.
+2020-10-01 23:44:38.3175 INFO Returned 14 authors from database.
+2020-10-01 23:44:38.3175 INFO Returned 11 subjects from database.
+2020-10-01 23:44:54.5944 INFO Returned 14 authors from database.
+2020-10-01 23:45:07.1618 INFO Returned 14 authors from database.
+2020-10-01 23:45:07.1752 INFO Returned 11 subjects from database.
+2020-10-01 23:45:57.8752 INFO Returned 11 subjects from database.
+2020-10-01 23:45:57.8752 INFO Returned 14 authors from database.
+2020-10-01 23:46:18.6149 INFO Returned 14 authors from database.
+2020-10-01 23:46:18.6149 INFO Returned 11 subjects from database.
+2020-10-01 23:46:19.9691 INFO Returned 14 authors from database.
+2020-10-01 23:46:20.0022 INFO Returned 11 subjects from database.
+2020-10-01 23:46:26.0164 INFO Returned 14 authors from database.
+2020-10-01 23:46:26.0389 INFO Returned 11 subjects from database.
+2020-10-01 23:46:39.7053 INFO Returned 14 authors from database.
+2020-10-01 23:46:39.7053 INFO Returned 11 subjects from database.
+2020-10-01 23:46:55.2595 INFO Returned 14 authors from database.
+2020-10-01 23:46:55.2843 INFO Returned 11 subjects from database.
+2020-10-01 23:48:43.2453 INFO Returned 14 authors from database.
+2020-10-01 23:48:45.3092 INFO Returned 26 books from database.
+2020-10-01 23:48:46.0989 INFO Returned 14 authors from database.
+2020-10-01 23:48:46.5464 INFO Returned 11 subjects from database.
+2020-10-01 23:48:48.3432 INFO Returned 26 books from database.
+2020-10-01 23:48:50.0115 INFO Returned 14 authors from database.
+2020-10-01 23:48:50.0115 INFO Returned 11 subjects from database.
+2020-10-01 23:52:41.9611 INFO Returned 26 books from database.
+2020-10-01 23:52:50.4015 INFO Returned book with id: 7
+2020-10-01 23:53:29.3329 INFO Returned book with id: 7
+2020-10-01 23:53:31.1953 INFO Returned 26 books from database.
+2020-10-01 23:54:52.6755 INFO Returned 26 books from database.
+2020-10-01 23:55:02.1883 INFO Returned 26 books from database.
+2020-10-01 23:55:03.7630 INFO Returned 26 books from database.
+2020-10-01 23:55:08.8596 INFO Returned 26 books from database.
+2020-10-01 23:55:10.4406 INFO Returned 26 books from database.
+2020-10-01 23:55:14.5177 INFO Returned 26 books from database.
+2020-10-01 23:56:04.1442 INFO Returned 26 books from database.
+2020-10-01 23:56:30.4524 INFO Returned 26 books from database.
+2020-10-01 23:56:43.5795 INFO Returned 26 books from database.
+2020-10-01 23:56:50.1574 INFO Returned 26 books from database.
+2020-10-01 23:57:12.7671 INFO Returned 26 books from database.
+2020-10-01 23:57:22.4170 INFO Returned 26 books from database.
+2020-10-01 23:57:29.1117 INFO Returned 26 books from database.
+2020-10-01 23:57:30.6572 INFO Returned 26 books from database.
+2020-10-01 23:57:49.6157 INFO Returned 26 books from database.
+2020-10-01 23:57:51.9960 INFO Returned 26 books from database.
+2020-10-01 23:57:55.2975 INFO Returned 26 books from database.
+2020-10-01 23:57:57.5663 INFO Returned 26 books from database.
+2020-10-01 23:57:58.7979 INFO Returned 26 books from database.
+2020-10-01 23:58:06.8619 INFO Returned 26 books from database.
+2020-10-01 23:58:09.4255 INFO Returned 26 books from database.
+2020-10-01 23:58:12.3770 INFO Returned 26 books from database.
+2020-10-01 23:58:15.9373 INFO Returned 26 books from database.
+2020-10-01 23:58:19.2418 INFO Returned 26 books from database.
+2020-10-01 23:58:19.7861 INFO Returned 26 books from database.
+2020-10-01 23:58:27.4860 INFO Returned 26 books from database.
+2020-10-01 23:58:43.2382 INFO Returned 26 books from database.
+2020-10-01 23:58:46.3342 INFO Returned 26 books from database.
+2020-10-01 23:58:49.2854 INFO Returned 26 books from database.
+2020-10-01 23:58:56.7620 INFO Returned 26 books from database.
+2020-10-01 23:59:48.5348 INFO Returned 26 books from database.
