@@ -28,9 +28,7 @@ namespace DesafioEdCRUD.Unit.Tests.Controller
         {
             repoWrapperMock = new Mock<IRepositoryWrapper>();
             logManagerMock = new Mock<ILoggerManager>();
-            mapperMock = new Mock<IMapper>();
-
-            bookController = new BookController(logManagerMock.Object, repoWrapperMock.Object, mapperMock.Object);            
+            mapperMock = new Mock<IMapper>();            
         }
 
         /*

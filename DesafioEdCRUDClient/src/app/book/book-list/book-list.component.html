@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let book of bookList.books | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalCount }">
+          <tr *ngFor="let book of books | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalCount }">
             <td>{{book.title}}</td>
             <td>{{book.company}}</td>
             <td>{{book.edition}}</td>

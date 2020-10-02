@@ -11,7 +11,7 @@ import { HttpParams } from '@angular/common/http';
   styleUrls: ['./book-list.component.css'],
 })
 export class BookListComponent implements OnInit {
-  public bookList: BookList;
+  public books;
   public errorMessage: string = '';
   public totalCount : Number;
   public totalPages: Number;
@@ -27,17 +27,16 @@ export class BookListComponent implements OnInit {
     this.getBooks();
   }
   public getBooks = () => {
-    let apiAddress: string = 'api/book';
-
     let params = new HttpParams().set("pageNumber",this.currentPage.toString()).set("pageSize", this.pageSize.toString());
 
-    this.repository.getData(apiAddress, params).subscribe(
+    this.repository.getData('api/book', params).subscribe(
       (res) => {
-        this.bookList = res as BookList;
-        this.totalCount = this.bookList.totalCount;
-        this.pageSize = this.bookList.currentPage;
-        this.totalPages = this.bookList.totalPages;
-        this.pageSize = this.bookList.pageSize;
+        const { books, totalCount, currentPage, totalPages, pageSize  } = res as BookList;
+        this.books = books;
+        this.totalCount = totalCount;
+        this.pageSize = currentPage;
+        this.totalPages = totalPages;
+        this.pageSize = pageSize;
       },
       (error) => {
         this.errorHandler.handleError(error);
