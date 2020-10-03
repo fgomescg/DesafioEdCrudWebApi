@@ -11,24 +11,18 @@ namespace DesafioEdCRUD.Controllers
     [ApiController]
     [Route("api/book")]
     public class BookController : ControllerBase
-    {
-        private ILoggerManager _logger;
-        private IRepositoryWrapper _repository;
-        private IMapper _mapper;
+    {       
+        private IBookService _service;
 
-        public BookController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public BookController(IBookService service)
         {
-            _logger = logger;
-            _repository = repository;
-            _mapper = mapper;
+            _service = service;            
         }
 
         [HttpGet]
-        public async ValueTask<IActionResult> GetAllBooks([FromQuery] BookParameters bookParameters)
+        public async ValueTask<IActionResult> GetBooksAsync([FromQuery] BookParameters bookParameters)
         {           
-            PagedList<Book> books = await _repository.Book.GetAllBooks(bookParameters);
-
-            _logger.LogInfo($"Returned {books.TotalCount} books from database.");                
+            var books = await _service.GetBooksAsync(bookParameters);            
 
             var booksResult = new
             {
@@ -46,27 +40,19 @@ namespace DesafioEdCRUD.Controllers
         [HttpGet("{Id}", Name ="BookById")]
         public async ValueTask<IActionResult> GetBookById(int Id)
         {           
-            var book = await _repository.Book.GetBookById(Id);
+            var book = await _service.GetBookByIdAsync(Id);
 
             if(book == null)
-            {
-                _logger.LogError($"Book with id:{Id}, not found.");
+            {                
                 return NotFound();
-            }
-            else
-            {
-                var bookResult = _mapper.Map<BookDto>(book);
-                _logger.LogInfo($"Returned book with id: {Id}");
-                return Ok(bookResult);
-            }          
+            }            
+            return Ok(book);                      
         }       
 
         [HttpPost]
         public async ValueTask<IActionResult> CreateBook([FromBody]Book book)
-        { 
-            await _repository.Book.CreateBookAsync(book);            
-
-            var createdBook = _mapper.Map<BookDto>(book);
+        {
+            var createdBook =  await _service.CreateBookAsync(book);                       
 
             return CreatedAtRoute("BookById", new { id = createdBook.Id }, createdBook);                   
         }
@@ -74,33 +60,25 @@ namespace DesafioEdCRUD.Controllers
         [HttpPut("{Id}")]
         public async ValueTask<IActionResult> UpdateBook(int Id, [FromBody]BookForUpdateDto bookObj)
         {  
-            var bookEntity = await _repository.Book.GetBookById(Id);
+            var isUpdated = await _service.UpdateBookAsync(Id, bookObj);
 
-            if (bookEntity == null)
-            {
-                _logger.LogError($"Book with id: {Id}, not found in db.");
+            if (!isUpdated)
+            {                
                 return NotFound();
-            }
-
-            _mapper.Map(bookObj, bookEntity);
-
-            await _repository.Book.UpdateBookAsync(bookEntity);            
+            }                 
 
             return NoContent();                        
         }
 
         [HttpDelete("{Id}")]
         public async ValueTask<IActionResult> DeleteBook(int Id)
-        {           
-            var book = await _repository.Book.GetBookById(Id);
-
-            if (book == null)
+        {
+            var isDeleted = await _service.DeleteBookAsync(Id);
+            
+            if(!isDeleted)
             {
-                _logger.LogError($"Book with id: {Id}, not found in db.");
                 return NotFound();
             }
-
-            await _repository.Book.DeleteBookAsync(book);            
 
             return NoContent();                      
         }
@@ -108,9 +86,7 @@ namespace DesafioEdCRUD.Controllers
         [HttpGet("report")]
         public async ValueTask<IActionResult> GetBookAuthorReports()
         {            
-            var bookReport = await _repository.Book.GetBookAuthorReports();
-
-            _logger.LogInfo($"Returned bookReport from database.");
+            var bookReport = await _service.GetBookAuthorReports();            
                 
             return Ok(bookReport);           
         }

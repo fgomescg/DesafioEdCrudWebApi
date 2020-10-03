@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using DesafioEdCRUD.Services;
 using Entities;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +35,7 @@ namespace DesafioEdCRUD.Extensions
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddScoped<IBookService, BookService>();
         }
     }
 }

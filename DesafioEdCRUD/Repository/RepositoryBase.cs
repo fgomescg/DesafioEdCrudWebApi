@@ -33,16 +33,17 @@ namespace Repository
              await RepositoryContext.SaveChangesAsync();
         }
         
-        public Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
             RepositoryContext.Entry(entity).State = EntityState.Modified;
-            return RepositoryContext.SaveChangesAsync();
+            await RepositoryContext.SaveChangesAsync();
+            
         }
 
-        public Task DeleteAsync(T entity)
+        public async Task DeleteAsync(T entity)
         {
             RepositoryContext.Set<T>().Remove(entity);
-            return RepositoryContext.SaveChangesAsync();
+            await RepositoryContext.SaveChangesAsync();
         }        
     }
 }
