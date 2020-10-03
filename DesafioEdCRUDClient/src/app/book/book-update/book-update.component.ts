@@ -4,8 +4,8 @@ import { ErrorHandlerService } from './../../shared/services/error-handler.servi
 import { RepositoryService } from './../../shared/services/repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Book } from './../../_interfaces/book.model';
-import { Author } from 'src/app/_interfaces/author.model';
-import { Subject } from 'src/app/_interfaces/subject.model';
+import { AuthorList } from './../../_interfaces/author-list';
+import { SubjectList } from './../../_interfaces/subject-list';
 
 @Component({
   selector: 'app-book-update',
@@ -16,8 +16,8 @@ export class BookUpdateComponent implements OnInit {
 
   public errorMessage: string = '';
   public book: Book;
-  public authors: Author[];
-  public subjects: Subject[];
+  public authors;
+  public subjects;
   public bookForm: FormGroup;
   public currentYear = new Date().getFullYear();
 
@@ -55,10 +55,10 @@ export class BookUpdateComponent implements OnInit {
   }
 
   public getAllAuthors = () => {
-    let apiAddress: string = 'api/author';
-    this.repository.getData(apiAddress).subscribe(
+    this.repository.getData('api/author').subscribe(
       (res) => {
-        this.authors = res as Author[];
+        const { authors } = res as AuthorList;
+        this.authors = authors;
       },
       (error) => {
         this.errorHandler.handleError(error);
@@ -71,7 +71,8 @@ export class BookUpdateComponent implements OnInit {
     let apiAddress: string = 'api/subject';
     this.repository.getData(apiAddress).subscribe(
       (res) => {
-        this.subjects = res as Subject[];
+        const { subjects } = res as SubjectList;
+        this.subjects = subjects;
       },
       (error) => {
         this.errorHandler.handleError(error);

@@ -40,7 +40,7 @@ export class BookCreateComponent implements OnInit {
   public getAllAuthors = () => {
     this.repository.getData('api/author').subscribe(
       (res) => {
-        const { authors, totalCount, currentPage, totalPages, pageSize  } = res as AuthorList;
+        const { authors } = res as AuthorList;
         this.authors = authors;
       },
       (error) => {
@@ -53,7 +53,7 @@ export class BookCreateComponent implements OnInit {
   public getAllSubjects = () => {
     this.repository.getData('api/subject').subscribe(
       (res) => {
-        const { subjects, totalCount, currentPage, totalPages, pageSize  } = res as SubjectList;
+        const { subjects } = res as SubjectList;
         this.subjects = subjects;
       },
       (error) => {
