@@ -60,6 +60,39 @@ namespace DesafioEdCRUD.Unit.Tests.Services
             Assert.Equal(pagedBooksMock.Count, pagedBookList.Count);            
         }
 
+        [Fact]
+        public async Task GetBookByIdAsync_ShouldReturnBook_WhenBookExists()
+        {
+            //Arrange            
+            var bookId = new Random().Next(1, int.MaxValue);
+            var bookTitle = "Book test title";
+            var book = new Book() { Id = bookId, Title = bookTitle, Company = "Company Test", Edition = 1, PublishYear = "2000", Value = 100m };
+
+            repoWrapperMock.Setup(p => p.Book.GetBookByIdAsync(bookId))
+                .ReturnsAsync(book);
+
+            //Act
+            var bookDto = await bookService.GetBookByIdAsync(bookId);
+
+            //Assert
+            Assert.Equal(bookId, bookDto.Id);
+            Assert.Equal(bookTitle, bookDto.Title);
+        }
+
+        [Fact]
+        public async Task GetBookByIdAsync_ShouldReturnNothing_WhenBookNotExists()
+        {
+            //Arrange                      
+            repoWrapperMock.Setup(p => p.Book.GetBookByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(() => null);
+
+            //Act
+            var bookId = new Random().Next(1, int.MaxValue);
+            var book = await bookService.GetBookByIdAsync(bookId);
+
+            //Assert
+            Assert.Null(book);
+        }
 
         [Fact]
         public async Task CreateBookAsync_ShouldReturnBookDto_WhenBookCreated()
@@ -149,40 +182,5 @@ namespace DesafioEdCRUD.Unit.Tests.Services
             //Assert
             Assert.False(isBookDeleted);
         }
-
-        [Fact]
-        public async Task GetBookByIdAsync_ShouldReturnBook_WhenBookExists()
-        {
-            //Arrange            
-            var bookId = new Random().Next(1, int.MaxValue);
-            var bookTitle = "Book test title";
-            var book = new Book() { Id = bookId, Title = bookTitle, Company = "Company Test", Edition = 1, PublishYear = "2000", Value = 100m };
-
-            repoWrapperMock.Setup(p => p.Book.GetBookByIdAsync(bookId))
-                .ReturnsAsync(book);
-
-            //Act
-            var bookDto = await bookService.GetBookByIdAsync(bookId);
-
-            //Assert
-            Assert.Equal(bookId, bookDto.Id);
-            Assert.Equal(bookTitle, bookDto.Title);
-        }
-
-        [Fact]
-        public async Task GetBookByIdAsync_ShouldReturnNothing_WhenBookNotExists()
-        {
-            //Arrange                      
-            repoWrapperMock.Setup(p => p.Book.GetBookByIdAsync(It.IsAny<int>()))
-                .ReturnsAsync(() => null);
-
-            //Act
-            var bookId = new Random().Next(1, int.MaxValue);
-            var book = await bookService.GetBookByIdAsync(bookId);
-
-            //Assert
-            Assert.Null(book);
-        }
-
     }
 }
