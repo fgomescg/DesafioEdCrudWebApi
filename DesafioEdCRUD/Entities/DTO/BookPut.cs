@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entities.DTO
 {
-    public class BookForCreateDto
+    public class BookPut
     {
         [Required(ErrorMessage = "Title is required")]
         [StringLength(40, ErrorMessage = "Name can't be longer than 40 characters")]

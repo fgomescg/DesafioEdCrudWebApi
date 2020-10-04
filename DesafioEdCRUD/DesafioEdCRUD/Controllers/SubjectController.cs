@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using System.Threading.Tasks;
 using Contracts;
 using Entities.DTO;
 using Entities.Models;
@@ -14,24 +10,18 @@ namespace DesafioEdCRUD.Controllers
     [Route("api/subject")]
     public class SubjectController : ControllerBase
     {
-       
-        private ILoggerManager _logger;
-        private IRepositoryWrapper _repository;
-        private IMapper _mapper;
 
-        public SubjectController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        private readonly ISubjectService _service;
+
+        public SubjectController(ISubjectService service)
         {
-            _logger = logger;
-            _repository = repository;
-            _mapper = mapper;
+            _service = service;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetSubjects([FromQuery] SubjectParameters subjectParameters)
         {    
-            var subjects = await _repository.Subject.GetSubjects(subjectParameters);
-
-            _logger.LogInfo($"Returned {subjects.TotalCount} subjects from database.");
+            var subjects = await _service.GetSubjectsAsync(subjectParameters);            
 
             var subjectsResult = new
             {
@@ -49,62 +39,45 @@ namespace DesafioEdCRUD.Controllers
         [HttpGet("{Id}", Name = "SubjectById")]
         public async Task<IActionResult> GetSubjectById(int Id)
         {           
-            var subject = await _repository.Subject.GetSubjectById(Id);
+            var subjectDto = await _service.GetSubjectByIdAsync(Id);
 
-            if (subject == null)
+            if (subjectDto == null)
             {
-                _logger.LogError($"Subject with id:{Id}, not found.");
                 return NotFound();
             }
-            else
-            {
-                var subjectResult = _mapper.Map<SubjectDto>(subject);
-                _logger.LogInfo($"Returned Subject with id: {Id}");
-                return Ok(subjectResult);
-            }           
+            return Ok(subjectDto);                       
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateSubject([FromBody] Subject subjectFromBody)
         {  
-            await _repository.Subject.CreateSubjectAsync(subjectFromBody);            
+            var createrSubject = await _service.CreateSubjectAsync(subjectFromBody);            
 
-            var createdSubject = _mapper.Map<SubjectDto>(subjectFromBody);
-
-            return CreatedAtRoute("SubjectById", new { id = createdSubject.SubjectId }, createdSubject);            
+            return CreatedAtRoute("SubjectById", new { id = createrSubject.SubjectId }, createrSubject);            
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateSubject(int Id, [FromBody] SubjectForCreateUpdateDto subject)
+        public async Task<IActionResult> UpdateSubject(int Id, [FromBody] SubjectPut subjectPut)
         {  
-            var subjectEntity = await _repository.Subject.GetSubjectById(Id);
+            var isUpdated = await _service.UpdateSubjectAsync(Id, subjectPut);
 
-            if (subjectEntity == null)
-            {
-                _logger.LogError($"Subject with id: {Id}, not found in db.");
+            if (!isUpdated)
+            {                
                 return NotFound();
             }            
-
-            var subjectToUpdate = _mapper.Map(subject, subjectEntity);
-
-            await _repository.Subject.UpdateSubjectAsync(subjectToUpdate);
             
-            return NoContent();
-           
+            return NoContent();           
         }
 
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteSubject(int Id)
         {            
-            var subject = await _repository.Subject.GetSubjectById(Id);
+            var isDeleted = await _service.DeleteSubjectAsync(Id);
 
-            if (subject == null)
-            {
-                _logger.LogError($"Subject with id: {Id}, not found in db.");
+            if (!isDeleted)
+            {                
                 return NotFound();
-            }
-
-            await _repository.Subject.DeleteSubjectAsync(subject);            
+            }            
 
             return NoContent();                        
         }

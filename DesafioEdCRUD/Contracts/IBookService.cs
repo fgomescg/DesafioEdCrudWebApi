@@ -11,9 +11,9 @@ namespace Contracts
     {
         ValueTask<PagedList<Book>> GetBooksAsync(BookParameters bookParameters);
         ValueTask<BookDto> GetBookByIdAsync(int bookId);
-        Task<BookDto> CreateBookAsync(Book book);
-        Task<bool> UpdateBookAsync(int Id, BookForUpdateDto book);
-        Task<bool> DeleteBookAsync(int Id);
+        ValueTask<BookDto> CreateBookAsync(Book book);
+        ValueTask<bool> UpdateBookAsync(int Id, BookPut bookPut);
+        ValueTask<bool> DeleteBookAsync(int Id);
         ValueTask<BookAuthorReport[]> GetBookAuthorReports();
 
     }

@@ -88,7 +88,7 @@ namespace DesafioEdCRUD.Unit.Tests.Services
             repoWrapperMock.Setup(p => p.Book.GetBookByIdAsync(bookId))
                 .ReturnsAsync(book);
 
-            var bookForUpdated = new BookForUpdateDto() { Title = "Book test title updated" };
+            var bookForUpdated = new BookPut() { Title = "Book test title updated" };
             repoWrapperMock.Setup(p => p.Book.UpdateBookAsync(book));
 
             //Act
@@ -103,7 +103,7 @@ namespace DesafioEdCRUD.Unit.Tests.Services
         {
             //Arrange  
             var bookId = new Random().Next(1, int.MaxValue);
-            var bookForUpdated = new BookForUpdateDto() { Title = "Book test title updated" };
+            var bookForUpdated = new BookPut() { Title = "Book test title updated" };
             repoWrapperMock.Setup(p => p.Book.GetBookByIdAsync(It.IsAny<int>()))
                 .ReturnsAsync(() => null);            
             

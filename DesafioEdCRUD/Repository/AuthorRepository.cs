@@ -16,17 +16,13 @@ namespace Repository
         {
         }
 
-        public async ValueTask<PagedList<Author>> GetAuthors(AuthorParameters authorParameters)
+        public async ValueTask<List<Author>> GetAuthorsAsync(AuthorParameters authorParameters)
         {
             var authors = FindAll();
             
             SearchByName(ref authors, authorParameters.Name);
 
-            await authors.OrderBy(p => p.Name).ToArrayAsync();
-
-            return PagedList<Author>.ToPagedList(authors,
-                     authorParameters.PageNumber,
-                     authorParameters.PageSize);
+            return await authors.OrderBy(p => p.Name).ToListAsync();            
         }
 
         private void SearchByName(ref IQueryable<Author> authors, string authorName)
@@ -36,7 +32,7 @@ namespace Repository
             authors = authors.Where(o => o.Name.ToLower().Contains(authorName.Trim().ToLower()));
         }
 
-        public async ValueTask<Author> GetAuthorById(int Id)
+        public async ValueTask<Author> GetAuthorByIdAsync(int Id)
         {
             return await FindByCondition(author => author.AuthorId.Equals(Id)).FirstOrDefaultAsync();
         }

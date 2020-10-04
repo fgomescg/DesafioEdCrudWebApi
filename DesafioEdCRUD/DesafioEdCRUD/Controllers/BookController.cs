@@ -1,9 +1,7 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Entities.Models;
 using Contracts;
-using AutoMapper;
 using Entities.DTO;
 
 namespace DesafioEdCRUD.Controllers
@@ -40,27 +38,27 @@ namespace DesafioEdCRUD.Controllers
         [HttpGet("{Id}", Name ="BookById")]
         public async ValueTask<IActionResult> GetBookById(int Id)
         {           
-            var book = await _service.GetBookByIdAsync(Id);
+            var bookDto = await _service.GetBookByIdAsync(Id);
 
-            if(book == null)
+            if(bookDto == null)
             {                
                 return NotFound();
             }            
-            return Ok(book);                      
+            return Ok(bookDto);                      
         }       
 
         [HttpPost]
         public async ValueTask<IActionResult> CreateBook([FromBody]Book book)
         {
-            var createdBook =  await _service.CreateBookAsync(book);                       
+            var createdBook = await _service.CreateBookAsync(book);                       
 
             return CreatedAtRoute("BookById", new { id = createdBook.Id }, createdBook);                   
         }
 
         [HttpPut("{Id}")]
-        public async ValueTask<IActionResult> UpdateBook(int Id, [FromBody]BookForUpdateDto bookObj)
+        public async ValueTask<IActionResult> UpdateBook(int Id, [FromBody]BookPut bookPut)
         {  
-            var isUpdated = await _service.UpdateBookAsync(Id, bookObj);
+            var isUpdated = await _service.UpdateBookAsync(Id, bookPut);
 
             if (!isUpdated)
             {                

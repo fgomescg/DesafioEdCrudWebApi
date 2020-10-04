@@ -13,7 +13,7 @@ namespace Repository
             : base(repositoryContext)
         {
         }       
-        public async ValueTask<PagedList<Subject>> GetSubjects(SubjectParameters subjectParameters)
+        public async ValueTask<PagedList<Subject>> GetSubjectsAsync(SubjectParameters subjectParameters)
         {
             var subjects = FindAll();
 
@@ -32,15 +32,14 @@ namespace Repository
                 return;
             subjects = subjects.Where(o => o.Description.ToLower().Contains(subjectDescription.Trim().ToLower()));
         }
-        public async ValueTask<Subject> GetSubjectById(int Id)
+        public async ValueTask<Subject> GetSubjectByIdAsync(int Id)
         {
             return await FindByCondition(sub => sub.SubjectId.Equals(Id)).FirstOrDefaultAsync();
-        }
+        }        
         public async Task CreateSubjectAsync(Subject subject)
         {
             await CreateAsync(subject);
         }
-
         public async Task UpdateSubjectAsync(Subject subject)
         {
             await UpdateAsync(subject);

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Entities.Models;
 using Contracts;
-using AutoMapper;
 using Entities.DTO;
-using System.Collections.Generic;
 
 namespace DesafioEdCRUD.Controllers
 {
@@ -13,23 +10,17 @@ namespace DesafioEdCRUD.Controllers
     [Route("api/author")]
     public class AuthorController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositoryWrapper _repository;
-        private IMapper _mapper;
+        private IAuthorService _service;
 
-        public AuthorController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public AuthorController(IAuthorService authorService)
         {
-            _logger = logger;
-            _repository = repository;
-            _mapper = mapper;
+            _service = authorService;
         }
 
         [HttpGet]
         public async ValueTask<IActionResult> GetAuthors([FromQuery] AuthorParameters authorParameters)
         {            
-            var authors = await _repository.Author.GetAuthors(authorParameters);
-
-            _logger.LogInfo($"Returned {authors.TotalCount} authors from database.");
+            var authors = await _service.GetAuthorsAsync(authorParameters);           
 
             var authorsResult = new
             {
@@ -47,61 +38,47 @@ namespace DesafioEdCRUD.Controllers
         [HttpGet("{Id}", Name = "AuthorById")]
         public async Task<IActionResult> GetAuthorById(int Id)
         {            
-            var authorEntity = await _repository.Author.GetAuthorById(Id);
+            var authorDto = await _service.GetAuthorByIdAsync(Id);
 
-            if (authorEntity == null)
-            {
-                _logger.LogError($"Author with id:{Id}, not found.");
+            if (authorDto == null)
+            {                
                 return NotFound();
-            }
-            else
-            {
-                var authorResult = _mapper.Map<AuthorDto>(authorEntity);
-                _logger.LogInfo($"Returned author with id: {Id}");
-                return Ok(authorResult);
-            }           
+            }                           
+            return Ok(authorDto);                       
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateAuthor([FromBody] Author authorFromBody)
-        {  
-            await _repository.Author.CreateAuthorAsync(authorFromBody);            
+        {
+            var createdAuthor = await _service.CreateAuthorAsync(authorFromBody);
 
-            var createdAuthorDto = _mapper.Map<AuthorDto>(authorFromBody);
-
-            return CreatedAtRoute("AuthorById", new { id = authorFromBody.AuthorId }, createdAuthorDto);            
+            return CreatedAtRoute("AuthorById", new { id = authorFromBody.AuthorId }, createdAuthor);            
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateAuthor(int Id, [FromBody] AuthorForCreateUpdateDto authorFromBody)
+        public async Task<IActionResult> UpdateAuthor(int Id, [FromBody] AuthorPut authorPut)
         {            
-            var authorEntity = await _repository.Author.GetAuthorById(Id);
+            var authorEntity = await _service.UpdateAuthorAsync(Id, authorPut);
 
-            if (authorEntity == null)
-            {
-                _logger.LogError($"Author with id: {Id}, not found in db.");
+            if (!authorEntity)
+            {                
                 return NotFound();
             }
-
-            var authorToUpdate = _mapper.Map(authorFromBody, authorEntity);
-
-            await _repository.Author.UpdateAuthorAsync(authorToUpdate);            
-
+            
             return NoContent();           
         }
 
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteAuthor(int Id)
         {           
-            var authorEntity = await _repository.Author.GetAuthorById(Id);
+            var authorEntity = await _service.GetAuthorByIdAsync(Id);
 
             if (authorEntity == null)
-            {
-                _logger.LogError($"Author with id: {Id}, not found in db.");
+            {                
                 return NotFound();
             }
 
-            await _repository.Author.DeleteAuthorAsync(authorEntity);            
+            await _service.DeleteAuthorAsync(Id);            
 
             return NoContent();            
         }

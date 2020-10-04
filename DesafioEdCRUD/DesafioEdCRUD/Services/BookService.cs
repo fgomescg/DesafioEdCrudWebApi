@@ -9,9 +9,9 @@ namespace DesafioEdCRUD.Services
 {
     public class BookService : IBookService
     {
-        private IRepositoryWrapper _repository;
-        private ILoggerManager _logger;
-        private IMapper _mapper;
+        private readonly IRepositoryWrapper _repository;
+        private readonly ILoggerManager _logger;
+        private readonly IMapper _mapper;
 
         public BookService(IRepositoryWrapper repository, ILoggerManager logger, IMapper mapper)
         {
@@ -46,7 +46,7 @@ namespace DesafioEdCRUD.Services
             return bookResult;
         }
 
-        public async Task<BookDto> CreateBookAsync(Book book)
+        public async ValueTask<BookDto> CreateBookAsync(Book book)
         {
             await _repository.Book.CreateBookAsync(book);
 
@@ -57,7 +57,7 @@ namespace DesafioEdCRUD.Services
             return createdBook;
         }
 
-        public async Task<bool> UpdateBookAsync(int Id, BookForUpdateDto book)
+        public async ValueTask<bool> UpdateBookAsync(int Id, BookPut book)
         {
             var bookEntity = await _repository.Book.GetBookByIdAsync(Id);
 
@@ -74,7 +74,7 @@ namespace DesafioEdCRUD.Services
             return true;            
         }
 
-        public async Task<bool> DeleteBookAsync(int Id)
+        public async ValueTask<bool> DeleteBookAsync(int Id)
         {
             var book = await _repository.Book.GetBookByIdAsync(Id);
 

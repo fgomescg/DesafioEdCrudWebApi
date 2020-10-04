@@ -1,12 +1,13 @@
 ﻿using Entities.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Contracts
 {
     public interface IAuthorRepository: IRepositoryBase<Author>
     {
-        ValueTask<PagedList<Author>> GetAuthors(AuthorParameters authorParameters);        
-        ValueTask<Author> GetAuthorById(int authorId);
+        ValueTask<List<Author>> GetAuthorsAsync(AuthorParameters authorParameters);        
+        ValueTask<Author> GetAuthorByIdAsync(int authorId);
         Task CreateAuthorAsync(Author author);
         Task UpdateAuthorAsync(Author author);
         Task DeleteAuthorAsync(Author author);
