@@ -43,6 +43,8 @@ namespace DesafioEdCRUD
 
             services.ConfigureRepositoryWrapper();
 
+            services.ConfigureServicesInjection();
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));

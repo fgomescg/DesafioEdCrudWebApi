@@ -55,7 +55,6 @@ namespace Repository
         {
             await DeleteAsync(book);            
         }
-
         public async ValueTask<BookAuthorReport[]> GetBookAuthorReports()
         {
             return await RepositoryContext.BookAuthorReport.ToArrayAsync();

@@ -19,7 +19,6 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         private Book bookTest;
         private string baseApiUrl = "/api/book";
 
-
         public BookControllerTest()
         {            
             var configurationBuilder = new ConfigurationBuilder()                

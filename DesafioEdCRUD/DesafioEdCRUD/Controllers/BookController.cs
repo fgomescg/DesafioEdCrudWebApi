@@ -29,7 +29,7 @@ namespace DesafioEdCRUD.Controllers
                 books.CurrentPage,
                 books.TotalPages,
                 books
-            };
+            };            
            
             return Ok(booksResult);            
         }

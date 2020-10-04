@@ -34,7 +34,11 @@ namespace DesafioEdCRUD.Extensions
         }
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
-            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();            
+        }
+
+        public static void ConfigureServicesInjection(this IServiceCollection services)
+        {
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<ISubjectService, SubjectService>();
