@@ -2,12 +2,14 @@
 using Contracts;
 using Entities.DTO;
 using Entities.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioEdCRUD.Controllers.V1
 {
-    [ApiController]
-    [Route("api/subject")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [ApiController]   
     public class SubjectController : ControllerBase
     {
 
@@ -18,7 +20,7 @@ namespace DesafioEdCRUD.Controllers.V1
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet(ApiRoutes.Subjects.GetAll)]
         public async Task<IActionResult> GetSubjects([FromQuery] SubjectParameters subjectParameters)
         {    
             var subjects = await _service.GetSubjectsAsync(subjectParameters);            
@@ -36,10 +38,10 @@ namespace DesafioEdCRUD.Controllers.V1
         }
 
 
-        [HttpGet("{Id}", Name = "SubjectById")]
-        public async Task<IActionResult> GetSubjectById(int Id)
+        [HttpGet(ApiRoutes.Subjects.Get, Name = "SubjectById")]
+        public async Task<IActionResult> GetSubjectById(int subjectId)
         {           
-            var subjectDto = await _service.GetSubjectByIdAsync(Id);
+            var subjectDto = await _service.GetSubjectByIdAsync(subjectId);
 
             if (subjectDto == null)
             {
@@ -48,18 +50,18 @@ namespace DesafioEdCRUD.Controllers.V1
             return Ok(subjectDto);                       
         }
 
-        [HttpPost]
+        [HttpPost(ApiRoutes.Subjects.Create)]
         public async Task<IActionResult> CreateSubject([FromBody] Subject subjectFromBody)
         {  
             var createrSubject = await _service.CreateSubjectAsync(subjectFromBody);            
 
-            return CreatedAtRoute("SubjectById", new { id = createrSubject.SubjectId }, createrSubject);            
+            return CreatedAtRoute("SubjectById", new { subjectId = createrSubject.SubjectId }, createrSubject);            
         }
 
-        [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateSubject(int Id, [FromBody] SubjectPut subjectPut)
+        [HttpPut(ApiRoutes.Subjects.Update)]
+        public async Task<IActionResult> UpdateSubject(int subjectId, [FromBody] SubjectPut subjectPut)
         {  
-            var isUpdated = await _service.UpdateSubjectAsync(Id, subjectPut);
+            var isUpdated = await _service.UpdateSubjectAsync(subjectId, subjectPut);
 
             if (!isUpdated)
             {                
@@ -69,10 +71,10 @@ namespace DesafioEdCRUD.Controllers.V1
             return NoContent();           
         }
 
-        [HttpDelete("{Id}")]
-        public async Task<IActionResult> DeleteSubject(int Id)
+        [HttpDelete(ApiRoutes.Subjects.Delete)]
+        public async Task<IActionResult> DeleteSubject(int subjectId)
         {            
-            var isDeleted = await _service.DeleteSubjectAsync(Id);
+            var isDeleted = await _service.DeleteSubjectAsync(subjectId);
 
             if (!isDeleted)
             {                

@@ -1,12 +1,7 @@
-﻿using Entities.Models;
+﻿using DesafioEdCRUD.Controllers;
+using Entities.Models;
 using FluentAssertions;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -19,8 +14,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
     public class SubjectControllerTest : IntegrationTest
     {
       
-        private Subject subjectTest;
-        private string baseApiUrl = "/api/subject";
+        private Subject subjectTest;       
 
         public SubjectControllerTest()
         {           
@@ -30,7 +24,9 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task GetAllSubjects_ReturnsOkResponse()
         {
-            var response = await TestClient.GetAsync(baseApiUrl);
+            await AuthenticateAsync();
+
+            var response = await TestClient.GetAsync(ApiRoutes.Subjects.GetAll);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -38,8 +34,9 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task GetSubjectById_Should_ReturnsOkResponse()
         {
-            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
-                             (subjectTest), Encoding.UTF8, "application/json"));
+            await AuthenticateAsync();
+
+            var responsePost = await TestClient.PostAsJsonAsync(ApiRoutes.Subjects.Create, subjectTest);
 
             var getPah = responsePost.Headers.Location.AbsolutePath;
 
@@ -51,8 +48,9 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task CreateSubject_Should_ReturnsCreatedResponse()
         {
-            var response = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
-                            (subjectTest), Encoding.UTF8, "application/json"));
+            await AuthenticateAsync();
+
+            var response = await TestClient.PostAsJsonAsync(ApiRoutes.Subjects.Create, subjectTest);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.Created);
         }
@@ -60,8 +58,9 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task UpdateSubject_Should_ReturnsNoContentResponse()
         {
-            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
-                             (subjectTest), Encoding.UTF8, "application/json"));
+            await AuthenticateAsync();
+
+            var responsePost = await TestClient.PostAsJsonAsync(ApiRoutes.Subjects.Create, subjectTest);
 
             var getPah = responsePost.Headers.Location.AbsolutePath;
 
@@ -76,8 +75,9 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task DeleteSubject_Should_ReturnsNoContentResponse()
         {
-            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
-                             (subjectTest), Encoding.UTF8, "application/json"));
+            await AuthenticateAsync();
+
+            var responsePost = await TestClient.PostAsJsonAsync(ApiRoutes.Subjects.Create, subjectTest);
 
             var getPah = responsePost.Headers.Location.AbsolutePath;
 

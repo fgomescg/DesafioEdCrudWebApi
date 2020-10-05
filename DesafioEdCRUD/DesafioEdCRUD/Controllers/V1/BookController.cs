@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 namespace DesafioEdCRUD.Controllers.V1
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [ApiController]
-    [Route("api/book")]
+    [ApiController]    
     public class BookController : ControllerBase
     {       
         private IBookService _service;
@@ -20,7 +19,7 @@ namespace DesafioEdCRUD.Controllers.V1
             _service = service;            
         }
 
-        [HttpGet]        
+        [HttpGet(ApiRoutes.Books.GetAll)]        
         public async ValueTask<IActionResult> GetBooksAsync([FromQuery] BookParameters bookParameters)
         {           
             var books = await _service.GetBooksAsync(bookParameters);            
@@ -36,12 +35,12 @@ namespace DesafioEdCRUD.Controllers.V1
            
             return Ok(booksResult);            
         }
-        
 
-        [HttpGet("{Id}", Name ="BookById")]
-        public async ValueTask<IActionResult> GetBookById(int Id)
+
+        [HttpGet(ApiRoutes.Books.Get, Name = "BookById")]
+        public async ValueTask<IActionResult> GetBookById(int bookId)
         {           
-            var bookDto = await _service.GetBookByIdAsync(Id);
+            var bookDto = await _service.GetBookByIdAsync(bookId);
 
             if(bookDto == null)
             {                
@@ -50,18 +49,18 @@ namespace DesafioEdCRUD.Controllers.V1
             return Ok(bookDto);                      
         }       
 
-        [HttpPost]
+        [HttpPost(ApiRoutes.Books.Create)]
         public async ValueTask<IActionResult> CreateBook([FromBody]Book book)
         {
             var createdBook = await _service.CreateBookAsync(book);                       
 
-            return CreatedAtRoute("BookById", new { id = createdBook.Id }, createdBook);                   
+            return CreatedAtRoute("BookById", new { bookId = createdBook.Id }, createdBook);                   
         }
 
-        [HttpPut("{Id}")]
-        public async ValueTask<IActionResult> UpdateBook(int Id, [FromBody]BookPut bookPut)
+        [HttpPut(ApiRoutes.Books.Update)]
+        public async ValueTask<IActionResult> UpdateBook(int bookId, [FromBody]BookPut bookPut)
         {  
-            var isUpdated = await _service.UpdateBookAsync(Id, bookPut);
+            var isUpdated = await _service.UpdateBookAsync(bookId, bookPut);
 
             if (!isUpdated)
             {                
@@ -71,10 +70,10 @@ namespace DesafioEdCRUD.Controllers.V1
             return NoContent();                        
         }
 
-        [HttpDelete("{Id}")]
-        public async ValueTask<IActionResult> DeleteBook(int Id)
+        [HttpDelete(ApiRoutes.Books.Delete)]
+        public async ValueTask<IActionResult> DeleteBook(int bookId)
         {
-            var isDeleted = await _service.DeleteBookAsync(Id);
+            var isDeleted = await _service.DeleteBookAsync(bookId);
             
             if(!isDeleted)
             {
@@ -84,7 +83,7 @@ namespace DesafioEdCRUD.Controllers.V1
             return NoContent();                      
         }
 
-        [HttpGet("report")]
+        [HttpGet(ApiRoutes.Report.Books)]
         public async ValueTask<IActionResult> GetBookAuthorReports()
         {            
             var bookReport = await _service.GetBookAuthorReports();            

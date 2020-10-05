@@ -6,48 +6,44 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Newtonsoft.Json;
-using Microsoft.Extensions.Configuration;
+using DesafioEdCRUD.Controllers;
 
 namespace DesafioEdCRUD.Integration.Tests.Controller
 {
     public class BookControllerTest : IntegrationTest
     {        
-        private Book bookTest;
-        private string baseApiUrl = "/api/book";
+        private Book bookTest;        
 
         public BookControllerTest()
-        {            
-            var configurationBuilder = new ConfigurationBuilder()                
-                .AddJsonFile("appsettings.test.json");           
-          
+        {             
             bookTest = new Book() { Title = "Test Title", Company = "Test Company", Edition = 1, PublishYear = "2000", Value = 20 };
         }
 
          [Fact]
         public async Task CreateBook_Should_ReturnsCreatedResponse()
-        {   
-            var response = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
-                            (bookTest), Encoding.UTF8, "application/json"));
+        {
+            await AuthenticateAsync();
+
+            var response = await TestClient.PostAsJsonAsync(ApiRoutes.Books.Create, bookTest);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.Created);
         }
 
         [Fact]
         public async Task GetAllBooks_ReturnsOkResponse()
-        {         
-            var response = await TestClient.GetAsync("/api/book");
+        {
+            await AuthenticateAsync();
+            var response = await TestClient.GetAsync(ApiRoutes.Books.GetAll);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
         [Fact]
         public async Task GetBookById_Should_ReturnsOkResponse()
-        {    
-            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
-                            (bookTest), Encoding.UTF8, "application/json"));
-
+        {
+            await AuthenticateAsync();
+            var responsePost = await TestClient.PostAsJsonAsync(ApiRoutes.Books.Create, bookTest);
             var getPah = responsePost.Headers.Location.AbsolutePath;
-
             var response = await TestClient.GetAsync(getPah);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -56,15 +52,12 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task UpdateBook_Should_ReturnsNoContentResponse()
         {
-            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
-                            (bookTest), Encoding.UTF8, "application/json"));
-
+            await AuthenticateAsync();
+            var responsePost = await TestClient.PostAsJsonAsync(ApiRoutes.Books.Create, bookTest);
             var bookCreatedPath = responsePost.Headers.Location.AbsolutePath;
 
             bookTest.Title = "Updated Title Test";
-
-            var response = await TestClient.PutAsync(bookCreatedPath, new StringContent(JsonConvert.SerializeObject
-                            (bookTest), Encoding.UTF8, "application/json"));
+            var response = await TestClient.PutAsJsonAsync(bookCreatedPath, bookTest);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }
@@ -72,8 +65,8 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task DeleteBook_Should_ReturnsNoContentResponse()
         {
-            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
-                            (bookTest), Encoding.UTF8, "application/json"));
+            await AuthenticateAsync();
+            var responsePost = await TestClient.PostAsJsonAsync(ApiRoutes.Books.Create, bookTest);
 
             var bookCreatedPath = responsePost.Headers.Location.AbsolutePath;
 

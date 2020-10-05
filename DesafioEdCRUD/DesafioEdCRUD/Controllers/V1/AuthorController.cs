@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Entities.Models;
 using Contracts;
 using Entities.DTO;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace DesafioEdCRUD.Controllers.V1
 {
-    [ApiController]
-    [Route("api/author")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [ApiController]    
     public class AuthorController : ControllerBase
     {
         private IAuthorService _service;
@@ -17,7 +19,7 @@ namespace DesafioEdCRUD.Controllers.V1
             _service = authorService;
         }
 
-        [HttpGet]
+        [HttpGet(ApiRoutes.Authors.GetAll)]
         public async ValueTask<IActionResult> GetAuthors([FromQuery] AuthorParameters authorParameters)
         {            
             var authors = await _service.GetAuthorsAsync(authorParameters);           
@@ -35,10 +37,10 @@ namespace DesafioEdCRUD.Controllers.V1
         }
 
 
-        [HttpGet("{Id}", Name = "AuthorById")]
-        public async Task<IActionResult> GetAuthorById(int Id)
+        [HttpGet(ApiRoutes.Authors.Get, Name = "AuthorById")]
+        public async Task<IActionResult> GetAuthorById(int authorId)
         {            
-            var authorDto = await _service.GetAuthorByIdAsync(Id);
+            var authorDto = await _service.GetAuthorByIdAsync(authorId);
 
             if (authorDto == null)
             {                
@@ -47,18 +49,18 @@ namespace DesafioEdCRUD.Controllers.V1
             return Ok(authorDto);                       
         }
 
-        [HttpPost]
+        [HttpPost(ApiRoutes.Authors.Create)]
         public async Task<IActionResult> CreateAuthor([FromBody] Author authorFromBody)
         {
             var createdAuthor = await _service.CreateAuthorAsync(authorFromBody);
 
-            return CreatedAtRoute("AuthorById", new { id = authorFromBody.AuthorId }, createdAuthor);            
+            return CreatedAtRoute("AuthorById", new { authorId = authorFromBody.AuthorId }, createdAuthor);            
         }
 
-        [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateAuthor(int Id, [FromBody] AuthorPut authorPut)
+        [HttpPut(ApiRoutes.Authors.Update)]
+        public async Task<IActionResult> UpdateAuthor(int authorId, [FromBody] AuthorPut authorPut)
         {            
-            var authorEntity = await _service.UpdateAuthorAsync(Id, authorPut);
+            var authorEntity = await _service.UpdateAuthorAsync(authorId, authorPut);
 
             if (!authorEntity)
             {                
@@ -68,17 +70,17 @@ namespace DesafioEdCRUD.Controllers.V1
             return NoContent();           
         }
 
-        [HttpDelete("{Id}")]
-        public async Task<IActionResult> DeleteAuthor(int Id)
+        [HttpDelete(ApiRoutes.Authors.Delete)]
+        public async Task<IActionResult> DeleteAuthor(int authorId)
         {           
-            var authorEntity = await _service.GetAuthorByIdAsync(Id);
+            var authorEntity = await _service.GetAuthorByIdAsync(authorId);
 
             if (authorEntity == null)
             {                
                 return NotFound();
             }
 
-            await _service.DeleteAuthorAsync(Id);            
+            await _service.DeleteAuthorAsync(authorId);            
 
             return NoContent();            
         }

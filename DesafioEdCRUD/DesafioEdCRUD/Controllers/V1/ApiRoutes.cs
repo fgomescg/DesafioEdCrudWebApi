@@ -18,11 +18,11 @@ namespace DesafioEdCRUD.Controllers
         {
             public const string GetAll = Base + "/books";
 
-            public const string Update = Base + "/books/{postId}";
+            public const string Update = Base + "/books/{bookId}";
 
-            public const string Delete = Base + "/books/{postId}";
+            public const string Delete = Base + "/books/{bookId}";
 
-            public const string Get = Base + "/books/{postId}";
+            public const string Get = Base + "/books/{bookId}";
 
             public const string Create = Base + "/books";
         }
@@ -57,6 +57,13 @@ namespace DesafioEdCRUD.Controllers
         public static class Identity
         {
             public const string Auth = Base + "/identity/auth";           
+        }
+
+        public static class Report
+        {
+            public const string Books = Base + "/report";
+
+            public const string Download = Base + "/report/download";
         }
     }
 }

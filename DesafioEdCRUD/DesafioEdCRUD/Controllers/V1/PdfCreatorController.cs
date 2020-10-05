@@ -7,8 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 
 namespace DesafioEdCRUD.Controllers.V1
-{
-    [Route("api/report")]
+{    
     [ApiController]
     public class PdfCreatorController : ControllerBase
     {
@@ -20,7 +19,7 @@ namespace DesafioEdCRUD.Controllers.V1
             _repository = repository;
         }
 
-        [HttpGet]
+        [HttpGet(ApiRoutes.Report.Books)]
         public async Task<IActionResult> CreatePDF()
         {
             var pdfData = await _repository.Book.GetBookAuthorReports();
@@ -52,7 +51,7 @@ namespace DesafioEdCRUD.Controllers.V1
             return File(file, "application/pdf");
         }
 
-        [HttpGet("download")]
+        [HttpGet(ApiRoutes.Report.Download)]
         public async Task<IActionResult> CreatePDFDownload()
         {
             var pdfData = await _repository.Book.GetBookAuthorReports();

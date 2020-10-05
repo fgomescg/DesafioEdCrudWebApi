@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-
+using DesafioEdCRUD.Controllers;
+using Entities.Models;
 
 namespace DesafioEdCRUD.Integration.Tests
 {
@@ -32,27 +33,21 @@ namespace DesafioEdCRUD.Integration.Tests
             TestClient = appFactory.CreateClient();
         }
 
-        /*protected async Task AuthenticateAsync()
+        protected async Task AuthenticateAsync()
         {
-            TestClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", await GetJwtAsync());
-        }
-
-        protected async Task<PostResponse> CreatePostAsync(CreatePostRequest request)
-        {
-            var response = await TestClient.PostAsJsonAsync(ApiRoutes.Posts.Create, request);
-            return await response.Content.ReadAsAsync<PostResponse>();
+            TestClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await GetJwtAsync());
         }
 
         private async Task<string> GetJwtAsync()
         {
-            var response = await TestClient.PostAsJsonAsync(ApiRoutes.Identity.Register, new UserRegistrationRequest
+            var response = await TestClient.PostAsJsonAsync(ApiRoutes.Identity.Auth, new Login
             {
-                Email = "test@integration.com",
-                Password = "SomePass1234!"
+                Username = "DesafioCRUD",
+                Password = "SecretPassAuth"
             });
 
             var registrationResponse = await response.Content.ReadAsAsync<AuthSuccessResponse>();
             return registrationResponse.Token;
-        }*/
+        }
     }
 }
