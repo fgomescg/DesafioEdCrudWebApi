@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
@@ -20,13 +21,15 @@ namespace DesafioEdCRUD.Services
             _mapper = mapper;
         }
 
-        public async ValueTask<PagedList<Book>> GetBooksAsync(BookParameters bookParameters)
+        public async ValueTask<PagedList<BookDto>> GetBooksAsync(BookParameters bookParameters)
         {
             var books = await _repository.Book.GetBooksAsync(bookParameters);
                         
-            var bookList = PagedList<Book>.ToPagedList(books.AsQueryable(),
+            var listBookResponse = _mapper.Map<List<BookDto>>(books);
+
+            var bookList = PagedList<BookDto>.ToPagedList(listBookResponse.AsQueryable(),
                  bookParameters.PageNumber,
-                 bookParameters.PageSize);          
+                 bookParameters.PageSize); 
 
             return bookList;            
         }

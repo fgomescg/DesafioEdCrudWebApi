@@ -2,7 +2,6 @@
 using DesafioEdCRUD.Services;
 using Entities;
 using LoggerService;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +24,7 @@ namespace DesafioEdCRUD.Extensions
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
-        }
+        }        
   
         public static void ConfigureMySqlContext(this IServiceCollection services, IConfiguration config)
         {

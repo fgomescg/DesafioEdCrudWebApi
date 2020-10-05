@@ -6,35 +6,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Newtonsoft.Json;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
 namespace DesafioEdCRUD.Integration.Tests.Controller
 {
-    public class BookControllerTest
-    {
-        private readonly HttpClient _client;
-        private readonly TestServer _server;
+    public class BookControllerTest : IntegrationTest
+    {        
         private Book bookTest;
         private string baseApiUrl = "/api/book";
 
         public BookControllerTest()
         {            
             var configurationBuilder = new ConfigurationBuilder()                
-                .AddJsonFile("appsettings.test.json");
-            
-            _server = new TestServer(new WebHostBuilder()
-                .UseConfiguration(configurationBuilder.Build())
-               .UseStartup<Startup>());
-            _client = _server.CreateClient();
+                .AddJsonFile("appsettings.test.json");           
+          
             bookTest = new Book() { Title = "Test Title", Company = "Test Company", Edition = 1, PublishYear = "2000", Value = 20 };
         }
 
          [Fact]
         public async Task CreateBook_Should_ReturnsCreatedResponse()
         {   
-            var response = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
+            var response = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
                             (bookTest), Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -43,7 +35,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task GetAllBooks_ReturnsOkResponse()
         {         
-            var response = await _client.GetAsync("/api/book");
+            var response = await TestClient.GetAsync("/api/book");
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -51,12 +43,12 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task GetBookById_Should_ReturnsOkResponse()
         {    
-            var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
+            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
                             (bookTest), Encoding.UTF8, "application/json"));
 
             var getPah = responsePost.Headers.Location.AbsolutePath;
 
-            var response = await _client.GetAsync(getPah);
+            var response = await TestClient.GetAsync(getPah);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }        
@@ -64,14 +56,14 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task UpdateBook_Should_ReturnsNoContentResponse()
         {
-            var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
+            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
                             (bookTest), Encoding.UTF8, "application/json"));
 
             var bookCreatedPath = responsePost.Headers.Location.AbsolutePath;
 
             bookTest.Title = "Updated Title Test";
 
-            var response = await _client.PutAsync(bookCreatedPath, new StringContent(JsonConvert.SerializeObject
+            var response = await TestClient.PutAsync(bookCreatedPath, new StringContent(JsonConvert.SerializeObject
                             (bookTest), Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
@@ -80,12 +72,12 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task DeleteBook_Should_ReturnsNoContentResponse()
         {
-            var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
+            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
                             (bookTest), Encoding.UTF8, "application/json"));
 
             var bookCreatedPath = responsePost.Headers.Location.AbsolutePath;
 
-            var response = await _client.DeleteAsync(bookCreatedPath);
+            var response = await TestClient.DeleteAsync(bookCreatedPath);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }

@@ -5,6 +5,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Internal;
+using Entities.DTO;
 
 namespace Repository
 {
@@ -20,11 +22,11 @@ namespace Repository
 
             SearchByTitle(ref books, bookParameters.Title);
 
-            return await books.Include(book => book.BookAuthors)
+            return await books.Include(book => book.BookAuthors)                            
                             .ThenInclude(ba => ba.Author)
                             .Include(su => su.BookSubjects)
                             .ThenInclude(bs => bs.Subject)
-                            .OrderBy(book => book.Title).ToListAsync();             
+                            .OrderBy(book => book.Title).ToListAsync();
         }
 
         private void SearchByTitle(ref IQueryable<Book> books, string bookTitle)

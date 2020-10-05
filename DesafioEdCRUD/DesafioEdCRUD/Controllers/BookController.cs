@@ -17,11 +17,11 @@ namespace DesafioEdCRUD.Controllers
             _service = service;            
         }
 
-        [HttpGet]
+        [HttpGet]        
         public async ValueTask<IActionResult> GetBooksAsync([FromQuery] BookParameters bookParameters)
         {           
             var books = await _service.GetBooksAsync(bookParameters);            
-
+                        
             var booksResult = new
             {
                 books.TotalCount,
@@ -29,7 +29,7 @@ namespace DesafioEdCRUD.Controllers
                 books.CurrentPage,
                 books.TotalPages,
                 books
-            };            
+            };
            
             return Ok(booksResult);            
         }

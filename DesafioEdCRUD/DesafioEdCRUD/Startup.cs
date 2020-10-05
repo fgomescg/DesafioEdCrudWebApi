@@ -1,10 +1,11 @@
 using System;
 using System.IO;
 using AutoMapper;
-using Contracts;
 using DesafioEdCRUD.Extensions;
 using DinkToPdf;
 using DinkToPdf.Contracts;
+using Entities.DTO;
+using Entities.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -34,10 +35,14 @@ namespace DesafioEdCRUD
 
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore);
 
             services.ConfigureLoggerService();
+
+            var configuration = new MapperConfiguration(config => {
+                config.AllowNullCollections = false;
+                config.CreateMap<Book, BookDto>();
+            });
 
             services.ConfigureMySqlContext(Configuration);
 

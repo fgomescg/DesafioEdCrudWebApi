@@ -8,10 +8,10 @@ namespace Entities.DTO
         public int Id { get; set; }
         public string Title { get; set; }
         public string Company { get; set; }
-        public int Edition { get; set; }
+        public string Edition { get; set; }
         public string PublishYear { get; set; }
-        public decimal Value { get; set; }
-        public IEnumerable<BookAuthor> BookAuthors { get; set; }
-        public IEnumerable<BookSubject> BookSubjects { get; set; }
+        public string Value { get; set; }
+        public IEnumerable<AuthorDto> Authors { get; set; }
+        public IEnumerable<SubjectDto> Subjects { get; set; }
     }
 }

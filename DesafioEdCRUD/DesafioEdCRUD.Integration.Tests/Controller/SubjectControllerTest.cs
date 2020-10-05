@@ -16,29 +16,21 @@ using Xunit;
 
 namespace DesafioEdCRUD.Integration.Tests.Controller
 {
-    public class SubjectControllerTest
+    public class SubjectControllerTest : IntegrationTest
     {
-        private readonly HttpClient _client;
-        private readonly TestServer _server;
+      
         private Subject subjectTest;
         private string baseApiUrl = "/api/subject";
 
         public SubjectControllerTest()
-        {
-            var configurationBuilder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.test.json");
-
-            _server = new TestServer(new WebHostBuilder()
-                .UseConfiguration(configurationBuilder.Build())
-               .UseStartup<Startup>());
-            _client = _server.CreateClient();
+        {           
             subjectTest = new Subject() { Description = "Subject Test" };
         }
 
         [Fact]
         public async Task GetAllSubjects_ReturnsOkResponse()
         {
-            var response = await _client.GetAsync(baseApiUrl);
+            var response = await TestClient.GetAsync(baseApiUrl);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -46,12 +38,12 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task GetSubjectById_Should_ReturnsOkResponse()
         {
-            var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
+            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
                              (subjectTest), Encoding.UTF8, "application/json"));
 
             var getPah = responsePost.Headers.Location.AbsolutePath;
 
-            var response = await _client.GetAsync(getPah);
+            var response = await TestClient.GetAsync(getPah);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -59,7 +51,7 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task CreateSubject_Should_ReturnsCreatedResponse()
         {
-            var response = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
+            var response = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
                             (subjectTest), Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -68,14 +60,14 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task UpdateSubject_Should_ReturnsNoContentResponse()
         {
-            var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
+            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
                              (subjectTest), Encoding.UTF8, "application/json"));
 
             var getPah = responsePost.Headers.Location.AbsolutePath;
 
             subjectTest.Description = "Test Subject updated";
 
-            var response = await _client.PutAsync(getPah, new StringContent(JsonConvert.SerializeObject
+            var response = await TestClient.PutAsync(getPah, new StringContent(JsonConvert.SerializeObject
                              (subjectTest), Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
@@ -84,12 +76,12 @@ namespace DesafioEdCRUD.Integration.Tests.Controller
         [Fact]
         public async Task DeleteSubject_Should_ReturnsNoContentResponse()
         {
-            var responsePost = await _client.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
+            var responsePost = await TestClient.PostAsync(baseApiUrl, new StringContent(JsonConvert.SerializeObject
                              (subjectTest), Encoding.UTF8, "application/json"));
 
             var getPah = responsePost.Headers.Location.AbsolutePath;
 
-            var response = await _client.DeleteAsync(getPah);
+            var response = await TestClient.DeleteAsync(getPah);
             response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }

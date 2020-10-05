@@ -9,7 +9,7 @@ namespace Contracts
 {
     public interface IBookService
     {
-        ValueTask<PagedList<Book>> GetBooksAsync(BookParameters bookParameters);
+        ValueTask<PagedList<BookDto>> GetBooksAsync(BookParameters bookParameters);
         ValueTask<BookDto> GetBookByIdAsync(int bookId);
         ValueTask<BookDto> CreateBookAsync(Book book);
         ValueTask<bool> UpdateBookAsync(int Id, BookPut bookPut);
