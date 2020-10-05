@@ -4,7 +4,7 @@ using Entities.Models;
 using Contracts;
 using Entities.DTO;
 
-namespace DesafioEdCRUD.Controllers
+namespace DesafioEdCRUD.Controllers.V1
 {
     [ApiController]
     [Route("api/author")]

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace DesafioEdCRUD.Controllers
+namespace DesafioEdCRUD.Controllers.V1
 {
     [Route("api/report")]
     [ApiController]

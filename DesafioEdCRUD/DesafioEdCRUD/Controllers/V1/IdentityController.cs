@@ -3,7 +3,7 @@ using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DesafioEdCRUD.Controllers
+namespace DesafioEdCRUD.Controllers.V1
 {
     [Route("api/auth")]
     public class IdentityController : ControllerBase

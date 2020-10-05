@@ -4,7 +4,7 @@ using Entities.DTO;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DesafioEdCRUD.Controllers
+namespace DesafioEdCRUD.Controllers.V1
 {
     [ApiController]
     [Route("api/subject")]
