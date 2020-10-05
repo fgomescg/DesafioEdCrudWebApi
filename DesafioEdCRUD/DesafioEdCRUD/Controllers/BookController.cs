@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Entities.Models;
 using Contracts;
 using Entities.DTO;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace DesafioEdCRUD.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("api/book")]
     public class BookController : ControllerBase

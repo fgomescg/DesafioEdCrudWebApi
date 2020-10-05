@@ -41,6 +41,7 @@ namespace DesafioEdCRUD.Extensions
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<ISubjectService, SubjectService>();
+            services.AddScoped<IidentityService, IdentityService>();
         }
     }
 }
