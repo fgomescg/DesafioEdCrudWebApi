@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Threading.Tasks;
-
-namespace DesafioEdCRUD.Controllers
+﻿namespace DesafioEdCRUD.Controllers
 {
     public static class ApiRoutes
     {
@@ -56,7 +50,7 @@ namespace DesafioEdCRUD.Controllers
 
         public static class Identity
         {
-            public const string Auth = Base + "/identity/auth";           
+            public const string Auth = Base + "/auth";           
         }
 
         public static class Report
