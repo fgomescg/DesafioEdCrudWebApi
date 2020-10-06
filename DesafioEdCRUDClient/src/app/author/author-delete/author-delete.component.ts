@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
-import { RepositoryService } from './../../shared/services/repository.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
+import { RepositoryService } from '../../_services/repository.service';
 import { Author } from './../../_interfaces/author.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -26,7 +26,7 @@ export class AuthorDeleteComponent implements OnInit {
 
   private getAuthorById = () => {
     const authorId: string = this.activeRoute.snapshot.params['id'];
-    const authorByIdUrl: string = `api/author/${authorId}`;
+    const authorByIdUrl: string = `/authors/${authorId}`;
 
     this.repository.getData(authorByIdUrl).subscribe(
       (res) => {
@@ -44,7 +44,7 @@ export class AuthorDeleteComponent implements OnInit {
   };
 
   public deleteAuthor = () => {
-    const deleteUrl: string = `api/author/${this.author.authorId}`;
+    const deleteUrl: string = `/authors/${this.author.authorId}`;
     this.repository.delete(deleteUrl).subscribe(
       (res) => {
         $('#successModal').modal();

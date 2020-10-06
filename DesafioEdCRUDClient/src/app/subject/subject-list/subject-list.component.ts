@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RepositoryService } from './../../shared/services/repository.service';
+import { RepositoryService } from '../../_services/repository.service';
 import { SubjectList } from './../../_interfaces/subject-list';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
 import { Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 
@@ -28,7 +28,7 @@ export class SubjectListComponent implements OnInit {
   }
   public getAllSubjects = () => {
     let params = new HttpParams().set("pageNumber",this.currentPage.toString()).set("pageSize", this.pageSize.toString());
-    this.repository.getData('api/subject', params).subscribe(
+    this.repository.getData('/subjects', params).subscribe(
       (res) => {
         const { subjects, totalCount, currentPage, totalPages, pageSize  } = res as SubjectList;
         this.subjects = subjects;

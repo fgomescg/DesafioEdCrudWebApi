@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
-import { RepositoryService } from './../../shared/services/repository.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
+import { RepositoryService } from '../../_services/repository.service';
 import { Subject } from './../../_interfaces/subject.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -26,7 +26,7 @@ export class SubjectDeleteComponent implements OnInit {
 
   private getSubjectById = () => {
     const subjectId: string = this.activeRoute.snapshot.params['id'];
-    const subjectByIdUrl: string = `api/subject/${subjectId}`;
+    const subjectByIdUrl: string = `/subjects/${subjectId}`;
 
     this.repository.getData(subjectByIdUrl).subscribe(
       (res) => {
@@ -44,7 +44,7 @@ export class SubjectDeleteComponent implements OnInit {
   };
 
   public deleteSubject = () => {
-    const deleteUrl: string = `api/subject/${this.subject.subjectId}`;
+    const deleteUrl: string = `/subjects/${this.subject.subjectId}`;
     this.repository.delete(deleteUrl).subscribe(
       (res) => {
         $('#successModal').modal();

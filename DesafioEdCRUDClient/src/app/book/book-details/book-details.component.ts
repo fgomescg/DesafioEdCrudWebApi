@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { RepositoryService } from './../../shared/services/repository.service';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
+import { RepositoryService } from '../../_services/repository.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
 import { Book } from 'src/app/_interfaces/book.model';
 
 @Component({
@@ -22,7 +22,7 @@ export class BookDetailsComponent implements OnInit {
 
   getBookDetails = () => {
     let id: string = this.activeRoute.snapshot.params['id'];
-    let apiUrl: string = `api/book/${id}`;
+    let apiUrl: string = `/books/${id}`;
     this.repository.getData(apiUrl)
     .subscribe(res => {
       this.book = res as Book;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
-import { RepositoryService } from './../../shared/services/repository.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
+import { RepositoryService } from '../../_services/repository.service';
 import { Book } from './../../_interfaces/book.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -26,7 +26,7 @@ export class BookDeleteComponent implements OnInit {
 
   private getBookById = () => {
     const bookId: string = this.activeRoute.snapshot.params['id'];
-    const bookByIdUrl: string = `api/book/${bookId}`;
+    const bookByIdUrl: string = `/books/${bookId}`;
 
     this.repository.getData(bookByIdUrl).subscribe(
       (res) => {
@@ -44,7 +44,7 @@ export class BookDeleteComponent implements OnInit {
   };
 
   public deleteBook = () => {
-    const deleteUrl: string = `api/book/${this.book.id}`;
+    const deleteUrl: string = `/books/${this.book.id}`;
     this.repository.delete(deleteUrl).subscribe(
       (res) => {
         $('#successModal').modal();

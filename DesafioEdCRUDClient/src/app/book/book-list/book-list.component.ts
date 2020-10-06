@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RepositoryService } from './../../shared/services/repository.service';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
+import { RepositoryService } from '../../_services/repository.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
 import { Router } from '@angular/router';
 import { BookList } from 'src/app/_interfaces/book-list';
 import { HttpParams } from '@angular/common/http';
@@ -29,7 +29,7 @@ export class BookListComponent implements OnInit {
   public getBooks = () => {
     let params = new HttpParams().set("pageNumber",this.currentPage.toString()).set("pageSize", this.pageSize.toString());
 
-    this.repository.getData('api/book', params).subscribe(
+    this.repository.getData('/books', params).subscribe(
       (res) => {
         const { books, totalCount, currentPage, totalPages, pageSize  } = res as BookList;
         this.books = books;

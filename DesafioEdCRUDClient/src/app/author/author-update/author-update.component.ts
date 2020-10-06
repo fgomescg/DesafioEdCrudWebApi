@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthorForCreation } from './../../_interfaces/author-for-creation.model';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
-import { RepositoryService } from './../../shared/services/repository.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
+import { RepositoryService } from '../../_services/repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Author } from 'src/app/_interfaces/author.model';
 
@@ -29,7 +29,7 @@ export class AuthorUpdateComponent implements OnInit {
   private getAuthorById = () => {
     let authorId: string = this.activeRoute.snapshot.params['id'];
 
-    let authorByIdUrl: string = `api/author/${authorId}`;
+    let authorByIdUrl: string = `/authors/${authorId}`;
     this.repository.getData(authorByIdUrl)
       .subscribe(res => {
         this.author = res as Author;
@@ -60,7 +60,7 @@ export class AuthorUpdateComponent implements OnInit {
     const author: AuthorForCreation = {
       name: authorFormValue.name
     }
-    let apiUrl = `api/author/${this.author.authorId}`;
+    let apiUrl = `/authors/${this.author.authorId}`;
     this.repository.update(apiUrl, author)
       .subscribe(res => {
         $('#successModal').modal();

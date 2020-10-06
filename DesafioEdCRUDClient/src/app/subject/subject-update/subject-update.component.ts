@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SubjectForCreation } from './../../_interfaces/Subject-for-creation.model';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
-import { RepositoryService } from './../../shared/services/repository.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
+import { RepositoryService } from '../../_services/repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'src/app/_interfaces/Subject.model';
 
@@ -29,7 +29,7 @@ export class SubjectUpdateComponent implements OnInit {
   private getSubjectById = () => {
     let subjectId: string = this.activeRoute.snapshot.params['id'];
 
-    let SubjectByIdUrl: string = `api/subject/${subjectId}`;
+    let SubjectByIdUrl: string = `/subjects/${subjectId}`;
     this.repository.getData(SubjectByIdUrl)
       .subscribe(res => {
         this.subject = res as Subject;
@@ -60,7 +60,7 @@ export class SubjectUpdateComponent implements OnInit {
     const subjectForm: SubjectForCreation = {
       description: subjectFormValue.description
     }
-    let apiUrl = `api/subject/${this.subject.subjectId}`;
+    let apiUrl = `/subjects/${this.subject.subjectId}`;
     this.repository.update(apiUrl, subjectForm)
       .subscribe(res => {
         $('#successModal').modal();
