@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -27,7 +27,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${environment.urlAddress}/v1/auth`, { username, password }, { withCredentials: true })
+        return this.http.post<any>(`${environment.urlAddress}/api/v1/auth`, { username, password }, { withCredentials: true })
             .pipe(map(user => {
                 this.userSubject.next(user);
                 this.startRefreshTokenTimer();
@@ -36,7 +36,7 @@ export class AuthenticationService {
     }
 
     logout() {
-        this.http.post<any>(`${environment.urlAddress}/v1/users/revoke-token`, {}, { withCredentials: true }).subscribe();
+        this.http.post<any>(`${environment.urlAddress}/api/v1/users/revoke-token`, {}, { withCredentials: true }).subscribe();
         this.stopRefreshTokenTimer();
         this.userSubject.next(null);
         this.router.navigate(['/login']);
@@ -52,7 +52,6 @@ export class AuthenticationService {
     }
 
     // helper methods
-
     private refreshTokenTimeout;
 
     private startRefreshTokenTimer() {
