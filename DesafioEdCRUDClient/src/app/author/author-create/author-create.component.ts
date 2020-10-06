@@ -40,7 +40,7 @@ export class AuthorCreateComponent implements OnInit {
     const author: AuthorForCreation = {
       name: authorFormValue.name
     }
-    const apiUrl = 'api/author';
+    const apiUrl = '/authors';
     this.repository.create(apiUrl, author)
       .subscribe(res => {
         $('#successModal').modal();

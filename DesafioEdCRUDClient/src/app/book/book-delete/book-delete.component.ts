@@ -26,7 +26,7 @@ export class BookDeleteComponent implements OnInit {
 
   private getBookById = () => {
     const bookId: string = this.activeRoute.snapshot.params['id'];
-    const bookByIdUrl: string = `api/book/${bookId}`;
+    const bookByIdUrl: string = `/books/${bookId}`;
 
     this.repository.getData(bookByIdUrl).subscribe(
       (res) => {
@@ -44,7 +44,7 @@ export class BookDeleteComponent implements OnInit {
   };
 
   public deleteBook = () => {
-    const deleteUrl: string = `api/book/${this.book.id}`;
+    const deleteUrl: string = `/books/${this.book.id}`;
     this.repository.delete(deleteUrl).subscribe(
       (res) => {
         $('#successModal').modal();

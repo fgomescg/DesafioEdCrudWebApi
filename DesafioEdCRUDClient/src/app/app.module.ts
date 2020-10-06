@@ -9,7 +9,7 @@ import { MenuComponent } from './menu/menu.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
-import { RelatorioModule } from './relatorio/relatorio.module';
+import { ReportModule } from './report/report.module';
 import { AuthenticationService } from './_services';
 import { JwtInterceptor, ErrorInterceptor, appInitializer  } from './_helpers';
 import { LoginComponent } from './login';
@@ -28,7 +28,7 @@ import { LoginComponent } from './login';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RelatorioModule,
+    ReportModule,
     ReactiveFormsModule
   ],
   providers: [

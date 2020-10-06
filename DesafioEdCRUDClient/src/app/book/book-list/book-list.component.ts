@@ -29,7 +29,7 @@ export class BookListComponent implements OnInit {
   public getBooks = () => {
     let params = new HttpParams().set("pageNumber",this.currentPage.toString()).set("pageSize", this.pageSize.toString());
 
-    this.repository.getData('api/book', params).subscribe(
+    this.repository.getData('/books', params).subscribe(
       (res) => {
         const { books, totalCount, currentPage, totalPages, pageSize  } = res as BookList;
         this.books = books;

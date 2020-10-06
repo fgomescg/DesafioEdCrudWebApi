@@ -28,7 +28,7 @@ export class AuthorListComponent implements OnInit {
   }
   public getAllAuthors = () => {
     let params = new HttpParams().set("pageNumber",this.currentPage.toString()).set("pageSize", this.pageSize.toString());
-    this.repository.getData('api/author', params).subscribe(
+    this.repository.getData('/authors', params).subscribe(
       (res) => {
         const { authors, totalCount, currentPage, totalPages, pageSize  } = res as AuthorList;
         this.authors = authors;

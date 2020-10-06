@@ -38,7 +38,7 @@ export class BookCreateComponent implements OnInit {
   }
 
   public getAllAuthors = () => {
-    this.repository.getData('api/author').subscribe(
+    this.repository.getData('/authors').subscribe(
       (res) => {
         const { authors } = res as AuthorList;
         this.authors = authors;
@@ -51,7 +51,7 @@ export class BookCreateComponent implements OnInit {
   };
 
   public getAllSubjects = () => {
-    this.repository.getData('api/subject').subscribe(
+    this.repository.getData('/subjects').subscribe(
       (res) => {
         const { subjects } = res as SubjectList;
         this.subjects = subjects;
@@ -92,8 +92,7 @@ export class BookCreateComponent implements OnInit {
       bookAuthors:  this.transformToBookAuthorModel(bookFormValue.bookAuthors),
       bookSubjects: this.transformToBookSubjectModel(bookFormValue.bookSubjects)
     }
-    const apiUrl = 'api/book';
-    this.repository.create(apiUrl, book)
+    this.repository.create(`/books`, book)
       .subscribe(res => {
         $('#successModal').modal();
       },

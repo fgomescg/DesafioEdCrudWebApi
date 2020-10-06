@@ -40,8 +40,7 @@ export class SubjectCreateComponent implements OnInit {
     const subject: SubjectForCreation = {
       description: subjectFormValue.description
     }
-    const apiUrl = 'api/subject';
-    this.repository.create(apiUrl, subject)
+    this.repository.create('/subjects', subject)
       .subscribe(res => {
         $('#successModal').modal();
       },

@@ -26,7 +26,7 @@ export class AuthorDeleteComponent implements OnInit {
 
   private getAuthorById = () => {
     const authorId: string = this.activeRoute.snapshot.params['id'];
-    const authorByIdUrl: string = `api/author/${authorId}`;
+    const authorByIdUrl: string = `/authors/${authorId}`;
 
     this.repository.getData(authorByIdUrl).subscribe(
       (res) => {
@@ -44,7 +44,7 @@ export class AuthorDeleteComponent implements OnInit {
   };
 
   public deleteAuthor = () => {
-    const deleteUrl: string = `api/author/${this.author.authorId}`;
+    const deleteUrl: string = `/authors/${this.author.authorId}`;
     this.repository.delete(deleteUrl).subscribe(
       (res) => {
         $('#successModal').modal();

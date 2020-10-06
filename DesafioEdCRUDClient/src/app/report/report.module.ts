@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RelatorioComponent } from './relatorio.component'
+import { ReportComponent } from './report.component'
 
 
 @NgModule({
-  declarations: [RelatorioComponent],
+  declarations: [ReportComponent],
   imports: [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: 'relatorio', component: RelatorioComponent },
+      { path: 'report', component: ReportComponent },
     ])
   ]
 
 })
 
-export class RelatorioModule { }
+export class ReportModule { }

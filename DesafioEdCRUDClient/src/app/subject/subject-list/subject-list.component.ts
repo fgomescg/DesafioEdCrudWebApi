@@ -28,7 +28,7 @@ export class SubjectListComponent implements OnInit {
   }
   public getAllSubjects = () => {
     let params = new HttpParams().set("pageNumber",this.currentPage.toString()).set("pageSize", this.pageSize.toString());
-    this.repository.getData('api/subject', params).subscribe(
+    this.repository.getData('/subjects', params).subscribe(
       (res) => {
         const { subjects, totalCount, currentPage, totalPages, pageSize  } = res as SubjectList;
         this.subjects = subjects;

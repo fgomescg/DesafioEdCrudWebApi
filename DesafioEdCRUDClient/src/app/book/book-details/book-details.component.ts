@@ -22,7 +22,7 @@ export class BookDetailsComponent implements OnInit {
 
   getBookDetails = () => {
     let id: string = this.activeRoute.snapshot.params['id'];
-    let apiUrl: string = `api/book/${id}`;
+    let apiUrl: string = `/books/${id}`;
     this.repository.getData(apiUrl)
     .subscribe(res => {
       this.book = res as Book;

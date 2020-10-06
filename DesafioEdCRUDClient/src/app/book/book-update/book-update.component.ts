@@ -42,7 +42,7 @@ export class BookUpdateComponent implements OnInit {
   private getBookById = () => {
     let bookId: string = this.activeRoute.snapshot.params['id'];
 
-    let bookIdByIdUrl: string = `api/book/${bookId}`;
+    let bookIdByIdUrl: string = `/books/${bookId}`;
     this.repository.getData(bookIdByIdUrl)
       .subscribe(res => {
         this.book = res as Book;
@@ -55,7 +55,7 @@ export class BookUpdateComponent implements OnInit {
   }
 
   public getAllAuthors = () => {
-    this.repository.getData('api/author').subscribe(
+    this.repository.getData('/authors').subscribe(
       (res) => {
         const { authors } = res as AuthorList;
         this.authors = authors;
@@ -68,8 +68,7 @@ export class BookUpdateComponent implements OnInit {
   };
 
   public getAllSubjects = () => {
-    let apiAddress: string = 'api/subject';
-    this.repository.getData(apiAddress).subscribe(
+    this.repository.getData(`/subjects`).subscribe(
       (res) => {
         const { subjects } = res as SubjectList;
         this.subjects = subjects;
@@ -110,7 +109,7 @@ export class BookUpdateComponent implements OnInit {
     this.book.bookAuthors =  this.transformToBookAuthorModel(bookFormValue.bookAuthors);
     this.book.bookSubjects= this.transformToBookSubjectModel(bookFormValue.bookSubjects);
 
-    let apiUrl = `api/book/${this.book.id}`;
+    let apiUrl = `/books/${this.book.id}`;
     this.repository.update(apiUrl, this.book)
       .subscribe(res => {
         $('#successModal').modal();

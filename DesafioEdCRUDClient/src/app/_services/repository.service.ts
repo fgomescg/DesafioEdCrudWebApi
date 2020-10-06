@@ -23,7 +23,7 @@ export class RepositoryService {
   }
 
   private createCompleteRoute = (route: string, envAddress: string) => {
-    return `${envAddress}/${route}`;
+    return `${envAddress}/api/v1${route}`;
   }
 
   private generateHeaders = () => {
