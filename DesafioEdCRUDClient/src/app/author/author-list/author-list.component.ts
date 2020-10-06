@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RepositoryService } from './../../shared/services/repository.service';
+import { RepositoryService } from '../../_services/repository.service';
 import { AuthorList } from './../../_interfaces/author-list';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
 import { Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 

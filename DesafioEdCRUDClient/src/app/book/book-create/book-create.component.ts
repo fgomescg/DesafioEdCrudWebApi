@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookForCreation } from './../../_interfaces/book-for-creation.model';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
-import { RepositoryService } from './../../shared/services/repository.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
+import { RepositoryService } from '../../_services/repository.service';
 import { Router } from '@angular/router';
 import { AuthorList } from 'src/app/_interfaces/author-list';
 import { SubjectList } from 'src/app/_interfaces/subject-list';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
-import { RepositoryService } from './../../shared/services/repository.service';
+import { ErrorHandlerService } from '../../_services/error-handler.service';
+import { RepositoryService } from '../../_services/repository.service';
 import { Author } from './../../_interfaces/author.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
