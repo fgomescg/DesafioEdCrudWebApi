@@ -41,9 +41,9 @@ namespace DesafioEdCRUD.Unit.Tests.Services
         public async Task GetSubjectsAsync_ShouldReturnPagedListSubjects()
         {
             //Arrange   
-            var parameters = new SubjectParameters() { PageNumber = 1, PageSize = 10 };
+            var parameters = new SubjectParameters() { PageNumber = 0, PageSize = 10 };
 
-            var pagedSubjectsMock = PagedList<Subject>.ToPagedList(_SubjectList.AsQueryable(), 1, 10);
+            var pagedSubjectsMock = PagedList<Subject>.ToPagedList(_SubjectList.AsQueryable(), 0, 10);
 
             repoWrapperMock.Setup(p => p.Subject.GetSubjectsAsync(parameters))
                 .ReturnsAsync(pagedSubjectsMock);

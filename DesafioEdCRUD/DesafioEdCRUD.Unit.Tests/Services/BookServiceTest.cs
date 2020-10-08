@@ -42,9 +42,9 @@ namespace DesafioEdCRUD.Unit.Tests.Services
         public async Task GetBooksAsync_ShouldReturnPagedListBook()
         {
             //Arrange   
-            var parameters = new BookParameters() { PageNumber = 1, PageSize = 10 };
+            var parameters = new BookParameters() { PageNumber = 0, PageSize = 10 };
 
-            var pagedBooksMock = PagedList<Book>.ToPagedList(_bookList.AsQueryable(), 1, 10);           
+            var pagedBooksMock = PagedList<Book>.ToPagedList(_bookList.AsQueryable(), 0, 10);           
 
             repoWrapperMock.Setup(p => p.Book.GetBooksAsync(parameters))
                 .ReturnsAsync(pagedBooksMock);

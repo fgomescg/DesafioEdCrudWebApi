@@ -42,9 +42,9 @@ namespace DesafioEdCRUD.Unit.Tests.Services
         public async Task GetAuthorsAsync_ShouldReturnPagedListAuthors()
         {
             //Arrange   
-            var parameters = new AuthorParameters() { PageNumber = 1, PageSize = 10 };
+            var parameters = new AuthorParameters() { PageNumber = 0, PageSize = 10 };
 
-            var pagedAuthorsMock = PagedList<Author>.ToPagedList(_authorList.AsQueryable(), 1, 10);
+            var pagedAuthorsMock = PagedList<Author>.ToPagedList(_authorList.AsQueryable(), 0, 10);
 
             repoWrapperMock.Setup(p => p.Author.GetAuthorsAsync(parameters))
                 .ReturnsAsync(pagedAuthorsMock);
