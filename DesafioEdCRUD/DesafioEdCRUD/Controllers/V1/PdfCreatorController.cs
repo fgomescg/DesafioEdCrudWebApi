@@ -80,7 +80,7 @@ namespace DesafioEdCRUD.Controllers.V1
 
             var file = _converter.Convert(pdf);
 
-            return File(file, "application/pdf", "BookAuthors.pdf");
+            return File(file, "application/pdf", "BookReport.pdf");
         }
     }
 }
