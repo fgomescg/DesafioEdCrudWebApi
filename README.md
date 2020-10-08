@@ -1,7 +1,7 @@
 # Desafio CRUD WEB API
 Cadastro de Livros, Autores e Assunto.
 
-# Tecnologias utilizas
+# Tecnologias utilizadas
 ASP.NET Core Web API 3.1
 <br />
 Entity Framework v3.1.8
