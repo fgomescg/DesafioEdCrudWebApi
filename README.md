@@ -19,6 +19,9 @@ Execute o arquivo 'script.sql' na pasta MySQl Script para criar a base de dados.
 # Swagger
 http://localhost:5000/swagger/index.html
 
+## LOGS
+# nlog
+
 ## Autenticação
 # JWT (JSON WEB TOKEN)
 (em desenvolvimento)
