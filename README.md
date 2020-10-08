@@ -1,5 +1,5 @@
 # Desafio CRUD WEB API
-## Cadastro de Livros
+Cadastro de Livros, Autores e Assunto.
 
 # Tecnologias utilizas
 ASP.NET Core Web API 3.1
