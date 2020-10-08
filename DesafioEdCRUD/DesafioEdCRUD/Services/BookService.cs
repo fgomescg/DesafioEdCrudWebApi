@@ -70,9 +70,9 @@ namespace DesafioEdCRUD.Services
                 return false;
             }
 
-            _mapper.Map(book, bookEntity);
+            var mappedBook = _mapper.Map(book, bookEntity);
 
-            await _repository.Book.UpdateBookAsync(bookEntity);
+            await _repository.Book.UpdateBookAsync(mappedBook);
 
             return true;            
         }

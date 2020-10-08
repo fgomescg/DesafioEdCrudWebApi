@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace DesafioEdCRUD.Controllers.V1
-{
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+{    
     [ApiController]    
     public class BookController : ControllerBase
     {       
@@ -81,14 +80,6 @@ namespace DesafioEdCRUD.Controllers.V1
             }
 
             return NoContent();                      
-        }
-
-        [HttpGet(ApiRoutes.Report.Books)]
-        public async ValueTask<IActionResult> GetBookAuthorReports()
-        {            
-            var bookReport = await _service.GetBookAuthorReports();            
-                
-            return Ok(bookReport);           
-        }
+        }              
     }
 }

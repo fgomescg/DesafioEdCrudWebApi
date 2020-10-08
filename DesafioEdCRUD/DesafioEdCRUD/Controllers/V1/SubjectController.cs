@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioEdCRUD.Controllers.V1
-{
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+{    
     [ApiController]   
     public class SubjectController : ControllerBase
     {

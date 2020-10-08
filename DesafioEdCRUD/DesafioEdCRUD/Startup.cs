@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using SwaggerOptions = DesafioEdCRUD.Options.SwaggerOptions;
+using Microsoft.OpenApi.Models;
 
 namespace DesafioEdCRUD
 {
@@ -32,9 +33,8 @@ namespace DesafioEdCRUD
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {           
-            services.ConfigureCors();          
-
+        {
+            services.AddCors();
             services.AddControllers();
 
             services.AddAuthentication(option =>
@@ -80,8 +80,27 @@ namespace DesafioEdCRUD
             services.AddSwaggerGen(x =>
             {
                 x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "DESAFIO EXTREME DIGITAL API", Version = "v1" });
+                x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                            x.AddSecurityRequirement(new OpenApiSecurityRequirement {
+               {
+                 new OpenApiSecurityScheme
+                 {
+                   Reference = new OpenApiReference
+                   {
+                     Type = ReferenceType.SecurityScheme,
+                     Id = "Bearer"
+                   }
+                  },
+                  new string[] { }
+                }
+              });
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,15 +125,20 @@ namespace DesafioEdCRUD
 
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
-
-            app.UseCors("CorsPolicy");
+            app.UseStaticFiles();            
            
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.All
             });
             app.UseRouting();
+
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             app.UseAuthentication();
 

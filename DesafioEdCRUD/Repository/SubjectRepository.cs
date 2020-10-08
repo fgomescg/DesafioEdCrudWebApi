@@ -4,6 +4,7 @@ using Contracts;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Repository
 {
@@ -13,18 +14,14 @@ namespace Repository
             : base(repositoryContext)
         {
         }       
-        public async ValueTask<PagedList<Subject>> GetSubjectsAsync(SubjectParameters subjectParameters)
+        public async ValueTask<List<Subject>> GetSubjectsAsync(SubjectParameters subjectParameters)
         {
             var subjects = FindAll();
 
             SearchByDescription(ref subjects, subjectParameters.description);
 
-            await subjects.OrderBy(su => su.Description)
-                            .ToListAsync();
-
-            return PagedList<Subject>.ToPagedList(subjects,
-                   subjectParameters.PageNumber,
-                   subjectParameters.PageSize);
+           return await subjects.OrderBy(su => su.Description)
+                            .ToListAsync();            
         }
         private void SearchByDescription(ref IQueryable<Subject> subjects, string subjectDescription)
         {

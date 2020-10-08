@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Internal;
-using Entities.DTO;
 
 namespace Repository
 {
@@ -42,7 +41,7 @@ namespace Repository
                              .Include(book => book.BookAuthors)
                              .ThenInclude(ba => ba.Author)
                              .Include(su => su.BookSubjects)
-                             .ThenInclude(bs => bs.Subject).FirstOrDefaultAsync();
+                             .ThenInclude(bs => bs.Subject).FirstOrDefaultAsync();            
         }       
         
         public async Task CreateBookAsync(Book book)
