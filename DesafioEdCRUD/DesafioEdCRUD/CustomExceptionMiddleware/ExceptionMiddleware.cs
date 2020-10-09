@@ -2,6 +2,7 @@
 using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -23,15 +24,20 @@ namespace DesafioEdCRUD.CustomExceptionMiddleware
             try
             {
                 await _next(httpContext);
+            }       
+            catch(Microsoft.EntityFrameworkCore.DbUpdateException ex)
+            {
+                _logger.LogError(ex.Message + ex.InnerException.Message);
+                await HandleExceptionAsync(httpContext, "Este registro não pode ser deletado pois está relacionado a um ou mais livros.");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                await HandleExceptionAsync(httpContext, ex);
+                await HandleExceptionAsync(httpContext, ex.Message);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private Task HandleExceptionAsync(HttpContext context, string exceptionMessage)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -39,7 +45,7 @@ namespace DesafioEdCRUD.CustomExceptionMiddleware
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error."
+                Message = exceptionMessage
             }.ToString());
         }
     }

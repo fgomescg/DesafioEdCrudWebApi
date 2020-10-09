@@ -1,10 +1,5 @@
-﻿using Contracts;
-using DesafioEdCRUD.CustomExceptionMiddleware;
-using Entities.Models;
+﻿using DesafioEdCRUD.CustomExceptionMiddleware;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using System.Net;
 
 namespace DesafioEdCRUD.Extensions
 {
