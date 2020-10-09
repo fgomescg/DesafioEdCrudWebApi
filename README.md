@@ -20,7 +20,8 @@ Testes unitários
 
 # Documentação
 <p>Swagger</P><br />
-http://localhost:5000/swagger/index.html
+
+<a href="http://localhost:5000/swagger/index.html" target="_blank">http://localhost:5000/swagger/index.html</a>
 
 # LOGS
 nlog
